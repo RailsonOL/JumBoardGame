@@ -9,7 +9,6 @@ public class MainMenuController : MonoBehaviour
     public GameObject joinRoomWindow;
     public GameObject CreateRoomWindow;
     public GameObject optionsMenuWindow;
-    public GameObject LobbyPainelWindow;
 
     void Start()
     {
@@ -17,7 +16,6 @@ public class MainMenuController : MonoBehaviour
         optionsMenuWindow.SetActive(false);
         joinRoomWindow.SetActive(false);
         CreateRoomWindow.SetActive(false);
-        LobbyPainelWindow.SetActive(false);
     }
 
     public void OnClickJoinRoom()
@@ -44,16 +42,6 @@ public class MainMenuController : MonoBehaviour
         optionsMenuWindow.SetActive(false);
         joinRoomWindow.SetActive(false);
         CreateRoomWindow.SetActive(false);
-        LobbyPainelWindow.SetActive(false);
-    }
-
-    public void OnEnterLobby()
-    {
-        mainMenuWindow.SetActive(false);
-        optionsMenuWindow.SetActive(false);
-        joinRoomWindow.SetActive(false);
-        CreateRoomWindow.SetActive(false);
-        LobbyPainelWindow.SetActive(true);
     }
 
     public void OnClickQuit()
