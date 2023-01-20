@@ -4,27 +4,38 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovimentNetwork : NetworkBehaviour
 {
-    [SerializeField] float speed = 5.0f;
-    [SerializeField] float shift = 10.0f;
+    [Header("Camera")]
+    public Camera cam;
+    public float fovSpeed = 500.0f;
+    public float mouseSense = 2f;
+    public float lookXLimit = 90f;
+    private float rotationX = 0;
+    private float defaultFov = 70.0f;
+    private float fov;
 
-    [SerializeField] Vector3 plusLimit = new Vector3(100.0f, 100.0f, 100.0f);
-    [SerializeField] Vector3 minusLimit = new Vector3(100.0f, 100.0f, 100.0f);
+    [Header("========================================")]
+    [Header("Movement")]
+    public float walkSpeed = 10f;
+    public float runSpeedMultiplier = 2f;
+    public float flightSpeed = 10f;
+    public bool canMove = true;
+    private Vector3 moveDirection = Vector3.zero;
 
-    // [SerializeField] Contoller controller;
-    [SerializeField] Camera cam;
-
-    [SerializeField] Transform pivot;
-    [SerializeField] float distanceToTarget = 10;
-    Vector3 previousPosition;
-
+    [Header("========================================")]
+    [Header("GameObjects")]
     public GameObject PlayerModel;
 
-    float defaultFov = 70.0f;
+    //Components
+    CharacterController characterController;
 
-    float fov;
-    [SerializeField] float fovSpeed = 500.0f;
+    public override void OnStartAuthority()
+    { 
+        cam.gameObject.SetActive(true);
+        SetPosition();
+    }
 
     private void Start()
     {
@@ -39,126 +50,63 @@ public class PlayerMovimentNetwork : NetworkBehaviour
         {
             if (PlayerModel.activeSelf == false)
             {
-                SetPosition();
                 PlayerModel.SetActive(true);
+
+                characterController = GetComponent<CharacterController>();
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
 
             if (isOwned)
             {
-                WASDCameraMoovement();
-                // FOV (zoom)
+                Movement();
                 FOVCamera();
-
-                // Camera rotation
-                RotateCamera();
-
-                //Default fov
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    cam.fieldOfView = fov;
-                    fov = defaultFov;
-                }
-
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    transform.position += Vector3.up * speed * Time.deltaTime;
-                }
-
-                if (Input.GetKey(KeyCode.LeftControl))
-                {
-                    transform.position += Vector3.down * speed * Time.deltaTime;
-                }
             }
         }
     }
 
     public void SetPosition()
     {
-        transform.position = new Vector3(Random.Range(-5, 5), 0.8f, Random.Range(-10, 7));
+        transform.position = new Vector3(Random.Range(-5, 5), 2f, Random.Range(-10, 7));
     }
 
-    Vector3 GetInput(Vector3 vec)
+    void Movement()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            vec.z += 1;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            vec.z += -1;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            vec.x += -1;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            vec.x += 1;
-        }
+        #region Movement 
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
 
-        return vec;
-    }
+        // Press Left Shift to run
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeedX = canMove ? (isRunning ? walkSpeed * runSpeedMultiplier : walkSpeed) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunning ? walkSpeed * runSpeedMultiplier : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+        float movementDirectionY = moveDirection.y;
+        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-    // Checking for across bounding box border
-    Vector3 CheckLimits(Transform pos, Vector3 moveDir)
-    {
-        Vector3 newPos = pos.position + moveDir;
-
-        if (newPos.x > plusLimit.x)
+        //Up and Down
+        if (Input.GetKey(KeyCode.Space))
         {
-            newPos.x = plusLimit.x;
+            moveDirection.y += flightSpeed;
         }
-        if (newPos.x < -minusLimit.x)
+        else if (Input.GetKey(KeyCode.LeftControl))
         {
-            newPos.x = -minusLimit.x;
+            moveDirection.y -= flightSpeed;
         }
 
-        if (newPos.y > plusLimit.y)
-        {
-            newPos.y = plusLimit.y;
-        }
-        if (newPos.y < -minusLimit.y)
-        {
-            newPos.y = -minusLimit.y;
-        }
+        #endregion
 
-        if (newPos.z > plusLimit.z)
+        #region Rotation
+        characterController.Move(moveDirection * Time.deltaTime);
+
+        if (canMove)
         {
-            newPos.z = plusLimit.z;
-        }
-        if (newPos.z < -minusLimit.z)
-        {
-            newPos.z = -minusLimit.z;
+            rotationX += -Input.GetAxis("Mouse Y") * mouseSense;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSense, 0);
         }
 
-        return newPos;
-    }
-
-    void RotateCamera()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-        }
-        else if (Input.GetMouseButton(1))
-        {
-            distanceToTarget = Vector3.Distance(pivot.position, cam.transform.position);
-
-            Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-            Vector3 direction = previousPosition - newPosition;
-
-            float rotationAroundYAxis = -direction.x * 180; // camera moves horizontally
-            float rotationAroundXAxis = direction.y * 180; // camera moves vertically
-
-            cam.transform.position = pivot.position;
-
-            cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis);
-            cam.transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis, Space.World);
-
-            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
-
-            previousPosition = newPosition;
-        }
+        #endregion
     }
 
     void FOVCamera()
@@ -173,31 +121,4 @@ public class PlayerMovimentNetwork : NetworkBehaviour
 
         cam.fieldOfView = fov;
     }
-
-    void WASDCameraMoovement()
-    {
-        Vector3 inputDir = new Vector3(0.0f, 0.0f, 0.0f);
-        inputDir = GetInput(inputDir);
-
-        Transform pos = transform;
-
-        // disable y-axis
-        Vector3 forward = transform.forward;
-        forward.y = 0;
-        Vector3 right = transform.right;
-        right.y = 0;
-        Vector3 moveDir = (forward * inputDir.z) + (right * inputDir.x);
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            moveDir *= shift * speed * Time.deltaTime;
-        }
-        else
-        {
-            moveDir *= speed * Time.deltaTime;
-        }
-
-        transform.position = CheckLimits(pos, moveDir);
-    }
-
 }
