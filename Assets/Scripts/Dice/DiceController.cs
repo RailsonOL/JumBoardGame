@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
-public class DiceNumberCheck : MonoBehaviour
+public class DiceController : MonoBehaviour
 {
     [Header("Dices Infos and Logs")]
     public List<GameObject> dices;

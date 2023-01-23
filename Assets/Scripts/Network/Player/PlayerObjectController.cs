@@ -12,6 +12,14 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool PlayerReady;
+    [SyncVar(hook = nameof(SendPawnColor))] public int PawnColor;
+    public Pawn pawn;
+
+    public int numberOfTurns = 0;
+    public int numberOfBuffs = 0;
+    public int numberOfFails = 0;
+    public int place = 0;
+    public bool isEnd = false;
 
     private CustomNetworkManager manager;
 
@@ -28,17 +36,20 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    private void Start() {
+    private void Start()
+    {
         DontDestroyOnLoad(gameObject);
     }
 
     private void PlayerReadyUpdate(bool oldReady, bool newReady)
     {
-        if(isServer){
+        if (isServer)
+        {
             this.PlayerReady = newReady;
         }
 
-        if(isClient){
+        if (isClient)
+        {
             LobbyController.Instance.UpdatePlayerList();
         }
     }
@@ -51,7 +62,8 @@ public class PlayerObjectController : NetworkBehaviour
 
     public void ChangeReadyState()
     {
-        if(isOwned){
+        if (isOwned)
+        {
             CmdChangeReadyState();
         }
     }
@@ -86,11 +98,13 @@ public class PlayerObjectController : NetworkBehaviour
 
     public void PlayerNameUpdate(string oldName, string newName)
     {
-        if(isServer){
+        if (isServer)
+        {
             this.PlayerName = newName;
         }
 
-        if(isClient){
+        if (isClient)
+        {
             LobbyController.Instance.UpdatePlayerList();
         }
     }
@@ -98,7 +112,8 @@ public class PlayerObjectController : NetworkBehaviour
     //Start Game
     public void CanStartGame(string SceneName)
     {
-        if(isOwned){
+        if (isOwned)
+        {
             CmdCanStartGame(SceneName);
         }
     }
@@ -109,4 +124,27 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.StartGame(SceneName);
     }
 
+    //Cosmetics
+    public void CmdUpdatePawnColor(int newColor)
+    {
+        SendPawnColor(PawnColor, newColor);
+    }
+
+    public void SendPawnColor(int oldColor, int newColor)
+    {
+        if (isServer)
+        {
+            this.PawnColor = newColor;
+        }
+
+        if (isClient && (oldColor != newColor))
+        {
+            UpdateColor(newColor);
+        }
+    }
+
+    void UpdateColor(int message)
+    {
+        PawnColor = message;
+    }
 }
