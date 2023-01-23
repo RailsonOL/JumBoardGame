@@ -23,7 +23,9 @@ public class Pawn : NetworkBehaviour
 
     void Start()
     {
-        playerObjectController = GameObject.Find("PlayerObjectController").GetComponent<PlayerObjectController>();
+        //DontDestroyOnLoad(gameObject);
+        playerObjectController = FindObjectsOfType<PlayerObjectController>()[0];
+        playerObjectController.pawn = this;
         PlayerCosmesticsSetup();
     }
 

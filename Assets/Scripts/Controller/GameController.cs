@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Route route;
     [SerializeField] PlayerObjectController[] players;
     [SerializeField] DiceController dice;
+    public GameObject pawnPrefab;
 
     //Manager
     private CustomNetworkManager manager;
@@ -42,37 +43,43 @@ public class GameController : MonoBehaviour
     void Start()
     {
         numberOfPlayers = Manager.GamePlayers.Count;
-        players = new PlayerObjectController[numberOfPlayers];
+        //get all player objects in scene
+        players = FindObjectsOfType<PlayerObjectController>();
+
     }
 
     void Update()
     {
         //Rolling dice and start movement
-        if (Input.GetKeyDown(KeyCode.Space) && (!gameEnd))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && (!gameEnd))
         {
-            SpawnPawns();
-            dice.RollDice();
-
-            while(!dice.diceThrown) //Wait for dice to stop
+            if (FindObjectOfType<Pawn>() == null)
             {
-                //wait
+                SpawnPawns();
             }
 
-            players[0].pawn.MoveNext(route.wayPointsSorted, dice.allDiceResult);
-
-            while(players[0].pawn.isMoving) //Wait for pawn to stop
-            {
-                //wait
-            }
-
-            TurnResult();
+            StartCoroutine(RollAndMove());
         }
 
         // Stat table
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             //ShowStat();
         }
+    }
+
+    IEnumerator RollAndMove()
+    {
+        dice.RollDice();
+
+        yield return new WaitUntil(() => dice.allDiceResult != 0);
+        Debug.Log($"Dice result: {dice.allDiceResult} diceThrown: {dice.diceThrown}");
+
+        players[0].pawn.MoveNext(route.wayPointsSorted, dice.allDiceResult);
+
+        yield return new WaitUntil(() => !players[0].pawn.isMoving);
+
+        TurnResult();
     }
 
     public void SpawnPawns()
@@ -81,9 +88,10 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            Instantiate(players[i].pawn.gameObject);
+            Instantiate(pawnPrefab, spawnPointPos, pawnPrefab.transform.rotation);
 
             players[i].pawn.gameObject.transform.position = spawnPointPos;
+            //players[i].pawn.gameObject.transform.SetParent(route.wayPointsSorted[0].transform);
         }
 
         RefreshStat();
@@ -129,7 +137,7 @@ public class GameController : MonoBehaviour
         }
 
 
-        if(gameEnd)
+        if (gameEnd)
         {
             //ShowStat();
         }
@@ -140,7 +148,7 @@ public class GameController : MonoBehaviour
     {
         RefreshStat();
 
-        if(repeat)
+        if (repeat)
         {
             // we simply dont change current player
         }
@@ -175,7 +183,7 @@ public class GameController : MonoBehaviour
 
             } while (true);
         }
-        
+
         // Set new info about next turn player
         Debug.Log($"Player {players[currentPlayer].PlayerName} turn");
     }
@@ -196,7 +204,7 @@ public class GameController : MonoBehaviour
 
         places = places.OrderByDescending(x => x.value).ToList();
 
-        for(int i = 0; i < numberOfPlayers; i++)
+        for (int i = 0; i < numberOfPlayers; i++)
         {
             players[currentPlayer].place = places[i].key;
         }

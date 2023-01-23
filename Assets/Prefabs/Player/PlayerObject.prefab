@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3505535824516076727}
   m_Layer: 0
   m_Name: PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   PlayerName: 
   PlayerReady: 0
   PawnColor: 0
+  pawnPrefab: {fileID: 5437781471914995263, guid: 5e61bbd3b2f3b2d45bb9f48fed17ba2f, type: 3}
   pawn: {fileID: 3196202940002182157, guid: 5e61bbd3b2f3b2d45bb9f48fed17ba2f, type: 3}
   numberOfTurns: 0
   numberOfBuffs: 0

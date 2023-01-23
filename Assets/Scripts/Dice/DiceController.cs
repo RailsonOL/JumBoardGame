@@ -133,6 +133,7 @@ public class DiceController : MonoBehaviour
     public void RollDice()
     {
         ResetDice();
+        allDiceResult = 0;
 
         for (int i = 0; i < dices.Count; i++)
         {
