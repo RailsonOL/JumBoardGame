@@ -125,6 +125,7 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     //Cosmetics
+    [Command]
     public void CmdUpdatePawnColor(int newColor)
     {
         SendPawnColor(PawnColor, newColor);

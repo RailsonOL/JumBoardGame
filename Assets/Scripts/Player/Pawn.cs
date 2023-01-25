@@ -11,6 +11,7 @@ public class Pawn : NetworkBehaviour
     public int currentTileIndex = 0;
     public Transform currentTile;
     public float speed = 5.0f;
+    public PlayerObjectController playerOwner;
     
     private Vector3 origPos, targetPos;
     private float timeToMoving = 0.5f;
@@ -19,13 +20,10 @@ public class Pawn : NetworkBehaviour
     [Header("Pawn Cosmetics")]
     public MeshRenderer meshRenderer;
     public Material[] colors;
-    private PlayerObjectController playerObjectController;
 
     void Start()
     {
-        //DontDestroyOnLoad(gameObject);
-        playerObjectController = FindObjectsOfType<PlayerObjectController>()[0];
-        playerObjectController.pawn = this;
+        currentTileIndex = 0;
         PlayerCosmesticsSetup();
     }
 
@@ -37,24 +35,30 @@ public class Pawn : NetworkBehaviour
         {
             isMoving = true;
 
-            targetPos = routeTile[(currentTileIndex + 1) % routeTile.Count].transform.position;
+            targetPos = routeTile[(currentTileIndex + 1)].transform.position;
 
             float distance = Vector3.Distance(transform.position, targetPos);
 
             int jumps = Mathf.RoundToInt(distance / 2.5f);
 
             DOTween.Sequence()
-                .Append(transform.DOJump(targetPos + new Vector3(0f, 0.5f, 0f), jumpHeight, jumps, distance / 5).SetEase(Ease.Linear))
-                .Append(transform.DOMove(targetPos + new Vector3(0f, 0.5f, 0f), timeToMoving).SetEase(Ease.Linear))
+                .Append(transform.DOJump(targetPos + new Vector3(0f, 1f, 0f), jumpHeight, jumps, distance / 5).SetEase(Ease.Linear))
+                .Append(transform.DOMove(targetPos + new Vector3(0f, 1f, 0f), timeToMoving).SetEase(Ease.Linear))
                 .OnComplete(() =>
                 {
                     isMoving = false;
 
-                    currentTileIndex = (currentTileIndex + 1) % routeTile.Count;
+                    currentTileIndex = (currentTileIndex + 1);
                     currentTile = routeTile[currentTileIndex].transform;
 
                     if (movesDone < numMoves)
                     {
+                        if (currentTile.GetComponent<WayPointData>().pointType == WayPointData.WayPointEnumerator.End)
+                        {
+                            Debug.Log($"Player {playerOwner.PlayerName} has reached the end and remaining {numMoves - movesDone} moves will be ignored.");
+                            return;
+                        }
+
                         movesDone++;
                         MoveNext(routeTile, numMoves - 1);
                     }
@@ -78,8 +82,8 @@ public class Pawn : NetworkBehaviour
             int jumps = Mathf.RoundToInt(distance / 2.5f);
 
             DOTween.Sequence()
-                .Append(transform.DOJump(targetPos + new Vector3(0f, 0.5f, 0f), jumpHeight, jumps, distance / 5).SetEase(Ease.Linear))
-                .Append(transform.DOMove(targetPos + new Vector3(0f, 0.5f, 0f), timeToMoving).SetEase(Ease.Linear))
+                .Append(transform.DOJump(targetPos + new Vector3(0f, 1f, 0f), jumpHeight, jumps, distance / 5).SetEase(Ease.Linear))
+                .Append(transform.DOMove(targetPos + new Vector3(0f, 1f, 0f), timeToMoving).SetEase(Ease.Linear))
                 .OnComplete(() =>
                 {
                     isMoving = false;
@@ -100,7 +104,7 @@ public class Pawn : NetworkBehaviour
 
     public void PlayerCosmesticsSetup()
     {
-        meshRenderer.material = colors[playerObjectController.PawnColor];
+        meshRenderer.material = colors[playerOwner.PawnColor];
     }
 }
 

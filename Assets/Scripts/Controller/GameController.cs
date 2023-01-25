@@ -6,11 +6,11 @@ using UnityEngine;
 using static WayPointData;
 using Mirror;
 
-public class GameController : MonoBehaviour
+public class GameController : NetworkBehaviour
 {
-    int currentPlayer;
-    int numberOfPlayers;
-    bool gameEnd = false;
+    [SyncVar] public int currentPlayer;
+    [SyncVar] int numberOfPlayers;
+    [SyncVar] bool gameEnd = false;
 
     [Header("Game Objects")]
     [SerializeField] Route route;
@@ -43,9 +43,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         numberOfPlayers = Manager.GamePlayers.Count;
-        //get all player objects in scene
-        players = FindObjectsOfType<PlayerObjectController>();
 
+        //get all player objects in scene
+        players = Manager.GamePlayers.ToArray();
     }
 
     void Update()
@@ -57,14 +57,13 @@ public class GameController : MonoBehaviour
             {
                 SpawnPawns();
             }
-
-            StartCoroutine(RollAndMove());
         }
 
         // Stat table
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             //ShowStat();
+            StartCoroutine(RollAndMove());
         }
     }
 
@@ -73,11 +72,10 @@ public class GameController : MonoBehaviour
         dice.RollDice();
 
         yield return new WaitUntil(() => dice.allDiceResult != 0);
-        Debug.Log($"Dice result: {dice.allDiceResult} diceThrown: {dice.diceThrown}");
 
-        players[0].pawn.MoveNext(route.wayPointsSorted, dice.allDiceResult);
+        players[currentPlayer].pawn.MoveNext(route.wayPointsSorted, dice.allDiceResult);
 
-        yield return new WaitUntil(() => !players[0].pawn.isMoving);
+        yield return new WaitUntil(() => !players[currentPlayer].pawn.isMoving);
 
         TurnResult();
     }
@@ -88,10 +86,11 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            Instantiate(pawnPrefab, spawnPointPos, pawnPrefab.transform.rotation);
+            Pawn pawnSpawned = Instantiate(pawnPrefab, spawnPointPos, pawnPrefab.transform.rotation).GetComponent<Pawn>();
+            pawnSpawned.playerOwner = players[i];
+            players[i].pawn = pawnSpawned;
 
-            players[i].pawn.gameObject.transform.position = spawnPointPos;
-            //players[i].pawn.gameObject.transform.SetParent(route.wayPointsSorted[0].transform);
+            NetworkServer.Spawn(pawnSpawned.gameObject);
         }
 
         RefreshStat();

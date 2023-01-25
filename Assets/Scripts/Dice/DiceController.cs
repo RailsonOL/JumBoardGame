@@ -85,7 +85,6 @@ public class DiceController : MonoBehaviour
     void SetResult(int index, Collider col)
     {
         diceNumberResults[index] = (7 - int.Parse(col.name));
-        //Debug.Log("O dado " + index + " parou de verdade. Resultado: " + diceNumberResults[index]);
     }
 
     IEnumerator UpdateResultText(float seconds)
@@ -133,7 +132,6 @@ public class DiceController : MonoBehaviour
     public void RollDice()
     {
         ResetDice();
-        allDiceResult = 0;
 
         for (int i = 0; i < dices.Count; i++)
         {
@@ -156,6 +154,7 @@ public class DiceController : MonoBehaviour
             dices[i].transform.rotation = Quaternion.identity;
             diceNumberResults[i] = 0;
             isRolling[i] = false;
+            allDiceResult = 0;
             diceResultText.SetText("00");
         }
     }

@@ -1045,7 +1045,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1632779198}
         m_TargetAssemblyTypeName: CharactersCosmestics, Assembly-CSharp
-        m_MethodName: PrevColor
+        m_MethodName: PreviousColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
