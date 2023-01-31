@@ -14,6 +14,7 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool PlayerReady;
     [SyncVar(hook = nameof(SendPawnColor))] public int PawnColor;
     public Pawn pawn;
+    [SyncVar] public bool isOurTurn = false;
 
     public int numberOfTurns = 0;
     public int numberOfBuffs = 0;
@@ -40,6 +41,30 @@ public class PlayerObjectController : NetworkBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
+
+    // [Command]
+    // public void CmdRollAndMove()
+    // {
+    //     StartCoroutine(RollAndMove());
+    // }
+
+    // IEnumerator RollAndMove()
+    // {
+    //     dice.RollDice();
+    //     //gameStatusText.SetText($"{players[currentPlayer].PlayerName} throw the dice...");
+
+    //     yield return new WaitUntil(() => dice.allDiceResult != 0);
+    //     //gameStatusText.SetText($"{players[currentPlayer].PlayerName} is moving {dice.allDiceResult} tiles");
+
+    //     players[currentPlayer].pawn.MoveNext(route.wayPointsSorted, dice.allDiceResult);
+
+    //     yield return new WaitUntil(() => !players[currentPlayer].pawn.isMoving);
+    //     //gameStatusText.SetText($"{players[currentPlayer].PlayerName} is stopped");
+
+    //     yield return new WaitForSeconds(1f);
+    //     TurnResult();
+    // }
 
     private void PlayerReadyUpdate(bool oldReady, bool newReady)
     {

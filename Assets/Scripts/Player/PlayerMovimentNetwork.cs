@@ -27,18 +27,21 @@ public class PlayerMovimentNetwork : NetworkBehaviour
     [Header("========================================")]
     [Header("GameObjects")]
     public GameObject PlayerModel;
+    private PlayerObjectController playerObjectController;
 
     //Components
     CharacterController characterController;
+    [SyncVar] public GameController gameController;
 
     public override void OnStartAuthority()
-    { 
+    {
         cam.gameObject.SetActive(true);
         SetPosition();
     }
 
     private void Start()
     {
+        playerObjectController = GetComponent<PlayerObjectController>();
         PlayerModel.SetActive(false);
         fov = cam.fieldOfView;
         defaultFov = fov;
@@ -61,6 +64,11 @@ public class PlayerMovimentNetwork : NetworkBehaviour
             {
                 Movement();
                 FOVCamera();
+                //Rolling dice and start movement
+                if (Input.GetKeyDown(KeyCode.R) && playerObjectController.isOurTurn)
+                {
+                    gameController.CmdRollDice();
+                }
             }
         }
     }

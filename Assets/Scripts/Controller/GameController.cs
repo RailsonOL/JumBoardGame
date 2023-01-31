@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using static WayPointData;
 using Mirror;
+using UnityEngine.SceneManagement;
 
 public class GameController : NetworkBehaviour
 {
@@ -17,6 +17,7 @@ public class GameController : NetworkBehaviour
     [SerializeField] PlayerObjectController[] players;
     [SerializeField] DiceController dice;
     public GameObject pawnPrefab;
+    public InGameInterfaceController interfaceC;
 
     //Manager
     private CustomNetworkManager manager;
@@ -50,8 +51,7 @@ public class GameController : NetworkBehaviour
 
     void Update()
     {
-        //Rolling dice and start movement
-        if (Input.GetKeyDown(KeyCode.Mouse0) && (!gameEnd))
+        if (SceneManager.GetActiveScene().name == "Game")
         {
             if (FindObjectOfType<Pawn>() == null)
             {
@@ -59,10 +59,26 @@ public class GameController : NetworkBehaviour
             }
         }
 
-        // Stat table
-        if (Input.GetKeyDown(KeyCode.Tab))
+        //Rolling dice and start movement
+        // if (Input.GetKeyDown(KeyCode.Mouse0))
+        // {
+        //     if (FindObjectOfType<Pawn>() == null)
+        //     {
+        //         SpawnPawns();
+        //     }
+        // }
+
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            //ShowStat();
+            dice.ViewDice();
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdRollDice()
+    {
+        if (!players[currentPlayer].pawn.isMoving) // if dice is not thrown
+        {
             StartCoroutine(RollAndMove());
         }
     }
@@ -70,13 +86,17 @@ public class GameController : NetworkBehaviour
     IEnumerator RollAndMove()
     {
         dice.RollDice();
+        interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} throw the dice...");
 
         yield return new WaitUntil(() => dice.allDiceResult != 0);
+        interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is moving {dice.allDiceResult} tiles");
 
         players[currentPlayer].pawn.MoveNext(route.wayPointsSorted, dice.allDiceResult);
 
         yield return new WaitUntil(() => !players[currentPlayer].pawn.isMoving);
+        interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is stopped");
 
+        yield return new WaitForSeconds(1f);
         TurnResult();
     }
 
@@ -86,6 +106,7 @@ public class GameController : NetworkBehaviour
 
         for (int i = 0; i < numberOfPlayers; i++)
         {
+            players[i].GetComponent<PlayerMovimentNetwork>().gameController = this;
             Pawn pawnSpawned = Instantiate(pawnPrefab, spawnPointPos, pawnPrefab.transform.rotation).GetComponent<Pawn>();
             pawnSpawned.playerOwner = players[i];
             players[i].pawn = pawnSpawned;
@@ -96,7 +117,8 @@ public class GameController : NetworkBehaviour
         RefreshStat();
 
         currentPlayer = 0;
-        Debug.Log($"Player {players[currentPlayer].PlayerName} turn");
+        players[currentPlayer].isOurTurn = true;
+        interfaceC.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
     }
 
     // check info about standing way point and recording stat
@@ -110,26 +132,32 @@ public class GameController : NetworkBehaviour
         {
             case WayPointBonus.Default:
                 {
+                    interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is in a normal tile, nothing happens");
                     NextTurn(false);
                     break;
                 }
 
             case WayPointBonus.Fail:
                 {
+                    interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is in a fail tile, move back {pointData.bonusValue} tiles");
                     players[currentPlayer].numberOfFails++;
                     players[currentPlayer].pawn.MoveBack(route.wayPointsSorted, pointData.bonusValue);
+                    NextTurn(false);
                     break;
                 }
 
             case WayPointBonus.Buff:
                 {
+                    interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is in a buff tile, move forward {pointData.bonusValue} tiles");
                     players[currentPlayer].numberOfBuffs++;
                     players[currentPlayer].pawn.MoveNext(route.wayPointsSorted, pointData.bonusValue);
+                    NextTurn(false);
                     break;
                 }
 
             case WayPointBonus.OneTurn:
                 {
+                    interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is in a one turn tile, he can throw the dice again");
                     NextTurn(true);
                     break;
                 }
@@ -146,7 +174,7 @@ public class GameController : NetworkBehaviour
     public void NextTurn(bool repeat)
     {
         RefreshStat();
-
+        players[currentPlayer].isOurTurn = false;
         if (repeat)
         {
             // we simply dont change current player
@@ -182,9 +210,11 @@ public class GameController : NetworkBehaviour
 
             } while (true);
         }
+        players[currentPlayer].isOurTurn = true;
 
         // Set new info about next turn player
         Debug.Log($"Player {players[currentPlayer].PlayerName} turn");
+        interfaceC.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
     }
 
 

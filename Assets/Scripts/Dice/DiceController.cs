@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System.Linq;
 
 public class DiceController : MonoBehaviour
@@ -18,13 +17,12 @@ public class DiceController : MonoBehaviour
     private List<Rigidbody> diceRbs;
     private List<Vector3> dicePositions;
 
-
     [Header("Cameras")]
     public Camera diceCam;
     public Camera mainCam;
 
     [Header("UI")]
-    public TextMeshProUGUI diceResultText;
+    public InGameInterfaceController interfaceC;
 
     void Start()
     {
@@ -60,7 +58,6 @@ public class DiceController : MonoBehaviour
         if (isRolling.All(x => x == false) && diceThrown)
         {
             StartCoroutine(UpdateResultText(0.5f));
-            diceThrown = false;
         }
     }
 
@@ -89,12 +86,13 @@ public class DiceController : MonoBehaviour
 
     IEnumerator UpdateResultText(float seconds)
     {
-        diceResultText.SetText("...");
+        interfaceC.RpcUpdateDiceResult("...");
         // Pausa a execução do script por alguns segundos
         yield return new WaitForSeconds(seconds);
         allDiceResult = diceNumberResults.Sum();
         Debug.Log("Resultado total: " + allDiceResult);
-        diceResultText.SetText(allDiceResult.ToString());
+        diceThrown = false;
+        interfaceC.RpcUpdateDiceResult(allDiceResult.ToString());
     }
 
     public void ViewDice()
@@ -102,7 +100,6 @@ public class DiceController : MonoBehaviour
         diceCam.gameObject.SetActive(!diceCam.gameObject.activeSelf);
         mainCam.gameObject.SetActive(!mainCam.gameObject.activeSelf);
     }
-
 
     IEnumerator WaitAndCalculateResult(int index)
     {
@@ -155,7 +152,7 @@ public class DiceController : MonoBehaviour
             diceNumberResults[i] = 0;
             isRolling[i] = false;
             allDiceResult = 0;
-            diceResultText.SetText("00");
+            interfaceC.RpcUpdateDiceResult("00");
         }
     }
 }
