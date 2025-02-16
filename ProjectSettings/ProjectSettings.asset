@@ -694,11 +694,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: b97710b8-fabd-4084-96ab-645c8fd19c52
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: JumBoardGame
+  organizationId: rayplaym
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

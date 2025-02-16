@@ -71,7 +71,7 @@ public class DiceController : MonoBehaviour
             // }
 
             // Se o dado estiver rolando e parar de se mover...
-            if (isRolling[i] && diceRbs[i].velocity.magnitude == 0)
+            if (isRolling[i] && diceRbs[i].linearVelocity.magnitude == 0)
             {
                 // Checa novamente se parou mesmo
                 StartCoroutine(WaitAndCalculateResult(i));
@@ -106,7 +106,7 @@ public class DiceController : MonoBehaviour
         // Pausa a execução do script por 0.4 segundos
         yield return new WaitForSeconds(0.4f);
 
-        if (diceRbs[index].velocity.magnitude == 0)
+        if (diceRbs[index].linearVelocity.magnitude == 0)
         {
             isRolling[index] = false;
         }
@@ -120,7 +120,7 @@ public class DiceController : MonoBehaviour
     {
         for (int i = 0; i < dices.Count; i++)
         {
-            diceRbs[i].velocity = Vector3.zero;
+            diceRbs[i].linearVelocity = Vector3.zero;
             diceRbs[i].angularVelocity = Vector3.zero;
             isRolling[i] = false;
         }
