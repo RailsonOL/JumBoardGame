@@ -34,8 +34,8 @@ public class SteamLobby : MonoBehaviour
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
 
-        LobbyList = Callback<LobbyMatchList_t>.Create(OnGetLobbyList);
-        LobbyDataUpdated = Callback<LobbyDataUpdate_t>.Create(OnGetLobbyData);
+        //LobbyList = Callback<LobbyMatchList_t>.Create(OnGetLobbyList);
+        //LobbyDataUpdated = Callback<LobbyDataUpdate_t>.Create(OnGetLobbyData);
     }
 
     public void HostLobby()
@@ -94,21 +94,10 @@ public class SteamLobby : MonoBehaviour
         SteamMatchmaking.RequestLobbyList();
     }
 
-    void OnGetLobbyList(LobbyMatchList_t result)
-    {
-        if (LobbiesListManager.Instance.listOfLobbies.Count > 0) LobbiesListManager.Instance.DestroyLobbies();
-
-        for (int i = 0; i < result.m_nLobbiesMatching; i++)
-        {
-            CSteamID lobbyID = SteamMatchmaking.GetLobbyByIndex(i);
-            lobbyIDs.Add(lobbyID);
-            SteamMatchmaking.RequestLobbyData(lobbyID);
-        }
-    }
-    void OnGetLobbyData(LobbyDataUpdate_t result)
-    {
-        LobbiesListManager.Instance.DisplayLobbies(lobbyIDs, result);
-    }
+    // void OnGetLobbyData(LobbyDataUpdate_t result)
+    // {
+    //     LobbiesListManager.Instance.DisplayLobbies(lobbyIDs, result);
+    // }
 
     public static string GenerateShortLobbyCode(ulong lobbyID)
     {
