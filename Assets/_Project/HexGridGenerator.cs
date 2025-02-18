@@ -1,226 +1,189 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 public class HexGridGenerator : MonoBehaviour
 {
+    [Header("Grid Settings")]
+    public int width = 10;
+    public int height = 10;
+    public float hexSize = 1f;
+    public float gapSize = 0.1f;
+    public Color gizmoColor = Color.white;
     public GameObject hexPrefab;
-    public int gridWidth = 8;
-    public int gridHeight = 8;
-    public int borderWidth = 8;
 
-    private readonly float horizontalSpacing = 1.732f;
-    private readonly float verticalSpacing = 1.5f;
+    // Adicionando uma flag para mostrar gizmos durante o jogo
+    public bool showGizmosInGame = true;
 
-    // Nomes especiais para as pontas
-    private readonly string[] cornerNames = new string[]
+    private float horizontalDistance;
+    private float verticalDistance;
+    private Dictionary<Vector2Int, GameObject> placedHexes = new Dictionary<Vector2Int, GameObject>();
+
+    void Start()
     {
-        "NEXUS_NE", // Nordeste
-        "NEXUS_E",  // Leste
-        "NEXUS_SE", // Sudeste
-        "NEXUS_SW", // Sudoeste
-        "NEXUS_W",  // Oeste
-        "NEXUS_NW"  // Noroeste
-    };
+        CalculateDistances();
+    }
+
+    void CalculateDistances()
+    {
+        horizontalDistance = hexSize * Mathf.Sqrt(3f) + gapSize;
+        verticalDistance = hexSize * 1.5f + gapSize;
+    }
 
     void OnDrawGizmos()
     {
-        for (int q = -gridWidth; q <= gridWidth; q++)
+        DrawAllHexGizmos();
+    }
+
+    // Novo método para desenhar gizmos também durante o jogo
+    void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying && showGizmosInGame)
         {
-            for (int r = -gridHeight; r <= gridHeight; r++)
+            DrawAllHexGizmos();
+        }
+    }
+
+    // Método separado para desenhar todos os gizmos
+    void DrawAllHexGizmos()
+    {
+        if (!Application.isPlaying)
+        {
+            CalculateDistances();
+        }
+
+        Gizmos.color = gizmoColor;
+        Vector3 basePosition = transform.position;
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
             {
-                if (IsHexInBorder(q, r))
-                {
-                    Vector3 position = GetHexPosition(q, r);
-                    Gizmos.color = Color.yellow;
-                    Gizmos.DrawWireSphere(position, 0.1f);
-                }
+                Vector3 position = CalculateHexPosition(x, y) + basePosition;
+                DrawHexGizmo(position);
             }
         }
     }
 
-    private bool IsHexInBorder(int q, int r)
+    Vector3 CalculateHexPosition(int x, int y)
     {
-        int distance = GetHexDistance(q, r);
-        bool isInOuterBorder = distance == borderWidth;
-        bool isInGrid = Mathf.Abs(q + r) <= gridWidth;
-        return isInOuterBorder && isInGrid;
-    }
+        float xPos = x * horizontalDistance;
+        float yPos = y * verticalDistance;
 
-    private bool IsCorner(int q, int r)
-    {
-        // Identifica se a posição é uma das 6 pontas
-        Vector3 pos = GetHexPosition(q, r);
-        float angle = Mathf.Atan2(pos.z, pos.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360;
-
-        int distance = GetHexDistance(q, r);
-        return distance == borderWidth && Mathf.Abs(angle % 60) < 5;
-    }
-
-    private int GetFaceNumber(int q, int r)
-    {
-        Vector3 pos = GetHexPosition(q, r);
-        float angle = Mathf.Atan2(pos.z, pos.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360;
-
-        // Divide o hexágono em 6 faces (60 graus cada)
-        return (int)(angle / 60) + 1;
-    }
-
-    private int GetHexDistance(int q, int r)
-    {
-        return (Mathf.Abs(q) + Mathf.Abs(r) + Mathf.Abs(-q - r)) / 2;
-    }
-
-    private string GetHexName(int q, int r)
-    {
-        if (IsCorner(q, r))
+        if (y % 2 != 0)
         {
-            Vector3 pos = GetHexPosition(q, r);
-            float angle = Mathf.Atan2(pos.z, pos.x) * Mathf.Rad2Deg;
-            if (angle < 0) angle += 360;
-            int cornerIndex = ((int)(angle / 60)) % 6;
-            return cornerNames[cornerIndex];
+            xPos += horizontalDistance * 0.5f;
         }
 
-        int face = GetFaceNumber(q, r);
-        int subNumber = GetSubNumber(q, r, face);
-        return $"Face_{face}_{subNumber}";
+        float centerOffsetX = (width * horizontalDistance) * 0.5f;
+        float centerOffsetY = (height * verticalDistance) * 0.5f;
+
+        return new Vector3(xPos - centerOffsetX, 0, yPos - centerOffsetY);
     }
 
-    private int GetSubNumber(int q, int r, int face)
+    void DrawHexGizmo(Vector3 center)
     {
-        // Calcula um número sequencial para cada hexágono dentro da face
-        Vector3 pos = GetHexPosition(q, r);
-        float angle = Mathf.Atan2(pos.z, pos.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360;
-
-        // Normaliza o ângulo para a face atual
-        float normalizedAngle = angle - (face - 1) * 60;
-        float distance = Vector3.Distance(Vector3.zero, pos);
-
-        // Cria um número único baseado na posição dentro da face
-        return Mathf.RoundToInt(normalizedAngle * distance / 30);
-    }
-
-    public void GenerateGrid()
-    {
-        while (transform.childCount > 0)
+        Vector3[] vertices = new Vector3[6];
+        for (int i = 0; i < 6; i++)
         {
-            DestroyImmediate(transform.GetChild(0).gameObject);
+            float angle = (i * 60f + 30f) * Mathf.Deg2Rad;
+            vertices[i] = center + new Vector3(
+                hexSize * Mathf.Cos(angle),
+                0,
+                hexSize * Mathf.Sin(angle)
+            );
         }
 
-        for (int q = -gridWidth; q <= gridWidth; q++)
+        for (int i = 0; i < 6; i++)
         {
-            for (int r = -gridHeight; r <= gridHeight; r++)
+            Gizmos.DrawLine(vertices[i], vertices[(i + 1) % 6]);
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            HandleHexClick();
+        }
+        // Adicionando verificação para a tecla espaço
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            HandleHexHover();
+        }
+    }
+
+    // Novo método para lidar com o hover + tecla espaço
+    void HandleHexHover()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Vector3 hitPoint = hit.point - transform.position;
+            Vector2Int gridPosition = WorldToGridPosition(hitPoint);
+
+            if (IsValidGridPosition(gridPosition))
             {
-                if (IsHexInBorder(q, r))
-                {
-                    Vector3 position = GetHexPosition(q, r);
-                    GameObject hex = Instantiate(hexPrefab, position, Quaternion.Euler(90, 0, 0), transform);
-                    hex.name = GetHexName(q, r);
-                }
+                PlaceHex(gridPosition);
             }
         }
     }
 
-    public Vector3 GetHexPosition(int q, int r)
+    void HandleHexClick()
     {
-        float x = horizontalSpacing * (q + r / 2f);
-        float y = verticalSpacing * r;
-        return new Vector3(x, 0, y);
-    }
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-    [MenuItem("GameObject/Sort Children Naturally", false, 0)]
-    static void SortSelectedGameObject()
-    {
-        Transform[] selections = Selection.transforms;
-
-        foreach (Transform selection in selections)
+        if (Physics.Raycast(ray, out hit))
         {
-            SortChildrenNaturally(selection);
+            Vector3 hitPoint = hit.point - transform.position;
+            Vector2Int gridPosition = WorldToGridPosition(hitPoint);
+
+            if (IsValidGridPosition(gridPosition))
+            {
+                PlaceHex(gridPosition);
+            }
         }
     }
 
-    static void SortChildrenNaturally(Transform parent)
+    Vector2Int WorldToGridPosition(Vector3 worldPosition)
     {
-        var children = parent.Cast<Transform>()
-            .OrderBy(t => t.name, new NaturalComparer())
-            .ToList();
+        float gridX = worldPosition.x + (width * horizontalDistance * 0.5f);
+        float gridY = worldPosition.z + (height * verticalDistance * 0.5f);
 
-        for (int i = 0; i < children.Count; i++)
+        float x = gridX / horizontalDistance;
+        float y = gridY / verticalDistance;
+
+        if (Mathf.RoundToInt(y) % 2 != 0)
         {
-            children[i].SetSiblingIndex(i);
+            x -= 0.5f;
         }
 
-        Undo.RegisterFullObjectHierarchyUndo(parent.gameObject, "Sort Children Naturally");
-        EditorUtility.SetDirty(parent.gameObject);
+        return new Vector2Int(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
     }
+
+    bool IsValidGridPosition(Vector2Int position)
+    {
+        return position.x >= 0 && position.x < width &&
+               position.y >= 0 && position.y < height;
+    }
+
+    void PlaceHex(Vector2Int gridPosition)
+    {
+        if (placedHexes.ContainsKey(gridPosition))
+        {
+            Destroy(placedHexes[gridPosition]);
+            placedHexes.Remove(gridPosition);
+        }
+        else if (hexPrefab != null)
+        {
+            Vector3 worldPosition = CalculateHexPosition(gridPosition.x, gridPosition.y) + transform.position;
+            GameObject hex = Instantiate(hexPrefab, worldPosition, Quaternion.Euler(90, 0, 0));
+            hex.transform.parent = transform;
+            placedHexes.Add(gridPosition, hex);
+        }
+    }
+
+    
 }
-
-// Comparador natural para strings
-public class NaturalComparer : System.Collections.Generic.IComparer<string>
-{
-    public int Compare(string x, string y)
-    {
-        if (x == null && y == null) return 0;
-        if (x == null) return -1;
-        if (y == null) return 1;
-
-        // Usa expressões regulares para dividir as strings em partes numéricas e não numéricas
-        var regex = new Regex(@"(\d+)|(\D+)");
-        var xParts = regex.Matches(x).Cast<Match>().Select(m => m.Value).ToArray();
-        var yParts = regex.Matches(y).Cast<Match>().Select(m => m.Value).ToArray();
-
-        int minLength = Mathf.Min(xParts.Length, yParts.Length);
-
-        for (int i = 0; i < minLength; i++)
-        {
-            string xPart = xParts[i];
-            string yPart = yParts[i];
-
-            // Se ambas as partes forem numéricas, compara como números
-            if (int.TryParse(xPart, out int xNum) && int.TryParse(yPart, out int yNum))
-            {
-                if (xNum != yNum) return xNum.CompareTo(yNum);
-            }
-            // Caso contrário, compara como strings
-            else
-            {
-                int stringCompare = string.Compare(xPart, yPart, System.StringComparison.OrdinalIgnoreCase);
-                if (stringCompare != 0) return stringCompare;
-            }
-        }
-
-        // Se todas as partes forem iguais, retorna a comparação pelo comprimento
-        return xParts.Length.CompareTo(yParts.Length);
-    }
-}
-
-#if UNITY_EDITOR
-
-[CustomEditor(typeof(HexGridGenerator))]
-public class HexGridGeneratorEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        HexGridGenerator generator = (HexGridGenerator)target;
-
-        if (GUILayout.Button("Generate Grid"))
-        {
-            generator.GenerateGrid();
-        }
-
-        if (GUILayout.Button("Generate Grid"))
-        {
-            generator.GenerateGrid();
-        }
-    }
-}
-
-#endif
