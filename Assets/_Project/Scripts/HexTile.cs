@@ -15,7 +15,11 @@ public class HexTile : MonoBehaviour
     public bool IsStartTile() => isStartTile;
     public bool IsEndTile() => isEndTile;
 
-    // Método para verificar se o hexágono está conectado a outro
+    // Métodos para configurar conexões (usados pelo BoardManager)
+    public void SetNextHex(HexTile next) => nextHex = next;
+    public void SetPreviousHex(HexTile prev) => previousHex = prev;
+
+    // Métodos auxiliares
     public bool HasNextHex() => nextHex != null;
     public bool HasPreviousHex() => previousHex != null;
 
@@ -38,12 +42,12 @@ public class HexTile : MonoBehaviour
         if (isStartTile)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, 0.5f);
+            Gizmos.DrawWireSphere(transform.position, 0.2f);
         }
         if (isEndTile)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, 0.5f);
+            Gizmos.DrawWireSphere(transform.position, 0.2f);
         }
     }
 }

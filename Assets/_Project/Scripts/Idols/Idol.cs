@@ -37,7 +37,7 @@ public class Idol : MonoBehaviour
             Vector3 newPosition = currentTile.transform.position;
 
             // Ajuste a posição para ficar acima do tile (aqui o valor de Y é aumentado)
-            newPosition.y += 1f; // Ajuste o valor conforme necessário para que o Idol fique acima
+            newPosition.y += 2f; // Ajuste o valor conforme necessário para que o Idol fique acima
 
             transform.position = newPosition;
             Debug.Log($"{data.idolName} se moveu para o hexágono {currentTile.GetTileIndex()}.");
@@ -57,7 +57,7 @@ public class Idol : MonoBehaviour
             Vector3 newPosition = currentTile.transform.position;
 
             // Ajuste a posição para ficar acima do tile (aqui o valor de Y é aumentado)
-            newPosition.y += 1f; // Ajuste o valor conforme necessário para que o Idol fique acima
+            newPosition.y += 2f; // Ajuste o valor conforme necessário para que o Idol fique acima
 
             transform.position = newPosition;
             Debug.Log($"{data.idolName} se moveu para o hexágono {currentTile.GetTileIndex()}.");
