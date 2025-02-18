@@ -1,10 +1,17 @@
 using UnityEngine;
+using System.Collections;
 
 public class Idol : MonoBehaviour
 {
-    public IdolData data;  // O ScriptableObject com as informações do Idol
+    public IdolData data;
     public int position;
-    public HexTile currentTile; // Hexágono atual em que o Idol está posicionado
+    public HexTile currentTile;
+
+    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float jumpHeight = 1f;
+    [SerializeField] private float arcHeight = 0.5f;
+
+    private bool isMoving = false;
 
     public bool IsAlive()
     {
@@ -25,22 +32,19 @@ public class Idol : MonoBehaviour
     public void Initialize(HexTile startTile)
     {
         currentTile = startTile;
-        transform.position = startTile.transform.position;
+        transform.position = startTile.transform.position + Vector3.up * 2f;
         Debug.Log($"{data.idolName} começou no hexágono {currentTile.GetTileIndex()}.");
     }
 
     public void MoveToNextHex()
     {
+        if (isMoving) return;
+
         if (currentTile != null && currentTile.GetNextHex() != null)
         {
-            currentTile = currentTile.GetNextHex();
-            Vector3 newPosition = currentTile.transform.position;
-
-            // Ajuste a posição para ficar acima do tile (aqui o valor de Y é aumentado)
-            newPosition.y += 2f; // Ajuste o valor conforme necessário para que o Idol fique acima
-
-            transform.position = newPosition;
-            Debug.Log($"{data.idolName} se moveu para o hexágono {currentTile.GetTileIndex()}.");
+            HexTile nextTile = currentTile.GetNextHex();
+            StartCoroutine(MoveSmoothly(nextTile, true));
+            Debug.Log($"{data.idolName} está se movendo para o hexágono {nextTile.GetTileIndex()}.");
         }
         else
         {
@@ -48,24 +52,54 @@ public class Idol : MonoBehaviour
         }
     }
 
-
     public void MoveToPreviousHex()
     {
+        if (isMoving) return;
+
         if (currentTile != null && currentTile.GetPreviousHex() != null)
         {
-            currentTile = currentTile.GetPreviousHex();
-            Vector3 newPosition = currentTile.transform.position;
-
-            // Ajuste a posição para ficar acima do tile (aqui o valor de Y é aumentado)
-            newPosition.y += 2f; // Ajuste o valor conforme necessário para que o Idol fique acima
-
-            transform.position = newPosition;
-            Debug.Log($"{data.idolName} se moveu para o hexágono {currentTile.GetTileIndex()}.");
+            HexTile previousTile = currentTile.GetPreviousHex();
+            StartCoroutine(MoveSmoothly(previousTile, false));
+            Debug.Log($"{data.idolName} está se movendo para o hexágono {previousTile.GetTileIndex()}.");
         }
         else
         {
             Debug.Log($"{data.idolName} não pode se mover para o hexágono anterior.");
         }
+    }
+
+    private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)
+    {
+        isMoving = true;
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = targetTile.transform.position + Vector3.up * 2f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 1f)
+        {
+            elapsedTime += Time.deltaTime * moveSpeed;
+            float percentageComplete = elapsedTime;
+
+            // Movimento horizontal com curva de suavização
+            Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, Mathf.SmoothStep(0f, 1f, percentageComplete));
+
+            // Efeito de pulo
+            float yOffset = Mathf.Sin(percentageComplete * Mathf.PI) * jumpHeight;
+
+            // Arco entre hexágonos
+            float arcOffset = (1f - Mathf.Abs(percentageComplete - 0.5f) * 2f) * arcHeight;
+
+            currentPosition.y += yOffset + arcOffset;
+
+            transform.position = currentPosition;
+
+            yield return null;
+        }
+
+        // Atualiza a posição final e o tile atual
+        transform.position = targetPosition;
+        currentTile = targetTile;
+        isMoving = false;
     }
 
     // Função para mostrar os botões no Inspector (apenas para testes)

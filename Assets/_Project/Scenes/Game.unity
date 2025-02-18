@@ -310,10 +310,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1113009354}
-  previousHex: {fileID: 1001050757}
+  previousHex: {fileID: 330712682}
   tileIndex: 0
   isStartTile: 1
-  isEndTile: 0
 --- !u!4 &26334799
 Transform:
   m_ObjectHideFlags: 0
@@ -1353,7 +1352,6 @@ MonoBehaviour:
   previousHex: {fileID: 0}
   tileIndex: 0
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &210660594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,7 +1385,6 @@ MonoBehaviour:
   previousHex: {fileID: 838190123}
   tileIndex: 3
   isStartTile: 0
-  isEndTile: 0
 --- !u!4 &210660596
 Transform:
   m_ObjectHideFlags: 0
@@ -1397,7 +1394,7 @@ Transform:
   m_GameObject: {fileID: 210660594}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.81, y: 12.954866, z: 3.44}
+  m_LocalPosition: {x: 3.9, y: 12.954866, z: 4.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1452,6 +1449,9 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 9f82e243e1072634ca5e5c956dc30ad7, type: 2}
   position: 0
   currentTile: {fileID: 26334798}
+  moveSpeed: 2
+  jumpHeight: 1
+  arcHeight: 0.5
 --- !u!1 &236561176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1501,6 @@ MonoBehaviour:
   previousHex: {fileID: 2134937471}
   tileIndex: 8
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &247649308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,11 +1836,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextHex: {fileID: 0}
+  nextHex: {fileID: 26334798}
   previousHex: {fileID: 516755195}
   tileIndex: 13
   isStartTile: 0
-  isEndTile: 1
 --- !u!1 &341973352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,7 +2146,6 @@ MonoBehaviour:
   previousHex: {fileID: 236561178}
   tileIndex: 9
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &471815627 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9131017794325657298, guid: 112bc2567c3153a4ab18a6ff6a38d866, type: 3}
@@ -2393,7 +2390,7 @@ Transform:
   m_GameObject: {fileID: 512315545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.95, y: 12.954866, z: -2.58}
+  m_LocalPosition: {x: 7.02, y: 12.954866, z: -2.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2416,7 +2413,6 @@ MonoBehaviour:
   previousHex: {fileID: 457779145}
   tileIndex: 10
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &516755193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2466,7 +2462,6 @@ MonoBehaviour:
   previousHex: {fileID: 1542262490}
   tileIndex: 12
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &573815605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,7 +2511,6 @@ MonoBehaviour:
   previousHex: {fileID: 0}
   tileIndex: 0
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &580841747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,7 +3077,6 @@ MonoBehaviour:
   - {fileID: 516755195}
   - {fileID: 330712682}
   startTile: {fileID: 26334798}
-  endTile: {fileID: 1001050757}
 --- !u!4 &675666707
 Transform:
   m_ObjectHideFlags: 0
@@ -4312,7 +4305,6 @@ MonoBehaviour:
   previousHex: {fileID: 1113009354}
   tileIndex: 2
   isStartTile: 0
-  isEndTile: 0
 --- !u!4 &838190124
 Transform:
   m_ObjectHideFlags: 0
@@ -5376,7 +5368,6 @@ MonoBehaviour:
   previousHex: {fileID: 1732673030}
   tileIndex: 5
   isStartTile: 0
-  isEndTile: 0
 --- !u!4 &1001050758
 Transform:
   m_ObjectHideFlags: 0
@@ -5386,7 +5377,7 @@ Transform:
   m_GameObject: {fileID: 1001050756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.65, y: 12.954866, z: 4.24}
+  m_LocalPosition: {x: 7.78, y: 12.954866, z: 4.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5684,7 +5675,6 @@ MonoBehaviour:
   previousHex: {fileID: 26334798}
   tileIndex: 1
   isStartTile: 0
-  isEndTile: 0
 --- !u!4 &1113009355
 Transform:
   m_ObjectHideFlags: 0
@@ -6120,7 +6110,6 @@ MonoBehaviour:
   previousHex: {fileID: 0}
   tileIndex: 0
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &1228970604
 GameObject:
   m_ObjectHideFlags: 0
@@ -7081,7 +7070,7 @@ Transform:
   m_GameObject: {fileID: 1542262488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.85, y: 12.954866, z: -1.16}
+  m_LocalPosition: {x: 5.16, y: 12.954866, z: -2.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7104,7 +7093,6 @@ MonoBehaviour:
   previousHex: {fileID: 512315547}
   tileIndex: 11
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &1549302688
 GameObject:
   m_ObjectHideFlags: 0
@@ -7348,7 +7336,6 @@ MonoBehaviour:
   previousHex: {fileID: 0}
   tileIndex: 0
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &1588638391
 GameObject:
   m_ObjectHideFlags: 0
@@ -8188,7 +8175,6 @@ MonoBehaviour:
   previousHex: {fileID: 210660595}
   tileIndex: 4
   isStartTile: 0
-  isEndTile: 0
 --- !u!4 &1732673031
 Transform:
   m_ObjectHideFlags: 0
@@ -8231,7 +8217,7 @@ Transform:
   m_GameObject: {fileID: 1735653788}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.62, y: 12.954866, z: 2.02}
+  m_LocalPosition: {x: 9.29, y: 12.954866, z: 2.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8254,7 +8240,6 @@ MonoBehaviour:
   previousHex: {fileID: 1001050757}
   tileIndex: 6
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &1749361070
 GameObject:
   m_ObjectHideFlags: 0
@@ -8846,7 +8831,6 @@ MonoBehaviour:
   previousHex: {fileID: 0}
   tileIndex: 0
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &1833974737
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,7 +9992,6 @@ MonoBehaviour:
   previousHex: {fileID: 1735653790}
   tileIndex: 7
   isStartTile: 0
-  isEndTile: 0
 --- !u!1 &2136597382
 GameObject:
   m_ObjectHideFlags: 0
@@ -10144,7 +10127,6 @@ MonoBehaviour:
   previousHex: {fileID: 0}
   tileIndex: 0
   isStartTile: 0
-  isEndTile: 0
 --- !u!1001 &1357015429691525031
 PrefabInstance:
   m_ObjectHideFlags: 0

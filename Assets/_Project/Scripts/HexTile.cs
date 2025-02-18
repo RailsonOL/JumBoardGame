@@ -6,18 +6,17 @@ public class HexTile : MonoBehaviour
     [SerializeField] private HexTile previousHex; // Hexágono anterior
     [SerializeField] private int tileIndex; // Índice do hexágono (opcional)
     [SerializeField] private bool isStartTile; // É o hexágono inicial?
-    [SerializeField] private bool isEndTile; // É o hexágono final?
 
     // Getters para acessar os hexágonos conectados
     public HexTile GetNextHex() => nextHex;
     public HexTile GetPreviousHex() => previousHex;
     public int GetTileIndex() => tileIndex;
     public bool IsStartTile() => isStartTile;
-    public bool IsEndTile() => isEndTile;
 
     // Métodos para configurar conexões (usados pelo BoardManager)
     public void SetNextHex(HexTile next) => nextHex = next;
     public void SetPreviousHex(HexTile prev) => previousHex = prev;
+    public void SetTileIndex(int index) => tileIndex = index;
 
     // Métodos auxiliares
     public bool HasNextHex() => nextHex != null;
@@ -42,11 +41,6 @@ public class HexTile : MonoBehaviour
         if (isStartTile)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, 0.2f);
-        }
-        if (isEndTile)
-        {
-            Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, 0.2f);
         }
     }
