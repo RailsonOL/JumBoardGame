@@ -11,7 +11,7 @@ public class Idol : MonoBehaviour
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float arcHeight = 0.5f;
 
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     public bool IsAlive()
     {
@@ -36,36 +36,41 @@ public class Idol : MonoBehaviour
         Debug.Log($"{data.idolName} começou no hexágono {currentTile.GetTileIndex()}.");
     }
 
-    public void MoveToNextHex()
+    public void MoveHexes(int amount)
     {
         if (isMoving) return;
 
-        if (currentTile != null && currentTile.GetNextHex() != null)
+        if (amount == 0)
         {
-            HexTile nextTile = currentTile.GetNextHex();
-            StartCoroutine(MoveSmoothly(nextTile, true));
-            Debug.Log($"{data.idolName} está se movendo para o hexágono {nextTile.GetTileIndex()}.");
+            Debug.Log($"{data.idolName} não se moveu pois a quantidade de casas é zero.");
+            return;
         }
-        else
-        {
-            Debug.Log($"{data.idolName} não pode se mover para o próximo hexágono.");
-        }
+
+        StartCoroutine(MoveMultipleHexes(amount));
     }
 
-    public void MoveToPreviousHex()
+    private IEnumerator MoveMultipleHexes(int amount)
     {
-        if (isMoving) return;
+        int remainingMoves = Mathf.Abs(amount);
+        bool isForward = amount > 0;
 
-        if (currentTile != null && currentTile.GetPreviousHex() != null)
+        while (remainingMoves > 0 && !isMoving)
         {
-            HexTile previousTile = currentTile.GetPreviousHex();
-            StartCoroutine(MoveSmoothly(previousTile, false));
-            Debug.Log($"{data.idolName} está se movendo para o hexágono {previousTile.GetTileIndex()}.");
+            HexTile nextTile = isForward ?
+                currentTile.GetNextHex() :
+                currentTile.GetPreviousHex();
+
+            if (nextTile == null)
+            {
+                Debug.Log($"{data.idolName} não pode continuar se movendo. Caminho bloqueado.");
+                break;
+            }
+
+            yield return StartCoroutine(MoveSmoothly(nextTile, isForward));
+            remainingMoves--;
         }
-        else
-        {
-            Debug.Log($"{data.idolName} não pode se mover para o hexágono anterior.");
-        }
+
+        Debug.Log($"{data.idolName} completou seu movimento de {Mathf.Abs(amount)} casas.");
     }
 
     private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)
@@ -96,7 +101,6 @@ public class Idol : MonoBehaviour
             yield return null;
         }
 
-        // Atualiza a posição final e o tile atual
         transform.position = targetPosition;
         currentTile = targetTile;
         isMoving = false;
@@ -108,13 +112,24 @@ public class Idol : MonoBehaviour
     {
         if (GUILayout.Button("Mover para o próximo Hexágono"))
         {
-            MoveToNextHex();
+            MoveHexes(1);
         }
 
         if (GUILayout.Button("Mover para o hexágono anterior"))
         {
-            MoveToPreviousHex();
+            MoveHexes(-1);
+        }
+
+        if (GUILayout.Button("Mover 3 casas para frente"))
+        {
+            MoveHexes(5);
+        }
+
+        if (GUILayout.Button("Mover 2 casas para trás"))
+        {
+            MoveHexes(-2);
         }
     }
 #endif
 }
+

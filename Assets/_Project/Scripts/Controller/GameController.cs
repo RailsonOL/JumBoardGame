@@ -19,18 +19,7 @@ public class GameController : NetworkBehaviour
 
     //Manager
     private CustomNetworkManager manager;
-    private CustomNetworkManager Manager
-    {
-        get
-        {
-            if (manager == null)
-            {
-                manager = NetworkManager.singleton as CustomNetworkManager;
-            }
-
-            return manager;
-        }
-    }
+    private CustomNetworkManager Manager => manager ??= NetworkManager.singleton as CustomNetworkManager;
 
     private struct KeyValuePlace
     {
@@ -57,15 +46,6 @@ public class GameController : NetworkBehaviour
             }
         }
 
-        //Rolling dice and start movement
-        // if (Input.GetKeyDown(KeyCode.Mouse0))
-        // {
-        //     if (FindObjectOfType<Pawn>() == null)
-        //     {
-        //         SpawnPawns();
-        //     }
-        // }
-
         if (Input.GetKeyDown(KeyCode.V))
         {
             dice.ViewDice();
@@ -75,7 +55,7 @@ public class GameController : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdRollDice()
     {
-        if (!players[currentPlayer].pawn.isMoving) // if dice is not thrown
+        if (!players[currentPlayer].SelectedIdol.isMoving) // if dice is not thrown
         {
             StartCoroutine(RollAndMove());
         }
@@ -89,9 +69,7 @@ public class GameController : NetworkBehaviour
         yield return new WaitUntil(() => dice.allDiceResult != 0);
         interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is moving {dice.allDiceResult} tiles");
 
-        // players[currentPlayer].pawn.MoveNext(route.wayPointsSorted, dice.allDiceResult);
-
-        yield return new WaitUntil(() => !players[currentPlayer].pawn.isMoving);
+        yield return new WaitUntil(() => !players[currentPlayer].SelectedIdol.isMoving);
         interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is stopped");
 
         yield return new WaitForSeconds(1f);
@@ -182,11 +160,5 @@ public class GameController : NetworkBehaviour
     public void RefreshStat()
     {
 
-    }
-
-    // If player reached end point
-    bool CheckForEnd(int pointPos)
-    {
-        return true;
     }
 }

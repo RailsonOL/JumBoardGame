@@ -31,7 +31,7 @@ public class CharactersCosmestics : MonoBehaviour
         PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
         colorImage.color = colors[currentColorIndex].color;
         colorText.text = colors[currentColorIndex].name;
-        LobbyController.Instance.LocalPlayerController.CmdUpdatePawnColor(index);
+        //LobbyController.Instance.LocalPlayerController.CmdUpdatePawnColor(index);
     }
 
     public void NextColor()

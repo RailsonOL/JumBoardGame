@@ -68,7 +68,7 @@ public class HexTile : MonoBehaviour
         if (isStartTile)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, 0.2f);
+            Gizmos.DrawWireSphere(transform.position, 0.5f);
         }
     }
 }

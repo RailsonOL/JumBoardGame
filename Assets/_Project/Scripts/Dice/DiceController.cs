@@ -65,11 +65,6 @@ public class DiceController : MonoBehaviour
     {
         for (int i = 0; i < dices.Count; i++)
         {
-            // if (isRolling[i])
-            // {
-            //     Debug.Log("O dado " + i + " está rolando...");
-            // }
-
             // Se o dado estiver rolando e parar de se mover...
             if (isRolling[i] && diceRbs[i].linearVelocity.magnitude == 0)
             {

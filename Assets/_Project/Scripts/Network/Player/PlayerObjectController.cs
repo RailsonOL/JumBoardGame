@@ -6,14 +6,20 @@ using Steamworks;
 
 public class PlayerObjectController : NetworkBehaviour
 {
-    //Player Data
+    [Header("Player Data")]
+
     [SyncVar] public int ConnectionID;
     [SyncVar] public int PlayerIdNumber;
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool PlayerReady;
-    [SyncVar(hook = nameof(SendPawnColor))] public int PawnColor;
-    public Pawn pawn;
+    // [SyncVar(hook = nameof(SendPawnColor))] public int PawnColor;
+
+
+    [Header("Player Game Data")]
+    public List<Card> Cards;
+    public Idol SelectedIdol;
+
     [SyncVar] public bool isOurTurn = false;
 
     public int numberOfTurns = 0;
@@ -23,19 +29,7 @@ public class PlayerObjectController : NetworkBehaviour
     public bool isEnd = false;
 
     private CustomNetworkManager manager;
-
-    private CustomNetworkManager Manager
-    {
-        get
-        {
-            if (manager == null)
-            {
-                manager = NetworkManager.singleton as CustomNetworkManager;
-            }
-
-            return manager;
-        }
-    }
+    private CustomNetworkManager Manager => manager ??= NetworkManager.singleton as CustomNetworkManager;
 
     private void Start()
     {
@@ -46,7 +40,7 @@ public class PlayerObjectController : NetworkBehaviour
     {
         if (isServer)
         {
-            this.PlayerReady = newReady;
+            PlayerReady = newReady;
         }
 
         if (isClient)
@@ -94,14 +88,14 @@ public class PlayerObjectController : NetworkBehaviour
     [Command]
     public void CmdSetPlayerName(string PlayerName)
     {
-        this.PlayerNameUpdate(this.PlayerName, PlayerName);
+        PlayerNameUpdate(this.PlayerName, PlayerName);
     }
 
     public void PlayerNameUpdate(string oldName, string newName)
     {
         if (isServer)
         {
-            this.PlayerName = newName;
+            PlayerName = newName;
         }
 
         if (isClient)
@@ -125,28 +119,18 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.StartGame(SceneName);
     }
 
-    //Cosmetics
-    [Command]
-    public void CmdUpdatePawnColor(int newColor)
+    private void GetIdolPosition()
     {
-        SendPawnColor(PawnColor, newColor);
+
     }
 
-    public void SendPawnColor(int oldColor, int newColor)
+    private void GetIdolCurrentEssence()
     {
-        if (isServer)
-        {
-            this.PawnColor = newColor;
-        }
 
-        if (isClient && (oldColor != newColor))
-        {
-            UpdateColor(newColor);
-        }
     }
 
-    void UpdateColor(int message)
+    private void GetIdolName()
     {
-        PawnColor = message;
+
     }
 }

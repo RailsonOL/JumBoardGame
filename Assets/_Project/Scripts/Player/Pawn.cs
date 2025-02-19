@@ -12,7 +12,7 @@ public class Pawn : NetworkBehaviour
     public Transform currentTile;
     public float speed = 5.0f;
     public PlayerObjectController playerOwner;
-    
+
     private Vector3 origPos, targetPos;
     private float timeToMoving = 0.5f;
     public float jumpHeight = 0.7f;
@@ -24,7 +24,7 @@ public class Pawn : NetworkBehaviour
     void Start()
     {
         currentTileIndex = 0;
-        PlayerCosmesticsSetup();
+        //PlayerCosmesticsSetup();
     }
 
     #region  Pawn Movement
@@ -101,11 +101,6 @@ public class Pawn : NetworkBehaviour
         }
     }
     #endregion
-
-    public void PlayerCosmesticsSetup()
-    {
-        meshRenderer.material = colors[playerOwner.PawnColor];
-    }
 }
 
 
