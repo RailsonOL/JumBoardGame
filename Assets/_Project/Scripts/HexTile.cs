@@ -2,42 +2,69 @@ using UnityEngine;
 
 public class HexTile : MonoBehaviour
 {
-    [SerializeField] private HexTile nextHex; // Próximo hexágono
-    [SerializeField] private HexTile previousHex; // Hexágono anterior
-    [SerializeField] private int tileIndex; // Índice do hexágono (opcional)
-    [SerializeField] private bool isStartTile; // É o hexágono inicial?
+    [SerializeField] private HexTile nextHex;
+    [SerializeField] private HexTile previousHex;
+    [SerializeField] private int tileIndex;
+    [SerializeField] private bool isStartTile;
+    [SerializeField] private Material tileMaterial;
 
-    // Getters para acessar os hexágonos conectados
+    private MeshRenderer hexModelRenderer;
+
+    private void Awake()
+    {
+        hexModelRenderer = transform.Find("HexModel").GetComponent<MeshRenderer>();
+        UpdateMaterial();
+    }
+
+    private void OnValidate()
+    {
+        if (!Application.isPlaying)
+        {
+            hexModelRenderer = transform.Find("HexModel").GetComponent<MeshRenderer>();
+            UpdateMaterial();
+        }
+    }
+
+    private void UpdateMaterial()
+    {
+        if (hexModelRenderer != null && tileMaterial != null)
+        {
+            hexModelRenderer.material = tileMaterial;
+        }
+    }
+
     public HexTile GetNextHex() => nextHex;
+
     public HexTile GetPreviousHex() => previousHex;
+
     public int GetTileIndex() => tileIndex;
+
     public bool IsStartTile() => isStartTile;
 
-    // Métodos para configurar conexões (usados pelo BoardManager)
     public void SetNextHex(HexTile next) => nextHex = next;
+
     public void SetPreviousHex(HexTile prev) => previousHex = prev;
+
     public void SetTileIndex(int index) => tileIndex = index;
 
-    // Métodos auxiliares
     public bool HasNextHex() => nextHex != null;
+
     public bool HasPreviousHex() => previousHex != null;
 
-    // Editor helper para visualizar conexões
     private void OnDrawGizmos()
     {
-        // Desenha as conexões
         if (nextHex != null)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, nextHex.transform.position);
         }
+
         if (previousHex != null)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, previousHex.transform.position);
         }
 
-        // Destaca visualmente os tiles especiais
         if (isStartTile)
         {
             Gizmos.color = Color.yellow;

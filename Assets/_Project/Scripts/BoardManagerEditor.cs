@@ -10,10 +10,17 @@ public class BoardManagerEditor : Editor
 
         BoardManager boardManager = (BoardManager)target;
 
+        if (Application.isPlaying)
+        {
+            return; // Evita chamadas no Play Mode
+        }
+
         if (GUILayout.Button("Gerar Conexões HexTiles"))
         {
             boardManager.GenerateHexConnections();
-            EditorUtility.SetDirty(boardManager); // Marca como modificado para salvar na cena
+            EditorUtility.SetDirty(boardManager);
         }
     }
+
+
 }

@@ -7,14 +7,10 @@ public class BoardManager : MonoBehaviour
     public List<HexTile> hexTiles; // Lista de hexágonos na ordem definida no Inspector
     public HexTile startTile; // Hexágono inicial
 
-    private void Awake()
+    private void Start()
     {
-        if (startTile == null)
-        {
-            Debug.LogError("StartTile não foi definido no BoardManager.");
-        }
-
-        ConfigureHexConnections();
+        Debug.Log($"Jogo iniciou! HexTiles: {hexTiles.Count}");
+        ConfigureHexConnections(); // Força a configuração ao iniciar
     }
 
     public void GenerateHexConnections() // Método que será chamado pelo botão
@@ -25,6 +21,12 @@ public class BoardManager : MonoBehaviour
 
     private void ConfigureHexConnections()
     {
+        if (hexTiles == null || hexTiles.Count == 0)
+        {
+            Debug.LogError("Lista de HexTiles está vazia!");
+            return;
+        }
+
         for (int i = 0; i < hexTiles.Count; i++)
         {
             HexTile current = hexTiles[i];
