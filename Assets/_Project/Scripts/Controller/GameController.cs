@@ -7,41 +7,38 @@ using UnityEngine.SceneManagement;
 
 public class GameController : NetworkBehaviour
 {
-    [Header("Network Variables")]
     [SyncVar] public int currentPlayer;
-    [SyncVar] private int numberOfPlayers;
-    [SyncVar] private bool gameEnd = false;
+    [SyncVar] int numberOfPlayers;
+    [SyncVar] bool gameEnd = false;
 
     [Header("Game Objects")]
-    [SerializeField] private PlayerObjectController[] players;
-    [SerializeField] private DiceController dice;
-    [SerializeField] private HexTile startingTile; // Referência para o tile inicial
-    public GameObject pawnPrefab;
+    [SerializeField] PlayerObjectController[] players;
+    [SerializeField] DiceController dice;
+    public GameObject idolPrefab;
     public InGameInterfaceController interfaceC;
+    [SerializeField] private HexTile startingTile;
 
-    [Header("Game Settings")]
-    [SerializeField] private float turnDelay = 1f;
-
-    // Network Manager reference
+    //Manager
     private CustomNetworkManager manager;
     private CustomNetworkManager Manager => manager ??= NetworkManager.singleton as CustomNetworkManager;
 
-    #region Unity Lifecycle
-
-    private void Start()
+    private struct KeyValuePlace
     {
-        if (!isServer) return;
+        public int key;
+        public int value;
+    }
 
+
+    void Start()
+    {
+        numberOfPlayers = Manager.GamePlayers.Count;
+
+        //get all player objects in scene
+        players = Manager.GamePlayers.ToArray();
         InitializeGame();
     }
 
-    private void Update()
-    {
-        HandleSceneSetup();
-        HandleDebugInput();
-    }
-
-    private void HandleSceneSetup()
+    void Update()
     {
         if (SceneManager.GetActiveScene().name == "Game")
         {
@@ -50,19 +47,12 @@ public class GameController : NetworkBehaviour
                 SpawnIdols();
             }
         }
-    }
 
-    private void HandleDebugInput()
-    {
         if (Input.GetKeyDown(KeyCode.V))
         {
             dice.ViewDice();
         }
     }
-
-    #endregion
-
-    #region Game Initialization
 
     private void InitializeGame()
     {
@@ -83,218 +73,126 @@ public class GameController : NetworkBehaviour
         }
     }
 
-    [Server]
-    public void SpawnIdols()
-    {
-        if (!isServer) return;
-
-        foreach (var player in players)
-        {
-            if (player == null)
-            {
-                Debug.LogError("Null player found during idol spawn!");
-                continue;
-            }
-
-            SetupPlayerComponents(player);
-            SpawnPlayerIdol(player);
-        }
-
-        RefreshStat();
-        SetupFirstTurn();
-    }
-
-    private void SetupPlayerComponents(PlayerObjectController player)
-    {
-        var playerMovement = player.GetComponent<PlayerMovimentNetwork>();
-        if (playerMovement != null)
-        {
-            playerMovement.gameController = this;
-        }
-    }
-
-    private void SpawnPlayerIdol(PlayerObjectController player)
-    {
-        if (player.SelectedIdol == null)
-        {
-            Debug.LogError($"SelectedIdol is null for player {player.PlayerName}");
-            return;
-        }
-
-        Vector3 spawnPosition = startingTile != null
-            ? startingTile.transform.position + Vector3.up * 2f
-            : player.transform.position;
-
-        var spawnedIdol = Instantiate(
-            player.SelectedIdol,
-            spawnPosition,
-            player.SelectedIdol.transform.rotation
-        );
-
-        spawnedIdol.playerOwner = player;
-
-        if (startingTile != null)
-        {
-            spawnedIdol.Initialize(startingTile);
-        }
-
-        NetworkServer.Spawn(spawnedIdol.gameObject);
-    }
-
-    private void SetupFirstTurn()
-    {
-        currentPlayer = 0;
-        players[currentPlayer].isOurTurn = true;
-        UpdateTurnUI();
-    }
-
-    #endregion
-
-    #region Turn Management
-
     [Command(requiresAuthority = false)]
     public void CmdRollDice()
     {
-        if (CanPlayerRollDice())
+        if (!players[currentPlayer].SelectedIdol.isMoving) // if dice is not thrown
         {
             StartCoroutine(RollAndMove());
         }
     }
 
-    private bool CanPlayerRollDice()
+    IEnumerator RollAndMove()
     {
-        return !players[currentPlayer].SelectedIdol.isMoving
-            && !gameEnd
-            && players[currentPlayer].SelectedIdol.IsAlive();
-    }
-
-    private IEnumerator RollAndMove()
-    {
-        // Roll dice and wait for result
         dice.RollDice();
         interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} throw the dice...");
-        yield return new WaitUntil(() => dice.allDiceResult != 0);
 
-        // Get result and start movement
+        yield return new WaitUntil(() => dice.allDiceResult != 0);
         int moveAmount = dice.allDiceResult;
         interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is moving {moveAmount} tiles");
 
-        // Move the idol
+        // Obtém o Idol do jogador atual e move
         var currentIdol = players[currentPlayer].SelectedIdol;
         if (currentIdol != null)
         {
+            Debug.Log("Chegou aqui");
             currentIdol.MoveHexes(moveAmount);
-            yield return new WaitUntil(() => !currentIdol.isMoving);
         }
 
+        yield return new WaitUntil(() => !players[currentPlayer].SelectedIdol.isMoving);
         interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is stopped");
-        yield return new WaitForSeconds(turnDelay);
 
-        ProcessTurnEnd();
-    }
-
-    private void ProcessTurnEnd()
-    {
+        yield return new WaitForSeconds(1f);
         TurnResult();
-        bool shouldRepeat = CheckForTurnRepeat();
-        NextTurn(shouldRepeat);
     }
 
+    public void SpawnIdols()
+    {
+        // Vector3 spawnPointPos = route.wayPointsSorted[0].GetComponent<Transform>().position;
+
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            players[i].GetComponent<PlayerMovimentNetwork>().gameController = this;
+            //Pawn pawnSpawned = Instantiate(pawnPrefab, spawnPointPos, pawnPrefab.transform.rotation).GetComponent<Pawn>();
+            PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
+            Idol idolSpawned = Instantiate(idolPrefab, player.transform.position, idolPrefab.transform.rotation).GetComponent<Idol>();
+            idolSpawned.playerOwner = player;
+            player.SelectedIdol = idolSpawned;
+
+            idolSpawned.Initialize(startingTile);
+
+            NetworkServer.Spawn(idolSpawned.gameObject);
+        }
+
+        RefreshStat();
+
+        currentPlayer = 0;
+        players[currentPlayer].isOurTurn = true;
+        interfaceC.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
+    }
+
+    // check info about standing way point and recording stat
     public void TurnResult()
     {
         players[currentPlayer].numberOfTurns++;
 
         if (gameEnd)
         {
-            HandleGameEnd();
+            //ShowStat();
         }
     }
 
-    private bool CheckForTurnRepeat()
-    {
-        // Implement your logic for determining if a player should repeat their turn
-        // For example, landing on a special tile or getting a specific dice result
-        return true;
-    }
-
+    // prepare for the next turn
     public void NextTurn(bool repeat)
     {
         RefreshStat();
         players[currentPlayer].isOurTurn = false;
-
-        if (!repeat)
+        if (repeat)
         {
-            SelectNextValidPlayer();
+            // we simply dont change current player
         }
-
-        players[currentPlayer].isOurTurn = true;
-        UpdateTurnUI();
-    }
-
-    private void SelectNextValidPlayer()
-    {
-        int checkedPlayers = 0;
-
-        do
+        else
         {
-            currentPlayer = (currentPlayer + 1) % numberOfPlayers;
-            checkedPlayers++;
+            int iter = 0;
 
-            if (checkedPlayers >= numberOfPlayers)
+            do
             {
-                gameEnd = true;
-                break;
-            }
+                currentPlayer++;
 
-        } while (players[currentPlayer].isEnd);
-    }
+                if ((currentPlayer + 1) > numberOfPlayers)
+                {
+                    currentPlayer = 0;
+                }
 
-    private void UpdateTurnUI()
-    {
+                // If one of the player ending the game
+                if (players[currentPlayer].isEnd)
+                {
+                    iter++;
+                    // If all of the players ended the game
+                    if (iter >= numberOfPlayers)
+                    {
+                        gameEnd = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+
+            } while (true);
+        }
+        players[currentPlayer].isOurTurn = true;
+
+        // Set new info about next turn player
+        Debug.Log($"Player {players[currentPlayer].PlayerName} turn");
         interfaceC.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
     }
 
-    #endregion
 
-    #region Game State Management
-
+    //Statistics table update 
     public void RefreshStat()
     {
-        // Implement statistics update logic here
-        // For example, update scores, positions, etc.
+
     }
-
-    private void HandleGameEnd()
-    {
-        // Implement game end logic here
-        // For example, show final scores, winner announcement, etc.
-    }
-
-    [Server]
-    public void ForceGameEnd()
-    {
-        gameEnd = true;
-        HandleGameEnd();
-    }
-
-    #endregion
-
-    #region Utility Methods
-
-    public PlayerObjectController GetCurrentPlayer()
-    {
-        return players[currentPlayer];
-    }
-
-    public bool IsGameEnded()
-    {
-        return gameEnd;
-    }
-
-    public int GetNumberOfPlayers()
-    {
-        return numberOfPlayers;
-    }
-
-    #endregion
 }

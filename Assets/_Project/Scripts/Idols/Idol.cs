@@ -42,6 +42,8 @@ public class Idol : NetworkBehaviour
     {
         if (isMoving) return;
 
+        isMoving = true;
+
         if (amount == 0)
         {
             Debug.Log($"{data.idolName} não se moveu pois a quantidade de casas é zero.");
@@ -49,6 +51,8 @@ public class Idol : NetworkBehaviour
         }
 
         StartCoroutine(MoveMultipleHexes(amount));
+
+        isMoving = false;
     }
 
     private IEnumerator MoveMultipleHexes(int amount)

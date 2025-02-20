@@ -11,7 +11,7 @@ public class Pawn : NetworkBehaviour
     public int currentTileIndex = 0;
     public Transform currentTile;
     public float speed = 5.0f;
-    [SyncVar] public PlayerObjectController playerOwner;
+    public PlayerObjectController playerOwner;
 
     private Vector3 origPos, targetPos;
     private float timeToMoving = 0.5f;

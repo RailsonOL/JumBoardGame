@@ -3548,50 +3548,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
   m_PrefabInstance: {fileID: 620308257}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &627703348
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 627703350}
-  - component: {fileID: 627703349}
-  m_Layer: 0
-  m_Name: DevConsole
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &627703349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 627703348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042608801f3b48f4ea5ecacc320280f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &627703350
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 627703348}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.246864, y: -11.887345, z: 12.467202}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &637265019
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,10 +3994,9 @@ MonoBehaviour:
   currentPlayer: 0
   players: []
   dice: {fileID: 491469301}
-  startingTile: {fileID: 0}
-  pawnPrefab: {fileID: 5437781471914995263, guid: 5e61bbd3b2f3b2d45bb9f48fed17ba2f, type: 3}
+  idolPrefab: {fileID: 8816444356503057198, guid: 1240291339f210340bc94f719091b2d1, type: 3}
   interfaceC: {fileID: 1659191330}
-  turnDelay: 1
+  startingTile: {fileID: 856687810}
 --- !u!4 &699832794
 Transform:
   m_ObjectHideFlags: 0
@@ -12805,4 +12760,3 @@ SceneRoots:
   - {fileID: 886670708}
   - {fileID: 396443626}
   - {fileID: 1581120943}
-  - {fileID: 627703350}
