@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using Mirror;
 
-public class Idol : MonoBehaviour
+public class Idol : NetworkBehaviour
 {
     public IdolData data;
     public int position;
     public HexTile currentTile;
+    public PlayerObjectController playerOwner;
 
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float jumpHeight = 1f;

@@ -199,8 +199,8 @@ MonoBehaviour:
   PlayerSteamID: 0
   PlayerName: 
   PlayerReady: 0
-  PawnColor: 0
-  pawn: {fileID: 3196202940002182157, guid: 5e61bbd3b2f3b2d45bb9f48fed17ba2f, type: 3}
+  Cards: []
+  SelectedIdol: {fileID: 1308796084235715506, guid: 1240291339f210340bc94f719091b2d1, type: 3}
   isOurTurn: 0
   numberOfTurns: 0
   numberOfBuffs: 0

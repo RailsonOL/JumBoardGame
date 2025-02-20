@@ -5,7 +5,7 @@ public class HexTile : MonoBehaviour
     [SerializeField] private HexTile nextHex;
     [SerializeField] private HexTile previousHex;
     [SerializeField] private int tileIndex;
-    [SerializeField] private bool isStartTile;
+    [SerializeField] public bool isStartTile;
     [SerializeField] private Material tileMaterial;
 
     private MeshRenderer hexModelRenderer;

@@ -1686,58 +1686,6 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 0}
---- !u!1 &210696070
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 210696071}
-  - component: {fileID: 210696072}
-  m_Layer: 0
-  m_Name: Hammer Idol
-  m_TagString: Idol
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &210696071
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210696070}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.49, y: 6.17, z: -9.68}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1495000505}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &210696072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210696070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 494eab78ac6abb24b81a2330960d4eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9f82e243e1072634ca5e5c956dc30ad7, type: 2}
-  position: 0
-  currentTile: {fileID: 129911520}
-  moveSpeed: 2
-  jumpHeight: 1
-  arcHeight: 0.5
-  isMoving: 0
 --- !u!1001 &219939618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3404,7 +3352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &580841748
 Transform:
   m_ObjectHideFlags: 0
@@ -4090,8 +4038,10 @@ MonoBehaviour:
   currentPlayer: 0
   players: []
   dice: {fileID: 491469301}
+  startingTile: {fileID: 0}
   pawnPrefab: {fileID: 5437781471914995263, guid: 5e61bbd3b2f3b2d45bb9f48fed17ba2f, type: 3}
   interfaceC: {fileID: 1659191330}
+  turnDelay: 1
 --- !u!4 &699832794
 Transform:
   m_ObjectHideFlags: 0
@@ -8918,68 +8868,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
   m_PrefabInstance: {fileID: 1456842387}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1495000504
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 210696071}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.016459465
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.0027239
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.00000014901161
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.70710677
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.70710677
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-      propertyPath: m_Name
-      value: Hammer
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
---- !u!4 &1495000505 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
-  m_PrefabInstance: {fileID: 1495000504}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1549302688
 GameObject:
   m_ObjectHideFlags: 0
@@ -12916,6 +12804,5 @@ SceneRoots:
   - {fileID: 1659191331}
   - {fileID: 886670708}
   - {fileID: 396443626}
-  - {fileID: 210696071}
   - {fileID: 1581120943}
   - {fileID: 627703350}
