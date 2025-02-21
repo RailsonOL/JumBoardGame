@@ -776,6 +776,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4836511523141343851, guid: 459b0b084f49deb4aa5d02ddb550e8d5, type: 3}
   - {fileID: 5437781471914995263, guid: 5e61bbd3b2f3b2d45bb9f48fed17ba2f, type: 3}
+  - {fileID: 8816444356503057198, guid: 1240291339f210340bc94f719091b2d1, type: 3}
   timeInterpolationGui: 0
   GamePlayerPrefab: {fileID: 4836511523141343850, guid: 459b0b084f49deb4aa5d02ddb550e8d5, type: 3}
 --- !u!4 &570456453

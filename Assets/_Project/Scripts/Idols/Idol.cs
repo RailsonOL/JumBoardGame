@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 using Mirror;
 
 public class Idol : NetworkBehaviour
@@ -38,47 +39,6 @@ public class Idol : NetworkBehaviour
         Debug.Log($"{data.idolName} começou no hexágono {currentTile.GetTileIndex()}.");
     }
 
-    public void MoveHexes(int amount)
-    {
-        if (isMoving) return;
-
-        isMoving = true;
-
-        if (amount == 0)
-        {
-            Debug.Log($"{data.idolName} não se moveu pois a quantidade de casas é zero.");
-            return;
-        }
-
-        StartCoroutine(MoveMultipleHexes(amount));
-
-        isMoving = false;
-    }
-
-    private IEnumerator MoveMultipleHexes(int amount)
-    {
-        int remainingMoves = Mathf.Abs(amount);
-        bool isForward = amount > 0;
-
-        while (remainingMoves > 0 && !isMoving)
-        {
-            HexTile nextTile = isForward ?
-                currentTile.GetNextHex() :
-                currentTile.GetPreviousHex();
-
-            if (nextTile == null)
-            {
-                Debug.Log($"{data.idolName} não pode continuar se movendo. Caminho bloqueado.");
-                break;
-            }
-
-            yield return StartCoroutine(MoveSmoothly(nextTile, isForward));
-            remainingMoves--;
-        }
-
-        Debug.Log($"{data.idolName} completou seu movimento de {Mathf.Abs(amount)} casas.");
-    }
-
     private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)
     {
         isMoving = true;
@@ -112,30 +72,63 @@ public class Idol : NetworkBehaviour
         isMoving = false;
     }
 
+    #region esse
+
+    public void MoveNext(int numMoves)
+    {
+        if (isMoving || numMoves <= 0) return;
+
+        StartCoroutine(MoveAlongRoute(numMoves));
+    }
+
+    private IEnumerator MoveAlongRoute(int numMoves)
+    {
+        isMoving = true;
+        int movesDone = 0;
+
+        while (movesDone < numMoves)
+        {
+            HexTile nextTile = currentTile.GetNextHex();
+            if (nextTile == null)
+            {
+                Debug.Log($"{data.idolName} atingiu o final da rota, ignorando {numMoves - movesDone} movimentos restantes.");
+                break;
+            }
+
+            yield return StartCoroutine(MoveSmoothly(nextTile, true));
+
+            currentTile = nextTile;
+            movesDone++;
+        }
+
+        isMoving = false;
+    }
+
+    #endregion
+
     // Função para mostrar os botões no Inspector (apenas para testes)
 #if UNITY_EDITOR
     void OnGUI()
     {
         if (GUILayout.Button("Mover para o próximo Hexágono"))
         {
-            MoveHexes(1);
+            MoveNext(1);
         }
 
         if (GUILayout.Button("Mover para o hexágono anterior"))
         {
-            MoveHexes(-1);
+            MoveNext(-1);
         }
 
         if (GUILayout.Button("Mover 3 casas para frente"))
         {
-            MoveHexes(5);
+            MoveNext(5);
         }
 
         if (GUILayout.Button("Mover 2 casas para trás"))
         {
-            MoveHexes(-2);
+            MoveNext(-2);
         }
     }
 #endif
 }
-

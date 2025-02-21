@@ -96,7 +96,7 @@ public class GameController : NetworkBehaviour
         if (currentIdol != null)
         {
             Debug.Log("Chegou aqui");
-            currentIdol.MoveHexes(moveAmount);
+            currentIdol.MoveNext(moveAmount);
         }
 
         yield return new WaitUntil(() => !players[currentPlayer].SelectedIdol.isMoving);
@@ -108,12 +108,9 @@ public class GameController : NetworkBehaviour
 
     public void SpawnIdols()
     {
-        // Vector3 spawnPointPos = route.wayPointsSorted[0].GetComponent<Transform>().position;
-
         for (int i = 0; i < numberOfPlayers; i++)
         {
             players[i].GetComponent<PlayerMovimentNetwork>().gameController = this;
-            //Pawn pawnSpawned = Instantiate(pawnPrefab, spawnPointPos, pawnPrefab.transform.rotation).GetComponent<Pawn>();
             PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
             Idol idolSpawned = Instantiate(idolPrefab, player.transform.position, idolPrefab.transform.rotation).GetComponent<Idol>();
             idolSpawned.playerOwner = player;
@@ -140,6 +137,8 @@ public class GameController : NetworkBehaviour
         {
             //ShowStat();
         }
+
+        NextTurn(false);
     }
 
     // prepare for the next turn

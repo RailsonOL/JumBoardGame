@@ -8,18 +8,18 @@ using TMPro;
 public class SteamLobby : MonoBehaviour
 {
     public static SteamLobby Instance;
-    //Callbacks
+
+    // Callbacks
     protected Callback<LobbyCreated_t> lobbyCreated;
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
 
-    //Lobbies Callbacks
-    protected Callback<LobbyMatchList_t> LobbyList;
+    // Lobbies Callbacks
     protected Callback<LobbyDataUpdate_t> LobbyDataUpdated;
 
     public List<CSteamID> lobbyIDs = new List<CSteamID>();
 
-    //Vars
+    // Vars
     private NetworkManager manager;
     private const string HostAddressKey = "HostAddress";
     public ulong CurrentLobbyID;
@@ -33,14 +33,10 @@ public class SteamLobby : MonoBehaviour
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
-
-        //LobbyList = Callback<LobbyMatchList_t>.Create(OnGetLobbyList);
-        //LobbyDataUpdated = Callback<LobbyDataUpdate_t>.Create(OnGetLobbyData);
     }
 
     public void HostLobby()
     {
-        //buttons.SetActive(false);
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypePublic, manager.maxConnections);
     }
 
@@ -53,14 +49,15 @@ public class SteamLobby : MonoBehaviour
         manager.StartHost();
 
         // Gerar um código curto com até 5 caracteres
-        string shortCode = GenerateShortLobbyCode(callback.m_ulSteamIDLobby);
+        string shortCode = GenerateShortLobbyCode();
 
         // Armazenar o código curto
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey, SteamUser.GetSteamID().ToString());
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), "name", SteamFriends.GetPersonaName() + "'s Lobby");
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), "shortCode", shortCode);
-    }
 
+        Debug.Log("Lobby Code Generated: " + shortCode);
+    }
 
     private void OnGameLobbyJoinRequested(GameLobbyJoinRequested_t callback)
     {
@@ -70,11 +67,11 @@ public class SteamLobby : MonoBehaviour
 
     private void OnLobbyEntered(LobbyEnter_t callback)
     {
-        //everyone
+        // Everyone
         CurrentLobbyID = callback.m_ulSteamIDLobby;
         Debug.Log("Lobby entered");
 
-        //client
+        // Client
         if (NetworkServer.active) return;
         string hostAddress = SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
         manager.networkAddress = hostAddress;
@@ -86,25 +83,19 @@ public class SteamLobby : MonoBehaviour
         SteamMatchmaking.JoinLobby(lobbyID);
     }
 
-    public void GetLobbiesList()
+    public static string GenerateShortLobbyCode()
     {
-        if (lobbyIDs.Count > 0) lobbyIDs.Clear();
+        // Gerar um valor aleatório único usando Guid e timestamp
+        ulong uniqueValue = (ulong)System.Guid.NewGuid().GetHashCode() ^ (ulong)System.DateTime.Now.Ticks;
 
-        SteamMatchmaking.AddRequestLobbyListResultCountFilter(60);
-        SteamMatchmaking.RequestLobbyList();
-    }
+        // Codificar o valor único em base36
+        string shortCode = Base36Encode(uniqueValue);
 
-    // void OnGetLobbyData(LobbyDataUpdate_t result)
-    // {
-    //     LobbiesListManager.Instance.DisplayLobbies(lobbyIDs, result);
-    // }
+        // Pegar os últimos 5 caracteres do código
+        string finalCode = shortCode.Length >= 5 ? shortCode.Substring(shortCode.Length - 5) : shortCode.PadLeft(5, 'X');
+        Debug.Log("Final Lobby Code: " + finalCode);
 
-    public static string GenerateShortLobbyCode(ulong lobbyID)
-    {
-        string shortCode = Base36Encode(lobbyID);
-
-        // Limitar o tamanho para 5 caracteres
-        return shortCode.Length > 5 ? shortCode.Substring(0, 5) : shortCode;
+        return finalCode;
     }
 
     private static string Base36Encode(ulong value)
@@ -120,6 +111,4 @@ public class SteamLobby : MonoBehaviour
 
         return result;
     }
-
-
 }

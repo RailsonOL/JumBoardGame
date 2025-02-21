@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;  // Adicione esta linha para trabalhar com UI
+using UnityEngine.UI;
 using Steamworks;
 using TMPro;
 
@@ -7,9 +7,10 @@ public class JoinLobbyController : MonoBehaviour
 {
     public static JoinLobbyController Instance;
 
-    // Adicione o campo de entrada e o botão de "Join"
     public TMP_InputField lobbyCodeInput;  // Campo de entrada do código do lobby
-    public Button joinLobbyButton;     // Botão para entrar na sala
+    public Button joinLobbyButton;        // Botão para entrar na sala
+
+    private Callback<LobbyMatchList_t> lobbyMatchListCallback; // Callback para receber a lista de lobbies
 
     private void Awake()
     {
@@ -20,11 +21,14 @@ public class JoinLobbyController : MonoBehaviour
 
         // Certifique-se de que o botão tem a função associada
         joinLobbyButton.onClick.AddListener(OnJoinLobbyButtonClicked);
+
+        // Configurar o callback para receber a lista de lobbies
+        lobbyMatchListCallback = Callback<LobbyMatchList_t>.Create(OnLobbyMatchList);
     }
 
     private void Start()
     {
-        // Também adicionamos um evento para detectar pressionamento da tecla Enter
+        // Adicionar um evento para detectar pressionamento da tecla Enter
         lobbyCodeInput.onEndEdit.AddListener(OnEnterPressed);
     }
 
@@ -41,38 +45,29 @@ public class JoinLobbyController : MonoBehaviour
 
         if (!string.IsNullOrEmpty(lobbyCode))
         {
-            // Aqui você converte o código para CSteamID
-            CSteamID lobbyID = GetLobbyIDFromCode(lobbyCode);
-            if (lobbyID.IsValid())
-            {
-                // Se o lobby ID for válido, tente entrar no lobby
-                SteamMatchmaking.JoinLobby(lobbyID);
-            }
-            else
-            {
-                Debug.LogError("Código de lobby inválido");
-            }
+            // Configurar o filtro para pesquisar lobbies com o shortCode correspondente
+            SteamMatchmaking.AddRequestLobbyListStringFilter("shortCode", lobbyCode, ELobbyComparison.k_ELobbyComparisonEqual);
+
+            // Iniciar a pesquisa de lobbies
+            SteamMatchmaking.RequestLobbyList();
         }
     }
 
-    // Método que converte o código do lobby em CSteamID
-    private CSteamID GetLobbyIDFromCode(string code)
+    // Callback chamado quando a lista de lobbies é recebida
+    private void OnLobbyMatchList(LobbyMatchList_t callback)
     {
-        // Converte o código base36 de volta para um ulong e cria um CSteamID
-        ulong lobbyID = Base36Decode(code);
-        return new CSteamID(lobbyID);
-    }
-
-    // Função para decodificar o código base36
-    private ulong Base36Decode(string code)
-    {
-        const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        ulong result = 0;
-        foreach (char c in code.ToUpper())
+        if (callback.m_nLobbiesMatching > 0)
         {
-            result = result * 36 + (ulong)chars.IndexOf(c);
+            // Pegar o primeiro lobby da lista (assumindo que há apenas um lobby com o shortCode correspondente)
+            CSteamID lobbyID = SteamMatchmaking.GetLobbyByIndex(0);
+
+            // Tentar entrar no lobby usando o lobbyID encontrado
+            SteamMatchmaking.JoinLobby(lobbyID);
         }
-        return result;
+        else
+        {
+            Debug.LogError("Nenhum lobby encontrado com o código fornecido");
+        }
     }
 
     // Detecta quando o Enter é pressionado no campo de entrada
@@ -82,10 +77,5 @@ public class JoinLobbyController : MonoBehaviour
         {
             JoinLobbyByCode();
         }
-    }
-
-    public void GetListOfLobbies()
-    {
-        SteamLobby.Instance.GetLobbiesList();
     }
 }
