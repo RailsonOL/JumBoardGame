@@ -10,6 +10,7 @@ public class InGameInterfaceController : NetworkBehaviour
     [SerializeField] TextMeshProUGUI currentTurnText;
     [SerializeField] TextMeshProUGUI gameStatusText;
     [SerializeField] TextMeshProUGUI diceResultText;
+    [SerializeField] TextMeshProUGUI genericMessage;
 
     [ClientRpc]
     public void RpcUpdateGameStatus(string text)
@@ -27,5 +28,11 @@ public class InGameInterfaceController : NetworkBehaviour
     public void RpcUpdateDiceResult(string text)
     {
         diceResultText.SetText(text);
+    }
+
+    [ClientRpc]
+    public void RpcUpdateGenericMessage(string text)
+    {
+        genericMessage.SetText(text);
     }
 }

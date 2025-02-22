@@ -16,6 +16,20 @@ public class Idol : NetworkBehaviour
 
     public bool isMoving = false;
 
+
+    private InGameInterfaceController interfaceController;
+
+    private void Start()
+    {
+        // Busca o InGameInterfaceController na cena
+        interfaceController = FindFirstObjectByType<InGameInterfaceController>();
+
+        if (interfaceController == null)
+        {
+            Debug.LogError("InGameInterfaceController não encontrado na cena!");
+        }
+    }
+
     public bool IsAlive()
     {
         return data.essence > 0;
@@ -95,10 +109,24 @@ public class Idol : NetworkBehaviour
                 break;
             }
 
+            // Move o ídolo para o próximo tile
             yield return StartCoroutine(MoveSmoothly(nextTile, true));
 
+            // Atualiza o tile atual
             currentTile = nextTile;
             movesDone++;
+        }
+
+        // Aplica o efeito do tile final após o movimento ser concluído
+        if (currentTile != null)
+        {
+            if (currentTile is RandomTile randomTile)
+            {
+                // Passa a referência do InGameInterfaceController para o RandomTile
+                randomTile.SetInterfaceController(interfaceController);
+            }
+
+            currentTile.ExecuteTileEffect(this);
         }
 
         isMoving = false;

@@ -29,27 +29,24 @@ public class HexTile : MonoBehaviour
     {
         if (hexModelRenderer != null && tileMaterial != null)
         {
-            hexModelRenderer.material = tileMaterial;
+            hexModelRenderer.sharedMaterial = tileMaterial;
         }
     }
 
     public HexTile GetNextHex() => nextHex;
-
     public HexTile GetPreviousHex() => previousHex;
-
     public int GetTileIndex() => tileIndex;
-
     public bool IsStartTile() => isStartTile;
-
     public void SetNextHex(HexTile next) => nextHex = next;
-
     public void SetPreviousHex(HexTile prev) => previousHex = prev;
-
     public void SetTileIndex(int index) => tileIndex = index;
-
     public bool HasNextHex() => nextHex != null;
-
     public bool HasPreviousHex() => previousHex != null;
+
+    public virtual void ExecuteTileEffect(Idol idol)
+    {
+        Debug.Log("Tile básico: Nenhum efeito aplicado.");
+    }
 
     private void OnDrawGizmos()
     {
