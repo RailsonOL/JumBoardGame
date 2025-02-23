@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Idol
   - HexTile
+  - Card
   layers:
   - Default
   - TransparentFX

@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 2142787939799642981}
   - component: {fileID: 202896648204656705}
   - component: {fileID: 3505535824516076727}
+  - component: {fileID: -5831279516990390762}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -201,6 +202,7 @@ MonoBehaviour:
   PlayerReady: 0
   Cards: []
   SelectedIdol: {fileID: 1308796084235715506, guid: 1240291339f210340bc94f719091b2d1, type: 3}
+  playerHand: {fileID: 0}
   isOurTurn: 0
   numberOfTurns: 0
   numberOfBuffs: 0
@@ -266,7 +268,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4836511523141343851}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e04a36c007857d1498cd27a97f93e5af, type: 3}
   m_Name: 
@@ -309,6 +311,46 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5831279516990390762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836511523141343851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e96fe1f522fd54697ed8a8e1403375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefabs:
+  - {fileID: 5738097540088855352, guid: ce547063afa6148468ae0530f56992b2, type: 3}
+  - {fileID: 5738097540088855352, guid: 43f1babb4c0d3934a9dd5c9a745a917b, type: 3}
+  - {fileID: 5738097540088855352, guid: 5780d9ec0d0d0504587dda7e4a29fc30, type: 3}
+  - {fileID: 5738097540088855352, guid: ce547063afa6148468ae0530f56992b2, type: 3}
+  - {fileID: 5738097540088855352, guid: 43f1babb4c0d3934a9dd5c9a745a917b, type: 3}
+  - {fileID: 5738097540088855352, guid: 5780d9ec0d0d0504587dda7e4a29fc30, type: 3}
+  - {fileID: 5738097540088855352, guid: 5780d9ec0d0d0504587dda7e4a29fc30, type: 3}
+  maxCards: 6
+  useFanLayout: 1
+  fanSpacing: 20
+  fanSpacingMultiplier: 4
+  fanSpreadMultiplier: 2
+  maxRotation: 10
+  flatSpacing: 100
+  flatSpacingMultiplier: 1
+  hoverHeight: 20
+  highlightedHeight: 40
+  highlightedScale: 1.5
+  draggedScale: 1.1
+  animationDuration: 0.3
+  releaseAnimationDuration: 0.1
+  pushDistance: 40
+  pushDistanceMultiplier: 1
+  activationPanel: {fileID: 0}
+  panelFadeInDuration: 0.3
+  panelFadeOutDuration: 0.2
+  handPanel: {fileID: 0}
 --- !u!1 &4889570912651190865
 GameObject:
   m_ObjectHideFlags: 0

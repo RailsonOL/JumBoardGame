@@ -16,5 +16,5 @@ public abstract class Card : ScriptableObject
     public abstract bool CanPlay();
 
     // Método para executar a carta, que será implementado nas classes derivadas
-    public abstract void Execute();
+    public abstract void Execute(Idol targetIdol); // Adicionado parâmetro Idol
 }

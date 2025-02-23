@@ -15,6 +15,10 @@ public class GameController : NetworkBehaviour
     [SerializeField] PlayerObjectController[] players;
     [SerializeField] DiceController dice;
     public GameObject idolPrefab;
+
+    [Header("Player Hand Panel")]
+    public RectTransform playerHandPanel; // Referência ao painel que será usado pelo PlayerHand
+    public GameObject activationPanel; // Referência ao activationPanel
     public InGameInterfaceController interfaceC;
     [SerializeField] private HexTile startingTile;
 
@@ -110,14 +114,25 @@ public class GameController : NetworkBehaviour
     {
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            players[i].GetComponent<PlayerMovimentNetwork>().gameController = this;
             PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
             Idol idolSpawned = Instantiate(idolPrefab, player.transform.position, idolPrefab.transform.rotation).GetComponent<Idol>();
             idolSpawned.playerOwner = player;
             player.SelectedIdol = idolSpawned;
 
-            idolSpawned.Initialize(startingTile);
+            // Configura o PlayerHand do jogador
+            PlayerHand playerHand = player.GetComponentInChildren<PlayerHand>();
+            if (playerHand != null && playerHandPanel != null)
+            {
+                playerHand.handPanel = playerHandPanel;
+                playerHand.activationPanel = activationPanel;
+                playerHand.InitializeHand(); // Inicializa as cartas após o painel estar disponível
+            }
+            else
+            {
+                Debug.LogWarning("PlayerHand ou playerHandPanel não está configurado corretamente.");
+            }
 
+            idolSpawned.Initialize(startingTile);
             NetworkServer.Spawn(idolSpawned.gameObject);
         }
 

@@ -11,17 +11,16 @@ public class EffectCard : Card
         return effect != null;
     }
 
-    public override void Execute()
+    public override void Execute(Idol targetIdol)
     {
-        // Aqui você pode adicionar lógica para encontrar o alvo apropriado
-        // Por exemplo, pegar o Idol selecionado ou o Idol atual
-        if (effect != null)
+        if (effect != null && targetIdol != null)
         {
-            // Supondo que você tenha acesso ao Idol alvo de alguma forma
-            // Idol targetIdol = ... 
-            // effect.ApplyEffect(targetIdol);
-
-            Debug.Log($"Executando carta com efeito: {effect.effectName}");
+            effect.ApplyEffect(targetIdol); // Aplica o efeito ao ídolo
+            Debug.Log($"Efeito {effect.effectName} aplicado ao ídolo {targetIdol.data.idolName}.");
+        }
+        else
+        {
+            Debug.LogWarning("Efeito ou ídolo não encontrado.");
         }
     }
 }

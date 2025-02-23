@@ -2,49 +2,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerHand : MonoBehaviour
 {
     [Header("Card Settings")]
-    public List<GameObject> cardPrefabs; // List of card prefabs
-    public int maxCards = 5; // Maximum number of cards in hand
+    public List<GameObject> cardPrefabs;
+    public int maxCards = 5;
 
     [Header("Fan Layout")]
-    public bool useFanLayout = true; // Enable/disable fan layout
-    public float fanSpacing = 70f; // Spacing for fan layout
-    public float fanSpacingMultiplier = 1.5f; // Multiplier for fanSpacing
-    public float fanSpreadMultiplier = 1.5f; // Multiplier to expand the fan
-    public float maxRotation = 30f; // Maximum rotation of cards
+    public bool useFanLayout = true;
+    public float fanSpacing = 70f;
+    public float fanSpacingMultiplier = 1.5f;
+    public float fanSpreadMultiplier = 1.5f;
+    public float maxRotation = 30f;
 
     [Header("Straight Layout (No Fan)")]
-    public float flatSpacing = 100f; // Spacing for straight layout
-    public float flatSpacingMultiplier = 1.5f; // Multiplier for flatSpacing
+    public float flatSpacing = 100f;
+    public float flatSpacingMultiplier = 1.5f;
 
     [Header("Highlight Effects")]
-    public float hoverHeight = 20f; // Height the card "jumps" when mouse hovers over
-    public float highlightedHeight = 40f; // Height of highlighted card
-    public float highlightedScale = 1.4f; // Scale of highlighted card
-    public float draggedScale = 1.1f; // Scale of card when being dragged
+    public float hoverHeight = 20f;
+    public float highlightedHeight = 40f;
+    public float highlightedScale = 1.4f;
+    public float draggedScale = 1.1f;
 
     [Header("Animation Settings")]
-    public float animationDuration = 0.3f; // Duration of animations
-    public float releaseAnimationDuration = 0.1f; // Duration of animation when releasing the card
+    public float animationDuration = 0.3f;
+    public float releaseAnimationDuration = 0.1f;
 
     [Header("Card Push")]
-    public float pushDistance = 30f; // Distance cards are pushed to the side
-    public float pushDistanceMultiplier = 1f; // Multiplier for pushDistance
+    public float pushDistance = 30f;
+    public float pushDistanceMultiplier = 1f;
 
+    [Header("Activation Panel")]
+    public GameObject activationPanel;
+    public float panelFadeInDuration = 0.3f;
+    public float panelFadeOutDuration = 0.2f;
+    private CanvasGroup activationPanelCanvasGroup;
+    private RectTransform activationPanelRect;
+    private bool isCardOverActivationArea = false;
+
+    [Header("Panel Reference")]
+    public RectTransform handPanel; // Referência ao painel onde as cartas serão renderizadas
     private List<GameObject> cardsInHand = new List<GameObject>();
-    private GameObject draggedCard; // Card being dragged
-    private int draggedCardIndex; // Index of the card being dragged
-    private bool isDragging = false; // Tracks if a card is being dragged
-
+    private GameObject draggedCard;
+    private int draggedCardIndex;
+    private bool isDragging = false;
+    private bool isInitialized = false;
 
 
     void Start()
     {
-        // Adiciona cartas à mão no início, baseado na lista de prefabs
-        InitializeHand();
+        // Verifica se estamos na cena do jogo antes de inicializar as cartas
+        if (SceneManager.GetActiveScene().name == "game")
+        {
+            InitializeHand();
+        }
+        InitializeActivationPanel();
     }
 
     private void OnValidate()
@@ -55,20 +70,42 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
-    // Inicializa a mão com as cartas da lista de prefabs
-    private void InitializeHand()
+    private void InitializeActivationPanel()
     {
-        // Limpa a mão atual (se houver cartas)
+        if (activationPanel != null)
+        {
+            activationPanelCanvasGroup = activationPanel.GetComponent<CanvasGroup>();
+            if (activationPanelCanvasGroup == null)
+            {
+                activationPanelCanvasGroup = activationPanel.AddComponent<CanvasGroup>();
+            }
+
+            activationPanelRect = activationPanel.GetComponent<RectTransform>();
+
+            activationPanelCanvasGroup.alpha = 0f;
+            activationPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Activation Panel not assigned in inspector!");
+        }
+    }
+
+    public void InitializeHand()
+    {
+        if (isInitialized) return; // Evita inicialização múltipla
+
         ClearHand();
 
-        // Adiciona cartas à mão, limitando ao número máximo de cartas
         for (int i = 0; i < Mathf.Min(cardPrefabs.Count, maxCards); i++)
         {
             AddCardToHand(cardPrefabs[i]);
         }
+
+        InitializeActivationPanel(); // Configura o activationPanel
+        isInitialized = true;
     }
 
-    // Limpa todas as cartas da mão
     private void ClearHand()
     {
         foreach (GameObject card in cardsInHand)
@@ -78,7 +115,6 @@ public class PlayerHand : MonoBehaviour
         cardsInHand.Clear();
     }
 
-    // Adiciona uma carta à mão
     public void AddCardToHand(GameObject cardPrefab)
     {
         if (cardsInHand.Count >= maxCards)
@@ -87,10 +123,31 @@ public class PlayerHand : MonoBehaviour
             return;
         }
 
-        GameObject newCard = Instantiate(cardPrefab, transform);
+        // Instancia a carta como filha do painel (handPanel)
+        GameObject newCard = Instantiate(cardPrefab, handPanel);
         cardsInHand.Add(newCard);
 
-        // Adiciona os eventos de mouse à carta
+        // Configura o RectTransform da carta para se ajustar ao painel
+        // RectTransform cardRect = newCard.GetComponent<RectTransform>();
+        // if (cardRect != null)
+        // {
+        //     // Define as âncoras para o centro do painel
+        //     cardRect.anchorMin = new Vector2(0.5f, 0.5f);
+        //     cardRect.anchorMax = new Vector2(0.5f, 0.5f);
+
+        //     // Define o pivô para o centro da carta
+        //     cardRect.pivot = new Vector2(0.5f, 0.5f);
+
+        //     // Define o tamanho da carta (ajuste conforme necessário)
+        //     cardRect.sizeDelta = new Vector2(100f, 150f);
+
+        //     // Reseta a posição local para o centro do painel
+        //     cardRect.localPosition = Vector3.zero;
+
+        //     // Garante que a escala inicial seja 1
+        //     cardRect.localScale = Vector3.one;
+        // }
+
         AddHoverEffect(newCard);
         AddDragEffect(newCard);
 
@@ -115,13 +172,11 @@ public class PlayerHand : MonoBehaviour
 
         if (useFanLayout)
         {
-            // Layout de leque
             totalWidth = (cardCount - 1) * (fanSpacing * fanSpacingMultiplier);
             startX = -totalWidth / 2;
         }
         else
         {
-            // Layout reto (sem leque)
             totalWidth = (cardCount - 1) * (flatSpacing * flatSpacingMultiplier);
             startX = -totalWidth / 2;
         }
@@ -131,53 +186,42 @@ public class PlayerHand : MonoBehaviour
             GameObject card = cardsInHand[i];
             RectTransform cardTransform = card.GetComponent<RectTransform>();
 
-            // Ignora a carta arrastada durante o reposicionamento
             if (card == draggedCard) continue;
 
-            // Posição X
             float xPos = startX + i * (useFanLayout ? fanSpacing * fanSpacingMultiplier : flatSpacing * flatSpacingMultiplier);
 
-            // Rotação (invertida para o leque ficar de baixo para cima)
             float rotation = 0f;
-            if (useFanLayout && cardCount > 1) // Aplica rotação apenas se o leque estiver ativado e houver mais de uma carta
+            if (useFanLayout && cardCount > 1)
             {
                 rotation = Mathf.Lerp(maxRotation * fanSpreadMultiplier, -maxRotation * fanSpreadMultiplier, (float)i / (cardCount - 1));
             }
 
-            // Escala da carta
             Vector3 scale = Vector3.one;
-
-            // Altura da carta
             float yPos = 0f;
 
-            // Se estiver destacando uma carta
             if (isHighlighting)
             {
                 if (i == highlightedIndex)
                 {
-                    // Carta destacada: aumenta a escala, zera a rotação e levanta
                     scale = Vector3.one * highlightedScale;
                     rotation = 0f;
                     yPos = highlightedHeight;
                 }
                 else if (i < highlightedIndex)
                 {
-                    // Cartas à esquerda da destacada: empurra para a esquerda
                     xPos -= pushDistance * pushDistanceMultiplier;
                 }
                 else if (i > highlightedIndex)
                 {
-                    // Cartas à direita da destacada: empurra para a direita
                     xPos += pushDistance * pushDistanceMultiplier;
                 }
             }
 
-            // Usar DOTween para animar a posição, rotação e escala
+            cardTransform.SetParent(handPanel); // Define o painel como pai da carta
             cardTransform.DOAnchorPos(new Vector2(xPos, yPos), animationDuration).SetEase(Ease.OutBack);
             cardTransform.DOLocalRotate(new Vector3(0, 0, rotation), animationDuration).SetEase(Ease.OutBack);
             cardTransform.DOScale(scale, animationDuration).SetEase(Ease.OutBack);
 
-            // Ajuste de profundidade (opcional)
             cardTransform.SetSiblingIndex(i);
         }
     }
@@ -190,13 +234,11 @@ public class PlayerHand : MonoBehaviour
             trigger = card.AddComponent<EventTrigger>();
         }
 
-        // Evento de entrar com o mouse
         EventTrigger.Entry entryEnter = new EventTrigger.Entry();
         entryEnter.eventID = EventTriggerType.PointerEnter;
         entryEnter.callback.AddListener((data) => OnCardHoverEnter(card));
         trigger.triggers.Add(entryEnter);
 
-        // Evento de sair com o mouse
         EventTrigger.Entry entryExit = new EventTrigger.Entry();
         entryExit.eventID = EventTriggerType.PointerExit;
         entryExit.callback.AddListener((data) => OnCardHoverExit(card));
@@ -211,19 +253,16 @@ public class PlayerHand : MonoBehaviour
             trigger = card.AddComponent<EventTrigger>();
         }
 
-        // Evento de começar a arrastar
         EventTrigger.Entry entryBeginDrag = new EventTrigger.Entry();
         entryBeginDrag.eventID = EventTriggerType.BeginDrag;
         entryBeginDrag.callback.AddListener((data) => OnCardBeginDrag(card));
         trigger.triggers.Add(entryBeginDrag);
 
-        // Evento de arrastar
         EventTrigger.Entry entryDrag = new EventTrigger.Entry();
         entryDrag.eventID = EventTriggerType.Drag;
         entryDrag.callback.AddListener((data) => OnCardDrag(card));
         trigger.triggers.Add(entryDrag);
 
-        // Evento de terminar de arrastar
         EventTrigger.Entry entryEndDrag = new EventTrigger.Entry();
         entryEndDrag.eventID = EventTriggerType.EndDrag;
         entryEndDrag.callback.AddListener((data) => OnCardEndDrag(card));
@@ -232,7 +271,6 @@ public class PlayerHand : MonoBehaviour
 
     private void OnCardHoverEnter(GameObject card)
     {
-        // Ignora o efeito de destacar se uma carta estiver sendo arrastada
         if (isDragging) return;
 
         int highlightedIndex = cardsInHand.IndexOf(card);
@@ -251,10 +289,11 @@ public class PlayerHand : MonoBehaviour
     {
         draggedCard = card;
         draggedCardIndex = cardsInHand.IndexOf(card);
-        isDragging = true; // Indica que uma carta está sendo arrastada
-        card.transform.SetAsLastSibling(); // Coloca a carta arrastada por cima das outras
+        isDragging = true;
+        card.transform.SetAsLastSibling();
 
-        // Ajusta a escala da carta ao segurar
+        ShowActivationPanel();
+
         RectTransform cardTransform = card.GetComponent<RectTransform>();
         cardTransform.DOScale(draggedScale, animationDuration).SetEase(Ease.OutBack);
     }
@@ -263,24 +302,25 @@ public class PlayerHand : MonoBehaviour
     {
         if (draggedCard != null)
         {
-            // Move a carta com o mouse
             RectTransform cardTransform = card.GetComponent<RectTransform>();
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                transform as RectTransform, Input.mousePosition, null, out localPoint);
+                handPanel, Input.mousePosition, null, out localPoint); // Usa handPanel em vez de transform
             cardTransform.anchoredPosition = localPoint;
 
-            // Calcula a nova posição na lista em tempo real
-            int newIndex = CalculateNewCardIndex(localPoint.x);
-            if (newIndex != draggedCardIndex)
-            {
-                // Atualiza a lista e reorganiza as cartas
-                cardsInHand.Remove(draggedCard);
-                cardsInHand.Insert(newIndex, draggedCard);
-                draggedCardIndex = newIndex;
+            isCardOverActivationArea = IsCardOverActivationPanel(Input.mousePosition);
+            UpdateActivationPanelFeedback(isCardOverActivationArea);
 
-                // Animação de empurrar as cartas ao lado
-                UpdateCardPositionsWithPushAnimation();
+            if (!isCardOverActivationArea)
+            {
+                int newIndex = CalculateNewCardIndex(localPoint.x);
+                if (newIndex != draggedCardIndex)
+                {
+                    cardsInHand.Remove(draggedCard);
+                    cardsInHand.Insert(newIndex, draggedCard);
+                    draggedCardIndex = newIndex;
+                    UpdateCardPositionsWithPushAnimation();
+                }
             }
         }
     }
@@ -289,14 +329,83 @@ public class PlayerHand : MonoBehaviour
     {
         if (draggedCard != null)
         {
-            // Retorna a escala da carta ao normal
-            RectTransform cardTransform = draggedCard.GetComponent<RectTransform>();
-            cardTransform.DOScale(Vector3.one, releaseAnimationDuration).SetEase(Ease.OutBack);
+            if (isCardOverActivationArea)
+            {
+                ActivateCard(draggedCard);
+            }
+            else
+            {
+                RectTransform cardTransform = draggedCard.GetComponent<RectTransform>();
+                cardTransform.DOScale(Vector3.one, releaseAnimationDuration).SetEase(Ease.OutBack);
+                UpdateCardPositions();
+            }
 
-            // Atualiza as posições das cartas
-            UpdateCardPositions();
+            HideActivationPanel();
+
             draggedCard = null;
-            isDragging = false; // Indica que a carta não está mais sendo arrastada
+            isDragging = false;
+            isCardOverActivationArea = false;
+        }
+    }
+
+    private void ShowActivationPanel()
+    {
+        if (activationPanel != null)
+        {
+            activationPanel.SetActive(true);
+            activationPanelCanvasGroup.DOFade(1f, panelFadeInDuration);
+        }
+    }
+
+    private void HideActivationPanel()
+    {
+        if (activationPanel != null)
+        {
+            activationPanelCanvasGroup.DOFade(0f, panelFadeOutDuration).OnComplete(() =>
+            {
+                activationPanel.SetActive(false);
+            });
+        }
+    }
+
+    private bool IsCardOverActivationPanel(Vector2 mousePosition)
+    {
+        if (activationPanelRect == null) return false;
+
+        Vector2 localPoint;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            activationPanelRect, mousePosition, null, out localPoint))
+        {
+            return activationPanelRect.rect.Contains(localPoint);
+        }
+        return false;
+    }
+
+    private void UpdateActivationPanelFeedback(bool isOver)
+    {
+        if (activationPanel != null)
+        {
+            activationPanel.transform.DOScale(
+                isOver ? 1.1f : 1f,
+                0.2f
+            ).SetEase(Ease.OutBack);
+        }
+    }
+
+    private void ActivateCard(GameObject card)
+    {
+        Debug.Log($"Card activated: {card.name}");
+        RemoveCardFromHand(card);
+
+        // Envia o efeito da carta ao PlayerObjectController
+        PlayerObjectController player = GetComponentInParent<PlayerObjectController>();
+        if (player != null && player.SelectedIdol != null)
+        {
+            EffectCard effectCard = card.GetComponent<EffectCard>();
+            if (effectCard != null)
+            {
+                effectCard.Execute(player.SelectedIdol); // Aplica o efeito ao ídolo do jogador
+            }
         }
     }
 
@@ -308,13 +417,11 @@ public class PlayerHand : MonoBehaviour
 
         if (useFanLayout)
         {
-            // Layout de leque
             totalWidth = (cardCount - 1) * (fanSpacing * fanSpacingMultiplier);
             startX = -totalWidth / 2;
         }
         else
         {
-            // Layout reto (sem leque)
             totalWidth = (cardCount - 1) * (flatSpacing * flatSpacingMultiplier);
             startX = -totalWidth / 2;
         }
@@ -324,69 +431,45 @@ public class PlayerHand : MonoBehaviour
             GameObject card = cardsInHand[i];
             RectTransform cardTransform = card.GetComponent<RectTransform>();
 
-            // Ignora a carta arrastada durante o reposicionamento
             if (card == draggedCard) continue;
 
-            // Posição X
             float xPos = startX + i * (useFanLayout ? fanSpacing * fanSpacingMultiplier : flatSpacing * flatSpacingMultiplier);
 
-            // Rotação (invertida para o leque ficar de baixo para cima)
             float rotation = 0f;
-            if (useFanLayout && cardCount > 1) // Aplica rotação apenas se o leque estiver ativado e houver mais de uma carta
+            if (useFanLayout && cardCount > 1)
             {
                 rotation = Mathf.Lerp(maxRotation * fanSpreadMultiplier, -maxRotation * fanSpreadMultiplier, (float)i / (cardCount - 1));
             }
 
-            // Escala da carta
             Vector3 scale = Vector3.one;
-
-            // Altura da carta
             float yPos = 0f;
 
-            // Verifica se a carta está ao lado da carta arrastada
             if (i == draggedCardIndex - 1 || i == draggedCardIndex + 1)
             {
                 if (i < draggedCardIndex)
                 {
-                    // Empurra a carta à esquerda
                     xPos -= pushDistance * pushDistanceMultiplier;
                 }
                 else if (i > draggedCardIndex)
                 {
-                    // Empurra a carta à direita
                     xPos += pushDistance * pushDistanceMultiplier;
                 }
             }
 
-            // Usar DOTween para animar a posição, rotação e escala
             cardTransform.DOAnchorPos(new Vector2(xPos, yPos), animationDuration).SetEase(Ease.OutBack);
             cardTransform.DOLocalRotate(new Vector3(0, 0, rotation), animationDuration).SetEase(Ease.OutBack);
             cardTransform.DOScale(scale, animationDuration).SetEase(Ease.OutBack);
 
-            // Ajuste de profundidade (opcional)
             cardTransform.SetSiblingIndex(i);
         }
     }
 
-    // Calcula o novo índice da carta com base na posição X
+    // Calculate the new card index based on the X position
     private int CalculateNewCardIndex(float xPos)
     {
         int cardCount = cardsInHand.Count;
-        float totalWidth;
-        float startX;
-
-        if (useFanLayout)
-        {
-            // Layout de leque
-            totalWidth = (cardCount - 1) * (fanSpacing * fanSpacingMultiplier);
-            startX = -totalWidth / 2;
-        }
-        else
-        {
-            // Layout reto (sem leque)
-            totalWidth = (cardCount - 1) * (flatSpacing * flatSpacingMultiplier);
-            startX = -totalWidth / 2;
-        }
+        float totalWidth = (cardCount - 1) * (useFanLayout ? fanSpacing * fanSpacingMultiplier : flatSpacing * flatSpacingMultiplier);
+        float startX = -totalWidth / 2;
 
         for (int i = 0; i < cardCount; i++)
         {

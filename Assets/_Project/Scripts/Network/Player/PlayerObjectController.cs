@@ -19,6 +19,7 @@ public class PlayerObjectController : NetworkBehaviour
     [Header("Player Game Data")]
     public List<Card> Cards;
     public Idol SelectedIdol;
+    public PlayerHand playerHand; // Referência ao PlayerHand
 
     [SyncVar] public bool isOurTurn = false;
 
