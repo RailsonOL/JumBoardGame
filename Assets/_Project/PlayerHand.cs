@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHand : MonoBehaviour
 {
     [Header("Card Settings")]
-    public List<GameObject> cardPrefabs;
+    public GameObject cardPrefab; // Agora temos apenas um prefab de carta
     public int maxCards = 5;
 
     [Header("Fan Layout")]
@@ -51,15 +51,16 @@ public class PlayerHand : MonoBehaviour
     private bool isDragging = false;
     private bool isInitialized = false;
 
+    private PlayerObjectController playerController;
 
     void Start()
     {
-        // Verifica se estamos na cena do jogo antes de inicializar as cartas
+        playerController = GetComponentInParent<PlayerObjectController>();
         if (SceneManager.GetActiveScene().name == "game")
         {
             InitializeHand();
+            InitializeActivationPanel();
         }
-        InitializeActivationPanel();
     }
 
     private void OnValidate()
@@ -97,9 +98,16 @@ public class PlayerHand : MonoBehaviour
 
         ClearHand();
 
-        for (int i = 0; i < Mathf.Min(cardPrefabs.Count, maxCards); i++)
+        if (playerController != null && playerController.SelectedIdol != null)
         {
-            AddCardToHand(cardPrefabs[i]);
+            IdolData idolData = playerController.SelectedIdol.data;
+            if (idolData != null)
+            {
+                foreach (Card card in idolData.initialCards)
+                {
+                    AddCardToHand(card);
+                }
+            }
         }
 
         InitializeActivationPanel(); // Configura o activationPanel
@@ -115,7 +123,7 @@ public class PlayerHand : MonoBehaviour
         cardsInHand.Clear();
     }
 
-    public void AddCardToHand(GameObject cardPrefab)
+    public void AddCardToHand(Card cardData)
     {
         if (cardsInHand.Count >= maxCards)
         {
@@ -125,28 +133,13 @@ public class PlayerHand : MonoBehaviour
 
         // Instancia a carta como filha do painel (handPanel)
         GameObject newCard = Instantiate(cardPrefab, handPanel);
+        CardUI cardUI = newCard.GetComponent<CardUI>();
+        if (cardUI != null)
+        {
+            cardUI.SetCardData(cardData);
+        }
+
         cardsInHand.Add(newCard);
-
-        // Configura o RectTransform da carta para se ajustar ao painel
-        // RectTransform cardRect = newCard.GetComponent<RectTransform>();
-        // if (cardRect != null)
-        // {
-        //     // Define as âncoras para o centro do painel
-        //     cardRect.anchorMin = new Vector2(0.5f, 0.5f);
-        //     cardRect.anchorMax = new Vector2(0.5f, 0.5f);
-
-        //     // Define o pivô para o centro da carta
-        //     cardRect.pivot = new Vector2(0.5f, 0.5f);
-
-        //     // Define o tamanho da carta (ajuste conforme necessário)
-        //     cardRect.sizeDelta = new Vector2(100f, 150f);
-
-        //     // Reseta a posição local para o centro do painel
-        //     cardRect.localPosition = Vector3.zero;
-
-        //     // Garante que a escala inicial seja 1
-        //     cardRect.localScale = Vector3.one;
-        // }
 
         AddHoverEffect(newCard);
         AddDragEffect(newCard);

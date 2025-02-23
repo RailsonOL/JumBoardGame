@@ -22,16 +22,8 @@ public class GameController : NetworkBehaviour
     public InGameInterfaceController interfaceC;
     [SerializeField] private HexTile startingTile;
 
-    //Manager
     private CustomNetworkManager manager;
     private CustomNetworkManager Manager => manager ??= NetworkManager.singleton as CustomNetworkManager;
-
-    private struct KeyValuePlace
-    {
-        public int key;
-        public int value;
-    }
-
 
     void Start()
     {
@@ -65,7 +57,6 @@ public class GameController : NetworkBehaviour
 
         if (startingTile == null)
         {
-            // Usa o novo método FindObjectsByType, que é mais eficiente pois não precisa ordenar
             var allTiles = FindObjectsByType<HexTile>(FindObjectsSortMode.None);
             startingTile = allTiles.FirstOrDefault(tile => tile.isStartTile);
 
@@ -76,6 +67,7 @@ public class GameController : NetworkBehaviour
             }
         }
     }
+
 
     [Command(requiresAuthority = false)]
     public void CmdRollDice()

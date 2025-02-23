@@ -202,7 +202,6 @@ MonoBehaviour:
   PlayerReady: 0
   Cards: []
   SelectedIdol: {fileID: 1308796084235715506, guid: 1240291339f210340bc94f719091b2d1, type: 3}
-  playerHand: {fileID: 0}
   isOurTurn: 0
   numberOfTurns: 0
   numberOfBuffs: 0
@@ -323,14 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e96fe1f522fd54697ed8a8e1403375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefabs:
-  - {fileID: 5738097540088855352, guid: ce547063afa6148468ae0530f56992b2, type: 3}
-  - {fileID: 5738097540088855352, guid: 43f1babb4c0d3934a9dd5c9a745a917b, type: 3}
-  - {fileID: 5738097540088855352, guid: 5780d9ec0d0d0504587dda7e4a29fc30, type: 3}
-  - {fileID: 5738097540088855352, guid: ce547063afa6148468ae0530f56992b2, type: 3}
-  - {fileID: 5738097540088855352, guid: 43f1babb4c0d3934a9dd5c9a745a917b, type: 3}
-  - {fileID: 5738097540088855352, guid: 5780d9ec0d0d0504587dda7e4a29fc30, type: 3}
-  - {fileID: 5738097540088855352, guid: 5780d9ec0d0d0504587dda7e4a29fc30, type: 3}
+  cardPrefab: {fileID: 5738097540088855352, guid: ce547063afa6148468ae0530f56992b2, type: 3}
   maxCards: 6
   useFanLayout: 1
   fanSpacing: 20
