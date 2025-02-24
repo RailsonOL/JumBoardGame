@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Move 2 Tiles
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 011b37cf134ce664ea2df2d870de8849, type: 3}
-  cardName: Andar +2 casas
-  description: carta descricao
+  cardName: Andar +2 home
+  description: carta aadasdasdasdasd
   essenceCost: 2
   effect: {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}

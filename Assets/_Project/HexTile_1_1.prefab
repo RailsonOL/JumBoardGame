@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+  - {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,3 +135,4 @@ MonoBehaviour:
   previousHex: {fileID: 0}
   tileIndex: 0
   isStartTile: 0
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}

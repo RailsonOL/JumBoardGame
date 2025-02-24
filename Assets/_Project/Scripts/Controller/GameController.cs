@@ -115,6 +115,7 @@ public class GameController : NetworkBehaviour
             PlayerHand playerHand = player.GetComponentInChildren<PlayerHand>();
             if (playerHand != null && playerHandPanel != null)
             {
+                player.gameController = this;
                 playerHand.handPanel = playerHandPanel;
                 playerHand.activationPanel = activationPanel;
                 playerHand.InitializeHand(); // Inicializa as cartas após o painel estar disponível

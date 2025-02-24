@@ -388,17 +388,35 @@ public class PlayerHand : MonoBehaviour
     private void ActivateCard(GameObject card)
     {
         Debug.Log($"Card activated: {card.name}");
+
+        // Remove a carta da mão
         RemoveCardFromHand(card);
 
-        // Envia o efeito da carta ao PlayerObjectController
-        PlayerObjectController player = GetComponentInParent<PlayerObjectController>();
-        if (player != null && player.SelectedIdol != null)
+        // Obtém o componente CardUI da carta
+        CardUI cardUI = card.GetComponent<CardUI>();
+        if (cardUI != null)
         {
-            EffectCard effectCard = card.GetComponent<EffectCard>();
-            if (effectCard != null)
+            // Obtém o cardData do CardUI
+            Card cardData = cardUI.GetCardData();
+
+            // Verifica se o cardData é um EffectCard
+            if (cardData is EffectCard effectCard)
             {
-                effectCard.Execute(player.SelectedIdol); // Aplica o efeito ao ídolo do jogador
+                // Envia o efeito da carta ao PlayerObjectController
+                PlayerObjectController player = GetComponentInParent<PlayerObjectController>();
+                if (player != null && player.SelectedIdol != null)
+                {
+                    effectCard.Execute(player.SelectedIdol); // Aplica o efeito ao ídolo do jogador
+                }
             }
+            else
+            {
+                Debug.LogWarning("A carta não é um EffectCard.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("CardUI não encontrado na carta.");
         }
     }
 

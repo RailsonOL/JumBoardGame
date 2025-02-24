@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Steamworks;
+using UnityEngine.SceneManagement;
 
 public class PlayerObjectController : NetworkBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerObjectController : NetworkBehaviour
     public List<Card> Cards;
     public Idol SelectedIdol;
 
+    public GameController gameController;
+
     [SyncVar] public bool isOurTurn = false;
 
     public int numberOfTurns = 0;
@@ -34,6 +37,21 @@ public class PlayerObjectController : NetworkBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            if (isOwned)
+            {
+                //Rolling dice and start movement
+                if (Input.GetKeyDown(KeyCode.R) && isOurTurn)
+                {
+                    gameController.CmdRollDice();
+                }
+            }
+        }
     }
 
     private void PlayerReadyUpdate(bool oldReady, bool newReady)

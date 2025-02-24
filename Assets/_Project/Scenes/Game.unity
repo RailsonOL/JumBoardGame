@@ -508,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-21,1_1,6
@@ -545,18 +545,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 71844314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1628097201}
   previousHex: {fileID: 1740079678}
   tileIndex: 16
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &73719551
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +898,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-0,9_-11,2
@@ -939,18 +935,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 129911520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1363602931}
   previousHex: {fileID: 856687810}
   tileIndex: 1
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &132431632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,7 +1242,7 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: previousHex
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1456842390}
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
@@ -1567,7 +1559,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-19,2_-1,6
@@ -1604,18 +1596,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 182425853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1740079678}
   previousHex: {fileID: 1035435190}
   tileIndex: 14
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &183264876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,7 +1921,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-19,2_4,8
@@ -1970,18 +1958,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 219939619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1818357671}
   previousHex: {fileID: 1628097201}
   tileIndex: 18
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &247649308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2135,7 +2119,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-11,9_14,4
@@ -2172,18 +2156,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 268321940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1055175945}
   previousHex: {fileID: 1385540757}
   tileIndex: 25
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &276499238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,7 +2435,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-14,7_12,8
@@ -2492,18 +2472,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 324519930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1385540757}
   previousHex: {fileID: 2142492138}
   tileIndex: 23
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1001 &334288074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2579,7 +2555,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-10,1_-11,2
@@ -2616,18 +2592,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 334288075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1679894877}
   previousHex: {fileID: 1202860951}
   tileIndex: 6
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &341973352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,7 +2761,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-13,7_-11,2
@@ -2826,18 +2798,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 379788316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1349558111}
   previousHex: {fileID: 1679894877}
   tileIndex: 8
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &396443624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3604,7 +3572,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-16,5_-6,4
@@ -3641,18 +3609,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 541742931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 2067248216}
   previousHex: {fileID: 1453601762}
   tileIndex: 11
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &573815605
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,7 +3682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &580841748
 Transform:
   m_ObjectHideFlags: 0
@@ -3727,14 +3691,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580841747}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6899639, y: -0, z: -0, w: 0.7238439}
-  m_LocalPosition: {x: 18.88, y: 17.5, z: -5.7}
+  m_LocalRotation: {x: 0.116609104, y: -0.3122236, z: 0.08307952, w: 0.9391574}
+  m_LocalPosition: {x: 56.31, y: 9.07, z: -15.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
+  - {fileID: 1941332190}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 87.255, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.718, y: -36.094, z: 4.96}
 --- !u!1 &595116743
 GameObject:
   m_ObjectHideFlags: 0
@@ -4032,7 +3997,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-4,6_-11,2
@@ -4069,18 +4034,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 620308258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1241496768}
   previousHex: {fileID: 1363602931}
   tileIndex: 3
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &637265019
 GameObject:
   m_ObjectHideFlags: 0
@@ -5493,7 +5454,7 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
-      objectReference: {fileID: 129911522}
+      objectReference: {fileID: 0}
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileType
       value: 1
@@ -6603,14 +6564,13 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &963194226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -6686,26 +6646,6 @@ Transform:
   - {fileID: 183264877}
   m_Father: {fileID: 580841748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b74de89fad30de47b5cac5759d9128a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  shift: 10
-  plusLimit: {x: 300, y: 300, z: 300}
-  minusLimit: {x: 300, y: 300, z: 300}
-  cam: {fileID: 963194227}
-  pivot: {fileID: 183264877}
-  distanceToTarget: 10
-  fovSpeed: 50000
 --- !u!1001 &1035435187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6781,7 +6721,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-18,3_-3,2
@@ -6818,18 +6758,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1035435188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 182425855}
   previousHex: {fileID: 2067248216}
   tileIndex: 13
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1001 &1051347469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6897,7 +6833,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-16,5_9,6
@@ -6934,18 +6870,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1051347470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 2142492138}
   previousHex: {fileID: 1092915321}
   tileIndex: 21
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1055109274
 GameObject:
   m_ObjectHideFlags: 0
@@ -7099,7 +7031,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-10,1_14,4
@@ -7136,18 +7068,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1055175943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1456842390}
   previousHex: {fileID: 268321942}
   tileIndex: 26
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1001 &1073510928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7495,7 +7423,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-17,4_8,0
@@ -7532,18 +7460,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092915319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1051347472}
   previousHex: {fileID: 1818357671}
   tileIndex: 20
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1127335033
 GameObject:
   m_ObjectHideFlags: 0
@@ -8261,7 +8185,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-8,2_-11,2
@@ -8298,18 +8222,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202860949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 334288077}
   previousHex: {fileID: 1241496768}
   tileIndex: 5
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1204718586
 GameObject:
   m_ObjectHideFlags: 0
@@ -8607,7 +8527,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-6,4_-11,2
@@ -8644,18 +8564,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241496766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1202860951}
   previousHex: {fileID: 620308260}
   tileIndex: 4
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!21 &1256388615
 Material:
   serializedVersion: 8
@@ -9121,7 +9037,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-14,7_-9,6
@@ -9158,18 +9074,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1349558109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1453601762}
   previousHex: {fileID: 379788318}
   tileIndex: 9
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!21 &1361101414
 Material:
   serializedVersion: 8
@@ -9327,7 +9239,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-2,7_-11,2
@@ -9364,18 +9276,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1363602929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 620308260}
   previousHex: {fileID: 129911522}
   tileIndex: 2
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1375918940
 GameObject:
   m_ObjectHideFlags: 0
@@ -9577,7 +9485,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-13,7_14,4
@@ -9614,18 +9522,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1385540755}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 268321942}
   previousHex: {fileID: 324519932}
   tileIndex: 24
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1389505212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9959,7 +9863,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-15,6_-8,0
@@ -9996,18 +9900,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1453601760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 541742933}
   previousHex: {fileID: 1349558111}
   tileIndex: 10
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1001 &1456842387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10075,7 +9975,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-8,2_14,4
@@ -10112,18 +10012,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1456842388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 170228388}
   previousHex: {fileID: 1055175945}
   tileIndex: 27
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1549302688
 GameObject:
   m_ObjectHideFlags: 0
@@ -10971,7 +10867,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-20,2_3,2
@@ -11008,18 +10904,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628097199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 219939621}
   previousHex: {fileID: 71844316}
   tileIndex: 17
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1659191329
 GameObject:
   m_ObjectHideFlags: 0
@@ -11246,7 +11138,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-11,9_-11,2
@@ -11283,18 +11175,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1679894875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 379788318}
   previousHex: {fileID: 334288077}
   tileIndex: 7
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1717241641
 GameObject:
   m_ObjectHideFlags: 0
@@ -11631,7 +11519,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-20,2_0,0
@@ -11668,18 +11556,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1740079676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 71844316}
   previousHex: {fileID: 182425855}
   tileIndex: 15
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1 &1765252879
 GameObject:
   m_ObjectHideFlags: 0
@@ -12136,7 +12020,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-18,3_6,4
@@ -12173,18 +12057,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1818357669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1092915321}
   previousHex: {fileID: 219939621}
   tileIndex: 19
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1001 &1819253953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12825,6 +12705,115 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!1 &1941332189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1941332190}
+  - component: {fileID: 1941332193}
+  - component: {fileID: 1941332192}
+  - component: {fileID: 1941332191}
+  m_Layer: 0
+  m_Name: Idol Follow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1941332190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941332189}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 580841748}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1941332191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941332189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b789bd66a1fa942951794039f055a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDelay: 1
+  yPosition: 10
+  distance: 5
+  xOffset: 5
+--- !u!81 &1941332192
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941332189}
+  m_Enabled: 1
+--- !u!20 &1941332193
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941332189}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1960721736
 GameObject:
   m_ObjectHideFlags: 0
@@ -13788,7 +13777,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-17,4_-4,8
@@ -13825,18 +13814,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2067248214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1035435190}
   previousHex: {fileID: 541742933}
   tileIndex: 12
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1001 &2108273527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14223,7 +14208,7 @@ PrefabInstance:
     - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-15,6_11,2
@@ -14260,18 +14245,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2142492136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60cf4891bcabc334eb600793d590e5fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 324519932}
   previousHex: {fileID: 1051347472}
   tileIndex: 22
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  possibleEffects:
-  - {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
-  - {fileID: 11400000, guid: 22ae6652e9735534bb04a6d66a93a8eb, type: 2}
-  - {fileID: 11400000, guid: 1a08f49a65c439545be7d0c06529cf93, type: 2}
+  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
 --- !u!1001 &1357015429691525031
 PrefabInstance:
   m_ObjectHideFlags: 0
