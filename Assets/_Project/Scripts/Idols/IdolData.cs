@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Idol Data", menuName = "Game/New Idol Data")]
+[CreateAssetMenu(fileName = "Idol Data", menuName = "Game/Idol Data")]
 public class IdolData : ScriptableObject
 {
     public string idolName;

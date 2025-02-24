@@ -15,7 +15,7 @@ MonoBehaviour:
   idolName: Hammer Joe
   essence: 10
   initialCards:
-  - {fileID: 11400000, guid: 00e0bc2627024a549b92ca07010a37f1, type: 2}
-  - {fileID: 11400000, guid: 3990edafd4314cb4f8e19b7d9bbfdd9c, type: 2}
-  - {fileID: 11400000, guid: 0d9e20f1a081fce4f8026755cbaf4e68, type: 2}
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
   description: Smash

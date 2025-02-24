@@ -12752,9 +12752,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 1
-  yPosition: 10
+  yPosition: 12
   distance: 5
-  xOffset: 5
+  xOffset: 2
 --- !u!81 &1941332192
 AudioListener:
   m_ObjectHideFlags: 0

@@ -120,12 +120,6 @@ public class Idol : NetworkBehaviour
         // Aplica o efeito do tile final após o movimento ser concluído
         if (currentTile != null)
         {
-            if (currentTile is RandomTile randomTile)
-            {
-                // Passa a referência do InGameInterfaceController para o RandomTile
-                randomTile.SetInterfaceController(interfaceController);
-            }
-
             currentTile.ExecuteTileEffect(this);
         }
 
@@ -133,30 +127,4 @@ public class Idol : NetworkBehaviour
     }
 
     #endregion
-
-    // Função para mostrar os botões no Inspector (apenas para testes)
-#if UNITY_EDITOR
-    void OnGUI()
-    {
-        if (GUILayout.Button("Mover para o próximo Hexágono"))
-        {
-            MoveNext(1);
-        }
-
-        if (GUILayout.Button("Mover para o hexágono anterior"))
-        {
-            MoveNext(-1);
-        }
-
-        if (GUILayout.Button("Mover 3 casas para frente"))
-        {
-            MoveNext(5);
-        }
-
-        if (GUILayout.Button("Mover 2 casas para trás"))
-        {
-            MoveNext(-2);
-        }
-    }
-#endif
 }
