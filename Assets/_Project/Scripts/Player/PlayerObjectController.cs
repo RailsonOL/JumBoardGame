@@ -137,6 +137,23 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.StartGame(SceneName);
     }
 
+    public void ReceiveCard(Card card)
+    {
+        if (card != null)
+        {
+            Cards.Add(card); // Adiciona a carta à lista de cartas do jogador
+
+            // Atualiza a mão do jogador, se necessário
+            PlayerHand playerHand = GetComponent<PlayerHand>();
+            if (playerHand != null)
+            {
+                playerHand.AddCardToHand(card);
+            }
+
+            Debug.Log($"Carta recebida: {card.cardName}");
+        }
+    }
+
     private void GetIdolPosition()
     {
 

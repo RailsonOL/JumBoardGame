@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   idolName: Hammer Joe
-  essence: 10
+  essence: 90
   initialCards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}

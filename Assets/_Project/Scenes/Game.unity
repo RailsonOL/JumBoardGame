@@ -2592,14 +2592,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 334288075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1679894877}
   previousHex: {fileID: 1202860951}
   tileIndex: 6
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!1 &341973352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,14 +2802,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 379788316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1349558111}
   previousHex: {fileID: 1679894877}
   tileIndex: 8
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!1 &396443624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3609,14 +3617,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 541742931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 2067248216}
   previousHex: {fileID: 1453601762}
   tileIndex: 11
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!1 &573815605
 GameObject:
   m_ObjectHideFlags: 0
@@ -5454,7 +5466,7 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 129911522}
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileType
       value: 1
@@ -8222,14 +8234,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202860949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 334288077}
   previousHex: {fileID: 1241496768}
   tileIndex: 5
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!1 &1204718586
 GameObject:
   m_ObjectHideFlags: 0
@@ -8564,14 +8580,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241496766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1202860951}
   previousHex: {fileID: 620308260}
   tileIndex: 4
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!21 &1256388615
 Material:
   serializedVersion: 8
@@ -9074,14 +9094,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1349558109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 1453601762}
   previousHex: {fileID: 379788318}
   tileIndex: 9
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!21 &1361101414
 Material:
   serializedVersion: 8
@@ -9900,14 +9924,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1453601760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 541742933}
   previousHex: {fileID: 1349558111}
   tileIndex: 10
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!1001 &1456842387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11139,6 +11167,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-11,9_-11,2
@@ -11175,14 +11207,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1679894875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d1035973082d3428ed12438bc64bd9, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextHex: {fileID: 379788318}
   previousHex: {fileID: 334288077}
   tileIndex: 7
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  cards:
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
 --- !u!1 &1717241641
 GameObject:
   m_ObjectHideFlags: 0
