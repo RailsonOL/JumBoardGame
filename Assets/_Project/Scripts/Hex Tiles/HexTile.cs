@@ -1,5 +1,15 @@
 using UnityEngine;
 
+public enum TileRegion
+{
+    Neutral,    // Zona Neutra
+    Frozen,     // Zona Gélida
+    Plains,     // Zona Planícies
+    PVP,        // Zona de PVP
+    Volcanic,   // Zona Vulcânica
+    Abyssal     // Zona Abismal
+}
+
 public class HexTile : MonoBehaviour
 {
     [SerializeField] private HexTile nextHex;
@@ -7,6 +17,9 @@ public class HexTile : MonoBehaviour
     [SerializeField] private int tileIndex;
     [SerializeField] public bool isStartTile;
     [SerializeField] private Material tileMaterial;
+
+    [Header("Region Settings")]
+    [SerializeField] private TileRegion region = TileRegion.Neutral; // Região do tile
 
     private MeshRenderer hexModelRenderer;
 
@@ -45,7 +58,7 @@ public class HexTile : MonoBehaviour
 
     public virtual void ExecuteTileEffect(Essent essent)
     {
-        Debug.Log("Tile básico: Nenhum efeito aplicado.");
+        Debug.Log($"Tile {tileIndex} ({region}): Nenhum efeito aplicado.");
     }
 
     private void OnDrawGizmos()

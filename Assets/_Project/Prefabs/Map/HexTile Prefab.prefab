@@ -50,6 +50,7 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  region: 0
 --- !u!1001 &5987707634736873051
 PrefabInstance:
   m_ObjectHideFlags: 0

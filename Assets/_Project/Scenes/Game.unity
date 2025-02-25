@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1361101414}
+  - {fileID: 2102802513}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -509,6 +509,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-21,1_1,6
@@ -552,7 +556,8 @@ MonoBehaviour:
   previousHex: {fileID: 1740079678}
   tileIndex: 16
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
 --- !u!1 &73719551
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,7 +614,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1665859629}
+  - {fileID: 305246962}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -781,7 +786,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1128176913}
+  - {fileID: 135015477}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -899,6 +904,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-0,9_-11,2
@@ -942,7 +951,8 @@ MonoBehaviour:
   previousHex: {fileID: 856687810}
   tileIndex: 1
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
 --- !u!1 &132431632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1039,88 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132431632}
   m_Mesh: {fileID: -2124705421725058983, guid: 4a65647b4d632f143b3abb256b59626c, type: 3}
+--- !u!21 &135015477
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Purple (Instance) (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &137033648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1037,6 +1129,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
@@ -1052,7 +1148,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.7480774
@@ -1097,6 +1205,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_2,7_-8,0
@@ -1135,6 +1247,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 2013994502}
@@ -1149,7 +1265,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.244228
@@ -1194,6 +1322,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_8,2_1,6
@@ -1232,6 +1364,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 1996647849}
@@ -1246,7 +1382,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.412178
@@ -1291,6 +1439,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-6,4_14,4
@@ -1560,6 +1712,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-19,2_-1,6
@@ -1603,7 +1759,8 @@ MonoBehaviour:
   previousHex: {fileID: 1035435190}
   tileIndex: 14
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  region: 1
 --- !u!1 &183264876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,6 +2011,7 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 0}
+  region: 0
 --- !u!1001 &219939618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1922,6 +2080,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-19,2_4,8
@@ -1965,7 +2127,8 @@ MonoBehaviour:
   previousHex: {fileID: 1628097201}
   tileIndex: 18
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  region: 2
 --- !u!1 &247649308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,6 +2283,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-11,9_14,4
@@ -2163,7 +2330,8 @@ MonoBehaviour:
   previousHex: {fileID: 1385540757}
   tileIndex: 25
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+  region: 3
 --- !u!1 &276499238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,6 +2536,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &305246962
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Purple (Instance) (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &324519929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2436,6 +2686,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-14,7_12,8
@@ -2479,7 +2733,8 @@ MonoBehaviour:
   previousHex: {fileID: 2142492138}
   tileIndex: 23
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  region: 2
 --- !u!1001 &334288074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2556,6 +2811,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-10,1_-11,2
@@ -2599,7 +2858,8 @@ MonoBehaviour:
   previousHex: {fileID: 1202860951}
   tileIndex: 6
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
@@ -2766,6 +3026,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-13,7_-11,2
@@ -2809,7 +3073,8 @@ MonoBehaviour:
   previousHex: {fileID: 1679894877}
   tileIndex: 8
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
@@ -2908,6 +3173,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 916388037}
@@ -2922,7 +3191,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.91602707
@@ -2967,6 +3248,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-0,9_14,4
@@ -3005,6 +3290,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 137033649}
@@ -3019,7 +3308,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6641006
@@ -3064,6 +3365,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_3,7_-6,4
@@ -3102,6 +3407,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 1197963865}
@@ -3116,7 +3425,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.7480774
@@ -3161,6 +3482,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_2,7_11,2
@@ -3417,6 +3742,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 952359330}
@@ -3431,7 +3760,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.496151
@@ -3476,6 +3817,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_5,5_-3,2
@@ -3581,6 +3926,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-16,5_-6,4
@@ -3625,6 +3974,7 @@ MonoBehaviour:
   tileIndex: 11
   isStartTile: 0
   tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  region: 1
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
@@ -3679,6 +4029,7 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 0}
+  region: 0
 --- !u!1 &580841747
 GameObject:
   m_ObjectHideFlags: 0
@@ -4010,6 +4361,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-4,6_-11,2
@@ -4053,7 +4408,8 @@ MonoBehaviour:
   previousHex: {fileID: 1363602931}
   tileIndex: 3
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
 --- !u!1 &637265019
 GameObject:
   m_ObjectHideFlags: 0
@@ -4311,6 +4667,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 1127579029}
@@ -4325,7 +4685,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.496151
@@ -4370,6 +4742,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_5,5_6,4
@@ -5383,7 +5759,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1190272552}
+  - {fileID: 1058777079}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5464,6 +5840,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 129911522}
@@ -5482,7 +5862,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.91602707
@@ -5527,6 +5919,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_0,9_-11,2
@@ -6100,6 +6496,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 1089685086}
@@ -6114,7 +6514,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.91602707
@@ -6159,6 +6571,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_0,9_14,4
@@ -6477,6 +6893,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 404231051}
@@ -6491,7 +6911,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5801277
@@ -6536,6 +6968,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_4,6_-4,8
@@ -6734,6 +7170,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-18,3_-3,2
@@ -6777,7 +7217,8 @@ MonoBehaviour:
   previousHex: {fileID: 2067248216}
   tileIndex: 13
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  region: 1
 --- !u!1001 &1051347469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6846,6 +7287,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-16,5_9,6
@@ -6889,7 +7334,8 @@ MonoBehaviour:
   previousHex: {fileID: 1092915321}
   tileIndex: 21
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  region: 2
 --- !u!1 &1055109274
 GameObject:
   m_ObjectHideFlags: 0
@@ -7044,6 +7490,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-10,1_14,4
@@ -7087,7 +7537,90 @@ MonoBehaviour:
   previousHex: {fileID: 268321942}
   tileIndex: 26
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+  region: 3
+--- !u!21 &1058777079
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Purple (Instance) (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1073510928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7096,6 +7629,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
@@ -7111,7 +7648,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.3282013
@@ -7156,6 +7705,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_7,3_3,2
@@ -7194,6 +7747,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 414161291}
@@ -7208,7 +7765,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8320503
@@ -7253,6 +7822,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_1,8_12,8
@@ -7338,7 +7911,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1256388615}
+  - {fileID: 1235671409}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7436,6 +8009,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-17,4_8,0
@@ -7479,7 +8056,8 @@ MonoBehaviour:
   previousHex: {fileID: 1818357671}
   tileIndex: 20
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  region: 2
 --- !u!1 &1127335033
 GameObject:
   m_ObjectHideFlags: 0
@@ -7575,6 +8153,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 1073510929}
@@ -7589,7 +8171,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.412178
@@ -7634,6 +8228,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_6,4_4,8
@@ -7663,88 +8261,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
   m_PrefabInstance: {fileID: 1127579028}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1128176913
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Purple (Instance)
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1134418865
 GameObject:
   m_ObjectHideFlags: 0
@@ -7906,88 +8422,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186339420}
   m_CullTransparentMesh: 1
---- !u!21 &1190272552
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Purple (Instance)
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &1197963864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7996,6 +8430,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
@@ -8011,7 +8449,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6641006
@@ -8056,6 +8506,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_3,7_9,6
@@ -8198,6 +8652,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-8,2_-11,2
@@ -8241,7 +8699,8 @@ MonoBehaviour:
   previousHex: {fileID: 1241496768}
   tileIndex: 5
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
@@ -8382,6 +8841,7 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 0}
+  region: 0
 --- !u!1 &1228970604
 GameObject:
   m_ObjectHideFlags: 0
@@ -8468,6 +8928,88 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228970604}
   m_Mesh: {fileID: -2124705421725058983, guid: 4a65647b4d632f143b3abb256b59626c, type: 3}
+--- !u!21 &1235671409
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Purple (Instance) (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1241496765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8544,6 +9086,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-6,4_-11,2
@@ -8587,93 +9133,12 @@ MonoBehaviour:
   previousHex: {fileID: 620308260}
   tileIndex: 4
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
   - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
---- !u!21 &1256388615
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Purple (Instance)
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1278824790
 GameObject:
   m_ObjectHideFlags: 0
@@ -9058,6 +9523,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-14,7_-9,6
@@ -9102,92 +9571,11 @@ MonoBehaviour:
   tileIndex: 9
   isStartTile: 0
   tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  region: 1
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
   - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
---- !u!21 &1361101414
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Purple (Instance)
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &1363602928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9264,6 +9652,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-2,7_-11,2
@@ -9307,7 +9699,8 @@ MonoBehaviour:
   previousHex: {fileID: 129911522}
   tileIndex: 2
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
 --- !u!1 &1375918940
 GameObject:
   m_ObjectHideFlags: 0
@@ -9510,6 +9903,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-13,7_14,4
@@ -9553,7 +9950,8 @@ MonoBehaviour:
   previousHex: {fileID: 324519932}
   tileIndex: 24
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
 --- !u!1 &1389505212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9812,6 +10210,88 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401431073}
   m_Mesh: {fileID: -2124705421725058983, guid: 4a65647b4d632f143b3abb256b59626c, type: 3}
+--- !u!21 &1453282453
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Purple (Instance) (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1453601759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9888,6 +10368,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-15,6_-8,0
@@ -9932,6 +10416,7 @@ MonoBehaviour:
   tileIndex: 10
   isStartTile: 0
   tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  region: 1
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
@@ -10004,6 +10489,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-8,2_14,4
@@ -10047,7 +10536,8 @@ MonoBehaviour:
   previousHex: {fileID: 1055175945}
   tileIndex: 27
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+  region: 3
 --- !u!1 &1549302688
 GameObject:
   m_ObjectHideFlags: 0
@@ -10321,6 +10811,13 @@ MonoBehaviour:
   - {fileID: 137033649}
   - {fileID: 1725662711}
   startTile: {fileID: 856687810}
+  regionMaterials:
+  - {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  - {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  - {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  - {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+  - {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+  - {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
 --- !u!4 &1581120943
 Transform:
   m_ObjectHideFlags: 0
@@ -10434,6 +10931,7 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 0}
+  region: 0
 --- !u!1 &1588638391
 GameObject:
   m_ObjectHideFlags: 0
@@ -10896,6 +11394,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-20,2_3,2
@@ -10939,7 +11441,8 @@ MonoBehaviour:
   previousHex: {fileID: 71844316}
   tileIndex: 17
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  region: 2
 --- !u!1 &1659191329
 GameObject:
   m_ObjectHideFlags: 0
@@ -11009,88 +11512,6 @@ MonoBehaviour:
   serverOnly: 0
   visible: 0
   hasSpawned: 0
---- !u!21 &1665859629
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Purple (Instance)
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &1679894874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11170,7 +11591,7 @@ PrefabInstance:
     - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-11,9_-11,2
@@ -11214,7 +11635,8 @@ MonoBehaviour:
   previousHex: {fileID: 334288077}
   tileIndex: 7
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
   cards:
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
@@ -11400,6 +11822,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 856687810}
@@ -11414,7 +11840,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8320503
@@ -11459,6 +11897,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_1,8_-9,6
@@ -11556,6 +11998,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-20,2_0,0
@@ -11599,7 +12045,8 @@ MonoBehaviour:
   previousHex: {fileID: 182425855}
   tileIndex: 15
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  region: 1
 --- !u!1 &1765252879
 GameObject:
   m_ObjectHideFlags: 0
@@ -12057,6 +12504,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-18,3_6,4
@@ -12100,7 +12551,8 @@ MonoBehaviour:
   previousHex: {fileID: 219939621}
   tileIndex: 19
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  region: 2
 --- !u!1001 &1819253953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12177,6 +12629,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 399468797}
@@ -12191,7 +12647,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7480774
@@ -12236,6 +12704,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-2,7_14,4
@@ -12315,6 +12787,7 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 0}
+  region: 0
 --- !u!1 &1833974737
 GameObject:
   m_ObjectHideFlags: 0
@@ -12457,7 +12930,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1905509150}
+  - {fileID: 1453282453}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12659,88 +13132,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888686282}
   m_Mesh: {fileID: -2124705421725058983, guid: 4a65647b4d632f143b3abb256b59626c, type: 3}
---- !u!21 &1905509150
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Purple (Instance)
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1941332189
 GameObject:
   m_ObjectHideFlags: 0
@@ -13006,6 +13397,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 1825942220}
@@ -13020,7 +13415,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.5801277
@@ -13065,6 +13472,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-4,6_14,4
@@ -13103,6 +13514,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 2030904829}
@@ -13117,7 +13532,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.3282013
@@ -13162,6 +13589,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_7,3_0,0
@@ -13447,6 +13878,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
       objectReference: {fileID: 515773488}
@@ -13461,7 +13896,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.412178
@@ -13506,6 +13953,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea508b0e6e99fdc4ba01927451ba3398, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_6,4_-1,6
@@ -13814,6 +14265,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-17,4_-4,8
@@ -13857,7 +14312,90 @@ MonoBehaviour:
   previousHex: {fileID: 541742933}
   tileIndex: 12
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
+  region: 1
+--- !u!21 &2102802513
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Purple (Instance) (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &2108273527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13866,6 +14404,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1581120943}
     m_Modifications:
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: region
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: nextHex
       value: 
@@ -13881,7 +14423,19 @@ PrefabInstance:
     - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: tileMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: regionColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5801277
@@ -13926,6 +14480,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_4,6_8,0
@@ -14177,6 +14735,7 @@ MonoBehaviour:
   tileIndex: 0
   isStartTile: 0
   tileMaterial: {fileID: 0}
+  region: 0
 --- !u!1001 &2142492135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14245,6 +14804,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
     - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
       propertyPath: m_Name
       value: Hex_-15,6_11,2
@@ -14288,7 +14851,8 @@ MonoBehaviour:
   previousHex: {fileID: 1051347472}
   tileIndex: 22
   isStartTile: 0
-  tileMaterial: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+  tileMaterial: {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
+  region: 2
 --- !u!1001 &1357015429691525031
 PrefabInstance:
   m_ObjectHideFlags: 0
