@@ -133,10 +133,10 @@ public class PlayerHand : MonoBehaviour
 
         // Instancia a carta como filha do painel (handPanel)
         GameObject newCard = Instantiate(cardPrefab, handPanel);
-        CardController cardUI = newCard.GetComponent<CardController>();
-        if (cardUI != null)
+        CardController cardController = newCard.GetComponent<CardController>();
+        if (cardController != null)
         {
-            cardUI.SetCardData(cardData);
+            cardController.SetCardData(cardData);
         }
 
         cardsInHand.Add(newCard);
@@ -413,12 +413,12 @@ public class PlayerHand : MonoBehaviour
         // Remove a carta da mão
         RemoveCardFromHand(card);
 
-        // Obtém o componente CardUI da carta
-        CardController cardUI = card.GetComponent<CardController>();
-        if (cardUI != null)
+        // Obtém o componente da carta
+        CardController cardController = card.GetComponent<CardController>();
+        if (cardController != null)
         {
-            // Obtém o cardData do CardUI
-            Card cardData = cardUI.GetCardData();
+            // Obtém o cardData
+            Card cardData = cardController.GetCardData();
 
             // Verifica se o cardData é um EffectCard
             if (cardData is Card effectCard)
@@ -437,7 +437,7 @@ public class PlayerHand : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("CardUI não encontrado na carta.");
+            Debug.LogWarning("CardController não encontrado na carta.");
         }
     }
 
