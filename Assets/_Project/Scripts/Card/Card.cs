@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[Icon("Assets/_Project/Resources/SO Icons/Card SO Icon.png")]
+[Icon("Assets/Editor/SO Icons/Card SO Icon.png")]
 [CreateAssetMenu(fileName = "New Card", menuName = "Game/Card")]
 public class Card : ScriptableObject
 {

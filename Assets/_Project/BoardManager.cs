@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 
+#if UNITY_EDITOR
 public class BoardManager : MonoBehaviour
 {
     [Header("Hex Tiles")]
@@ -157,7 +158,6 @@ public class BoardManager : MonoBehaviour
     }
 }
 
-#if UNITY_EDITOR
 [CustomEditor(typeof(BoardManager))]
 public class BoardManagerEditor : Editor
 {
