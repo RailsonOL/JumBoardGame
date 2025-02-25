@@ -14,7 +14,7 @@ public class GameController : NetworkBehaviour
     [Header("Game Objects")]
     [SerializeField] PlayerObjectController[] players;
     [SerializeField] DiceController dice;
-    public GameObject idolPrefab;
+    public GameObject essentPrefab;
 
     [Header("Player Hand Panel")]
     public RectTransform playerHandPanel; // Referência ao painel que será usado pelo PlayerHand
@@ -38,9 +38,9 @@ public class GameController : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Game")
         {
-            if (FindFirstObjectByType<Idol>() == null)
+            if (FindFirstObjectByType<Essent>() == null)
             {
-                SpawnIdols();
+                SpawnEssents();
             }
         }
 
@@ -72,7 +72,7 @@ public class GameController : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdRollDice()
     {
-        if (!players[currentPlayer].SelectedIdol.isMoving) // if dice is not thrown
+        if (!players[currentPlayer].SelectedEssent.isMoving) // if dice is not thrown
         {
             StartCoroutine(RollAndMove());
         }
@@ -87,29 +87,29 @@ public class GameController : NetworkBehaviour
         int moveAmount = dice.allDiceResult;
         interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is moving {moveAmount} tiles");
 
-        // Obtém o Idol do jogador atual e move
-        var currentIdol = players[currentPlayer].SelectedIdol;
-        if (currentIdol != null)
+        // Obtém o Essent do jogador atual e move
+        var currentEssent = players[currentPlayer].SelectedEssent;
+        if (currentEssent != null)
         {
             Debug.Log("Chegou aqui");
-            currentIdol.MoveNext(moveAmount);
+            currentEssent.MoveNext(moveAmount);
         }
 
-        yield return new WaitUntil(() => !players[currentPlayer].SelectedIdol.isMoving);
+        yield return new WaitUntil(() => !players[currentPlayer].SelectedEssent.isMoving);
         interfaceC.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is stopped");
 
         yield return new WaitForSeconds(1f);
         TurnResult();
     }
 
-    public void SpawnIdols()
+    public void SpawnEssents()
     {
         for (int i = 0; i < numberOfPlayers; i++)
         {
             PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
-            Idol idolSpawned = Instantiate(idolPrefab, player.transform.position, idolPrefab.transform.rotation).GetComponent<Idol>();
-            idolSpawned.playerOwner = player;
-            player.SelectedIdol = idolSpawned;
+            Essent essentSpawned = Instantiate(essentPrefab, player.transform.position, essentPrefab.transform.rotation).GetComponent<Essent>();
+            essentSpawned.playerOwner = player;
+            player.SelectedEssent = essentSpawned;
 
             // Configura o PlayerHand do jogador
             PlayerHand playerHand = player.GetComponentInChildren<PlayerHand>();
@@ -125,8 +125,8 @@ public class GameController : NetworkBehaviour
                 Debug.LogWarning("PlayerHand ou playerHandPanel não está configurado corretamente.");
             }
 
-            idolSpawned.Initialize(startingTile);
-            NetworkServer.Spawn(idolSpawned.gameObject);
+            essentSpawned.Initialize(startingTile);
+            NetworkServer.Spawn(essentSpawned.gameObject);
         }
 
         RefreshStat();

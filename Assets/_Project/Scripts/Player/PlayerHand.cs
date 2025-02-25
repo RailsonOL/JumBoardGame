@@ -98,12 +98,12 @@ public class PlayerHand : MonoBehaviour
 
         ClearHand();
 
-        if (playerController != null && playerController.SelectedIdol != null)
+        if (playerController != null && playerController.SelectedEssent != null)
         {
-            IdolData idolData = playerController.SelectedIdol.data;
-            if (idolData != null)
+            EssentData essentData = playerController.SelectedEssent.data;
+            if (essentData != null)
             {
-                foreach (Card card in idolData.initialCards)
+                foreach (Card card in essentData.initialCards)
                 {
                     AddCardToHand(card);
                 }
@@ -133,7 +133,7 @@ public class PlayerHand : MonoBehaviour
 
         // Instancia a carta como filha do painel (handPanel)
         GameObject newCard = Instantiate(cardPrefab, handPanel);
-        CardUI cardUI = newCard.GetComponent<CardUI>();
+        CardController cardUI = newCard.GetComponent<CardController>();
         if (cardUI != null)
         {
             cardUI.SetCardData(cardData);
@@ -157,7 +157,7 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
-    private void UpdateCardPositions(bool isHighlighting = false, int highlightedIndex = -1)
+    private void UpdateCardPositions(bool isHighlighting = false, int highlightedIndex = -1, bool isPushing = false)
     {
         int cardCount = cardsInHand.Count;
         float totalWidth;
@@ -192,25 +192,45 @@ public class PlayerHand : MonoBehaviour
             Vector3 scale = Vector3.one;
             float yPos = 0f;
 
-            if (isHighlighting)
+            // Handle highlighting effect
+            if (isHighlighting && i == highlightedIndex)
             {
-                if (i == highlightedIndex)
+                scale = Vector3.one * highlightedScale;
+                rotation = 0f;
+                yPos = highlightedHeight;
+            }
+
+            // Handle pushing effect (when dragging or highlighting)
+            if ((isHighlighting && i != highlightedIndex) || isPushing)
+            {
+                if (isHighlighting)
                 {
-                    scale = Vector3.one * highlightedScale;
-                    rotation = 0f;
-                    yPos = highlightedHeight;
+                    // Push cards away from highlighted card
+                    if (i < highlightedIndex)
+                    {
+                        xPos -= pushDistance * pushDistanceMultiplier;
+                    }
+                    else if (i > highlightedIndex)
+                    {
+                        xPos += pushDistance * pushDistanceMultiplier;
+                    }
                 }
-                else if (i < highlightedIndex)
+                else if (isPushing)
                 {
-                    xPos -= pushDistance * pushDistanceMultiplier;
-                }
-                else if (i > highlightedIndex)
-                {
-                    xPos += pushDistance * pushDistanceMultiplier;
+                    // Push cards adjacent to dragged card
+                    if (i == draggedCardIndex - 1)
+                    {
+                        xPos -= pushDistance * pushDistanceMultiplier;
+                    }
+                    else if (i == draggedCardIndex + 1)
+                    {
+                        xPos += pushDistance * pushDistanceMultiplier;
+                    }
                 }
             }
 
-            cardTransform.SetParent(handPanel); // Define o painel como pai da carta
+            // Apply animations
+            cardTransform.SetParent(handPanel);
             cardTransform.DOAnchorPos(new Vector2(xPos, yPos), animationDuration).SetEase(Ease.OutBack);
             cardTransform.DOLocalRotate(new Vector3(0, 0, rotation), animationDuration).SetEase(Ease.OutBack);
             cardTransform.DOScale(scale, animationDuration).SetEase(Ease.OutBack);
@@ -218,6 +238,7 @@ public class PlayerHand : MonoBehaviour
             cardTransform.SetSiblingIndex(i);
         }
     }
+
 
     private void AddHoverEffect(GameObject card)
     {
@@ -312,7 +333,7 @@ public class PlayerHand : MonoBehaviour
                     cardsInHand.Remove(draggedCard);
                     cardsInHand.Insert(newIndex, draggedCard);
                     draggedCardIndex = newIndex;
-                    UpdateCardPositionsWithPushAnimation();
+                    UpdateCardPositions(false, -1, true);
                 }
             }
         }
@@ -393,7 +414,7 @@ public class PlayerHand : MonoBehaviour
         RemoveCardFromHand(card);
 
         // Obtém o componente CardUI da carta
-        CardUI cardUI = card.GetComponent<CardUI>();
+        CardController cardUI = card.GetComponent<CardController>();
         if (cardUI != null)
         {
             // Obtém o cardData do CardUI
@@ -404,9 +425,9 @@ public class PlayerHand : MonoBehaviour
             {
                 // Envia o efeito da carta ao PlayerObjectController
                 PlayerObjectController player = GetComponentInParent<PlayerObjectController>();
-                if (player != null && player.SelectedIdol != null)
+                if (player != null && player.SelectedEssent != null)
                 {
-                    effectCard.Execute(player.SelectedIdol); // Aplica o efeito ao ídolo do jogador
+                    effectCard.Execute(player.SelectedEssent); // Aplica o efeito ao ídolo do jogador
                 }
             }
             else
@@ -417,61 +438,6 @@ public class PlayerHand : MonoBehaviour
         else
         {
             Debug.LogWarning("CardUI não encontrado na carta.");
-        }
-    }
-
-    private void UpdateCardPositionsWithPushAnimation()
-    {
-        int cardCount = cardsInHand.Count;
-        float totalWidth;
-        float startX;
-
-        if (useFanLayout)
-        {
-            totalWidth = (cardCount - 1) * (fanSpacing * fanSpacingMultiplier);
-            startX = -totalWidth / 2;
-        }
-        else
-        {
-            totalWidth = (cardCount - 1) * (flatSpacing * flatSpacingMultiplier);
-            startX = -totalWidth / 2;
-        }
-
-        for (int i = 0; i < cardCount; i++)
-        {
-            GameObject card = cardsInHand[i];
-            RectTransform cardTransform = card.GetComponent<RectTransform>();
-
-            if (card == draggedCard) continue;
-
-            float xPos = startX + i * (useFanLayout ? fanSpacing * fanSpacingMultiplier : flatSpacing * flatSpacingMultiplier);
-
-            float rotation = 0f;
-            if (useFanLayout && cardCount > 1)
-            {
-                rotation = Mathf.Lerp(maxRotation * fanSpreadMultiplier, -maxRotation * fanSpreadMultiplier, (float)i / (cardCount - 1));
-            }
-
-            Vector3 scale = Vector3.one;
-            float yPos = 0f;
-
-            if (i == draggedCardIndex - 1 || i == draggedCardIndex + 1)
-            {
-                if (i < draggedCardIndex)
-                {
-                    xPos -= pushDistance * pushDistanceMultiplier;
-                }
-                else if (i > draggedCardIndex)
-                {
-                    xPos += pushDistance * pushDistanceMultiplier;
-                }
-            }
-
-            cardTransform.DOAnchorPos(new Vector2(xPos, yPos), animationDuration).SetEase(Ease.OutBack);
-            cardTransform.DOLocalRotate(new Vector3(0, 0, rotation), animationDuration).SetEase(Ease.OutBack);
-            cardTransform.DOScale(scale, animationDuration).SetEase(Ease.OutBack);
-
-            cardTransform.SetSiblingIndex(i);
         }
     }
 

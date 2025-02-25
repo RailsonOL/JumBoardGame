@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Idol
   - HexTile
   - Card
+  - Essent
   layers:
   - Default
   - TransparentFX

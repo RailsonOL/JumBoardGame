@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CardUI : MonoBehaviour
+public class CardController : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Image iconImage;

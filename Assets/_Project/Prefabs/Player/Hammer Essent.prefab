@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4066060273075744624}
   - component: {fileID: -6511425442526626339}
   m_Layer: 0
-  m_Name: Hammer Idol
-  m_TagString: Idol
+  m_Name: Hammer Essent
+  m_TagString: Essent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

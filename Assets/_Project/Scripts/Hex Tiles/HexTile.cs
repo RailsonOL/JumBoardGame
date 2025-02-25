@@ -43,7 +43,7 @@ public class HexTile : MonoBehaviour
     public bool HasNextHex() => nextHex != null;
     public bool HasPreviousHex() => previousHex != null;
 
-    public virtual void ExecuteTileEffect(Idol idol)
+    public virtual void ExecuteTileEffect(Essent essent)
     {
         Debug.Log("Tile básico: Nenhum efeito aplicado.");
     }

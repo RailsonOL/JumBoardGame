@@ -19,4 +19,4 @@ MonoBehaviour:
   essenceCost: 5
   cardRarity: 4
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: 74a8db51e14ab584c80df0a702f0da06, type: 2}
+  effect: {fileID: 11400000, guid: f219af20dace43c4d99e121cebf404c9, type: 2}

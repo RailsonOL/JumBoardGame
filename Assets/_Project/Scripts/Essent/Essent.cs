@@ -3,10 +3,10 @@ using System.Collections;
 using DG.Tweening;
 using Mirror;
 
-public class Idol : NetworkBehaviour
+public class Essent : NetworkBehaviour
 {
-    public IdolData data;
-    public int position;
+    public EssentData data;
+    public int tileIndexPosition;
     public HexTile currentTile;
     public PlayerObjectController playerOwner;
 
@@ -15,7 +15,6 @@ public class Idol : NetworkBehaviour
     [SerializeField] private float arcHeight = 0.5f;
 
     public bool isMoving = false;
-
 
     private InGameInterfaceController interfaceController;
 
@@ -38,19 +37,19 @@ public class Idol : NetworkBehaviour
     public void ModifyEssence(int amount)
     {
         data.essence += amount;
-        Debug.Log($"{data.idolName} agora tem {data.essence} de essência.");
+        Debug.Log($"{data.essentName} agora tem {data.essence} de essência.");
     }
 
     public void UseSpecialAbility()
     {
-        Debug.Log($"{data.idolName} usou sua habilidade especial!");
+        Debug.Log($"{data.essentName} usou sua habilidade especial!");
     }
 
     public void Initialize(HexTile startTile)
     {
         currentTile = startTile;
         transform.position = startTile.transform.position + Vector3.up * 2f;
-        Debug.Log($"{data.idolName} começou no hexágono {currentTile.GetTileIndex()}.");
+        Debug.Log($"{data.essentName} começou no hexágono {currentTile.GetTileIndex()}.");
     }
 
     private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)
@@ -86,7 +85,7 @@ public class Idol : NetworkBehaviour
         isMoving = false;
     }
 
-    #region esse
+    #region Move Next
 
     public void MoveNext(int numMoves)
     {
@@ -105,7 +104,7 @@ public class Idol : NetworkBehaviour
             HexTile nextTile = currentTile.GetNextHex();
             if (nextTile == null)
             {
-                Debug.Log($"{data.idolName} atingiu o final da rota, ignorando {numMoves - movesDone} movimentos restantes.");
+                Debug.Log($"{data.essentName} atingiu o final da rota, ignorando {numMoves - movesDone} movimentos restantes.");
                 break;
             }
 
@@ -114,6 +113,48 @@ public class Idol : NetworkBehaviour
 
             // Atualiza o tile atual
             currentTile = nextTile;
+            movesDone++;
+        }
+
+        // Aplica o efeito do tile final após o movimento ser concluído
+        if (currentTile != null)
+        {
+            currentTile.ExecuteTileEffect(this);
+        }
+
+        isMoving = false;
+    }
+
+    #endregion
+
+    #region Move Back
+
+    public void MoveBack(int numMoves)
+    {
+        if (isMoving || numMoves <= 0) return;
+
+        StartCoroutine(MoveBackAlongRoute(numMoves));
+    }
+
+    private IEnumerator MoveBackAlongRoute(int numMoves)
+    {
+        isMoving = true;
+        int movesDone = 0;
+
+        while (movesDone < numMoves)
+        {
+            HexTile previousTile = currentTile.GetPreviousHex();
+            if (previousTile == null)
+            {
+                Debug.Log($"{data.essentName} atingiu o início da rota, ignorando {numMoves - movesDone} movimentos restantes.");
+                break;
+            }
+
+            // Move o ídolo para o tile anterior
+            yield return StartCoroutine(MoveSmoothly(previousTile, false));
+
+            // Atualiza o tile atual
+            currentTile = previousTile;
             movesDone++;
         }
 

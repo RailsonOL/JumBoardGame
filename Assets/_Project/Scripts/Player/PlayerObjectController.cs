@@ -19,7 +19,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     [Header("Player Game Data")]
     public List<Card> Cards;
-    public Idol SelectedIdol;
+    public Essent SelectedEssent;
 
     public GameController gameController;
 
@@ -154,17 +154,17 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    private void GetIdolPosition()
+    private void GetTilePosition()
     {
 
     }
 
-    private void GetIdolCurrentEssence()
+    private void GetCurrentEssence()
     {
 
     }
 
-    private void GetIdolName()
+    private void GetEssentName()
     {
 
     }

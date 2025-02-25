@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay);
 
-        target = GameObject.FindGameObjectWithTag("Idol");
+        target = GameObject.FindGameObjectWithTag("Essent");
 
         if (target != null)
         {

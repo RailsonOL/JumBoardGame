@@ -73,12 +73,12 @@ public class Card : ScriptableObject
     }
 
     // Método para executar a carta
-    public void Execute(Idol targetIdol)
+    public void Execute(Essent targetEssent)
     {
-        if (effect != null && targetIdol != null)
+        if (effect != null && targetEssent != null)
         {
-            effect.ApplyEffect(targetIdol); // Aplica o efeito ao ídolo
-            Debug.Log($"Efeito {effect.effectName} aplicado ao ídolo {targetIdol.data.idolName}.");
+            effect.ApplyEffect(targetEssent); // Aplica o efeito ao ídolo
+            Debug.Log($"Efeito {effect.effectName} aplicado ao ídolo {targetEssent.data.essentName}.");
         }
         else
         {

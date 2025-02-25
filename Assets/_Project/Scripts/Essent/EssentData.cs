@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Idol Data", menuName = "Game/Idol Data")]
-public class IdolData : ScriptableObject
+[CreateAssetMenu(fileName = "Essent Data", menuName = "Game/Essent Data")]
+public class EssentData : ScriptableObject
 {
-    public string idolName;
+    public string essentName;
     public int essence;
     public List<Card> initialCards;
     public string description;
