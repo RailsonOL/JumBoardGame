@@ -14,11 +14,8 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool PlayerReady;
-    // [SyncVar(hook = nameof(SendPawnColor))] public int PawnColor;
-
 
     [Header("Player Game Data")]
-    public List<Card> Cards;
     public Essent SelectedEssent;
 
     public GameController gameController;
@@ -141,8 +138,6 @@ public class PlayerObjectController : NetworkBehaviour
     {
         if (card != null)
         {
-            Cards.Add(card); // Adiciona a carta à lista de cartas do jogador
-
             // Atualiza a mão do jogador, se necessário
             PlayerHand playerHand = GetComponent<PlayerHand>();
             if (playerHand != null)
