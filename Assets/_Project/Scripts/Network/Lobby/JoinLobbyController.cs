@@ -41,7 +41,7 @@ public class JoinLobbyController : MonoBehaviour
     // Método para entrar no lobby usando o código
     private void JoinLobbyByCode()
     {
-        string lobbyCode = lobbyCodeInput.text.Trim();
+        string lobbyCode = lobbyCodeInput.text.Trim().ToUpper();
 
         if (!string.IsNullOrEmpty(lobbyCode))
         {
