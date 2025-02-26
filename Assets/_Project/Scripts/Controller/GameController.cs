@@ -102,39 +102,39 @@ public class GameController : NetworkBehaviour
         TurnResult();
     }
 
-    public void SpawnEssents()
+public void SpawnEssents()
+{
+    for (int i = 0; i < numberOfPlayers; i++)
     {
-        for (int i = 0; i < numberOfPlayers; i++)
+        PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
+        Essent essentSpawned = Instantiate(essentPrefab, player.transform.position, essentPrefab.transform.rotation).GetComponent<Essent>();
+        essentSpawned.playerOwner = player;
+        player.SelectedEssent = essentSpawned;
+
+        // Configura o PlayerHand do jogador
+        PlayerHand playerHand = player.GetComponentInChildren<PlayerHand>();
+        if (playerHand != null && playerHandPanel != null)
         {
-            PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
-            Essent essentSpawned = Instantiate(essentPrefab, player.transform.position, essentPrefab.transform.rotation).GetComponent<Essent>();
-            essentSpawned.playerOwner = player;
-            player.SelectedEssent = essentSpawned;
-
-            // Configura o PlayerHand do jogador
-            PlayerHand playerHand = player.GetComponentInChildren<PlayerHand>();
-            if (playerHand != null && playerHandPanel != null)
-            {
-                player.gameController = this;
-                playerHand.handPanel = playerHandPanel;
-                playerHand.activationPanel = activationPanel;
-                playerHand.InitializeHand(); // Inicializa as cartas após o painel estar disponível
-            }
-            else
-            {
-                Debug.LogWarning("PlayerHand ou playerHandPanel não está configurado corretamente.");
-            }
-
-            essentSpawned.Initialize(startingTile);
-            NetworkServer.Spawn(essentSpawned.gameObject);
+            player.gameController = this;
+            playerHand.handPanel = playerHandPanel;
+            playerHand.activationPanel = activationPanel;
+            playerHand.InitializeHand(); // Inicializa as cartas após o painel estar disponível
+        }
+        else
+        {
+            Debug.LogWarning("PlayerHand ou playerHandPanel não está configurado corretamente.");
         }
 
-        RefreshStat();
-
-        currentPlayer = 0;
-        players[currentPlayer].isOurTurn = true;
-        interfaceC.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
+        essentSpawned.Initialize(startingTile);
+        NetworkServer.Spawn(essentSpawned.gameObject);
     }
+
+    RefreshStat();
+
+    currentPlayer = 0;
+    players[currentPlayer].isOurTurn = true;
+    interfaceC.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
+}
 
     // check info about standing way point and recording stat
     public void TurnResult()

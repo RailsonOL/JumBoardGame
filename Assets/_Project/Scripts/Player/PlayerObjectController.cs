@@ -138,14 +138,23 @@ public class PlayerObjectController : NetworkBehaviour
     {
         if (card != null)
         {
-            // Atualiza a mão do jogador, se necessário
-            PlayerHand playerHand = GetComponent<PlayerHand>();
-            if (playerHand != null)
+            // Busca a carta pelo ID usando o CardManager
+            Card cardFromManager = CardManager.Instance.GetCardById(card.id);
+            if (cardFromManager != null)
             {
-                playerHand.AddCardToHand(card);
-            }
+                // Atualiza a mão do jogador, se necessário
+                PlayerHand playerHand = GetComponent<PlayerHand>();
+                if (playerHand != null)
+                {
+                    playerHand.AddCardToHand(cardFromManager);
+                }
 
-            Debug.Log($"Carta recebida: {card.cardName}");
+                Debug.Log($"Carta recebida: {cardFromManager.cardName}");
+            }
+            else
+            {
+                Debug.LogWarning($"Carta com ID {card.id} não encontrada no CardManager!");
+            }
         }
     }
 

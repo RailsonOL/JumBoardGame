@@ -5,6 +5,7 @@ using UnityEngine;
 public class Card : ScriptableObject
 {
     [Header("Card Visual Data")]
+    public int id;
     public Sprite icon;
     public string cardName;
     [TextArea(3, 10)]

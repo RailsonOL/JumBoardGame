@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
   m_Name: New Card 3
   m_EditorClassIdentifier: 
+  id: 4
   icon: {fileID: 21300000, guid: a8aa26bcad1c64d4d8a78fcd0b65bf61, type: 3}
   cardName: Move Back 3
   description: aa

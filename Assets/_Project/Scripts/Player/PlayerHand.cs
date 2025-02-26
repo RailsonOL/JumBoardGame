@@ -92,27 +92,39 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
-    public void InitializeHand()
+public void InitializeHand()
+{
+    if (isInitialized) return; // Evita inicialização múltipla
+
+    ClearHand();
+
+    if (playerController != null && playerController.SelectedEssent != null)
     {
-        if (isInitialized) return; // Evita inicialização múltipla
-
-        ClearHand();
-
-        if (playerController != null && playerController.SelectedEssent != null)
+        EssentData essentData = playerController.SelectedEssent.data;
+        if (essentData != null)
         {
-            EssentData essentData = playerController.SelectedEssent.data;
-            if (essentData != null)
+            foreach (Card card in essentData.initialCards) // Itera sobre a lista de cartas iniciais
             {
-                foreach (Card card in essentData.initialCards)
+                if (card != null)
                 {
-                    AddCardToHand(card);
+                    // Busca a carta pelo ID usando o CardManager
+                    Card cardFromManager = CardManager.Instance.GetCardById(card.id);
+                    if (cardFromManager != null)
+                    {
+                        AddCardToHand(cardFromManager);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Card with ID {card.id} not found in CardManager!");
+                    }
                 }
             }
         }
-
-        InitializeActivationPanel(); // Configura o activationPanel
-        isInitialized = true;
     }
+
+    InitializeActivationPanel(); // Configura o activationPanel
+    isInitialized = true;
+}
 
     private void ClearHand()
     {
