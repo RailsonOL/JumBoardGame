@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using Mirror;
 using UnityEngine.SceneManagement;
 
-public class PlayerHand : MonoBehaviour
+public class PlayerHand : NetworkBehaviour
 {
+    #region Variables
     [Header("Card Settings")]
     public GameObject cardPrefab; // Agora temos apenas um prefab de carta
     public int maxCards = 5;
@@ -45,22 +47,20 @@ public class PlayerHand : MonoBehaviour
 
     [Header("Panel Reference")]
     public RectTransform handPanel; // Referência ao painel onde as cartas serão renderizadas
-    private List<GameObject> cardsInHand = new List<GameObject>();
+    [SerializeField] private List<GameObject> cardsInHand = new List<GameObject>();
     private GameObject draggedCard;
     private int draggedCardIndex;
     private bool isDragging = false;
     private bool isInitialized = false;
 
     private PlayerObjectController playerController;
+    #endregion
 
+    #region Unity Lifecycle
     void Start()
     {
         playerController = GetComponentInParent<PlayerObjectController>();
-        if (SceneManager.GetActiveScene().name == "game")
-        {
-            InitializeHand();
-            InitializeActivationPanel();
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnValidate()
@@ -71,60 +71,43 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
-    private void InitializeActivationPanel()
+    private void OnDestroy()
     {
-        if (activationPanel != null)
-        {
-            activationPanelCanvasGroup = activationPanel.GetComponent<CanvasGroup>();
-            if (activationPanelCanvasGroup == null)
-            {
-                activationPanelCanvasGroup = activationPanel.AddComponent<CanvasGroup>();
-            }
-
-            activationPanelRect = activationPanel.GetComponent<RectTransform>();
-
-            activationPanelCanvasGroup.alpha = 0f;
-            activationPanel.SetActive(false);
-        }
-        else
-        {
-            Debug.LogWarning("Activation Panel not assigned in inspector!");
-        }
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-public void InitializeHand()
-{
-    if (isInitialized) return; // Evita inicialização múltipla
-
-    ClearHand();
-
-    if (playerController != null && playerController.SelectedEssent != null)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        EssentData essentData = playerController.SelectedEssent.data;
-        if (essentData != null)
+        if (scene.name == "Game" && isLocalPlayer) // When the "Game" scene is loaded
         {
-            foreach (Card card in essentData.initialCards) // Itera sobre a lista de cartas iniciais
-            {
-                if (card != null)
-                {
-                    // Busca a carta pelo ID usando o CardManager
-                    Card cardFromManager = CardManager.Instance.GetCardById(card.id);
-                    if (cardFromManager != null)
-                    {
-                        AddCardToHand(cardFromManager);
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"Card with ID {card.id} not found in CardManager!");
-                    }
-                }
-            }
+            handPanel.gameObject.SetActive(true);
+            InitializeActivationPanel();
         }
     }
+    #endregion
 
-    InitializeActivationPanel(); // Configura o activationPanel
-    isInitialized = true;
-}
+    #region Hand Initialization and Management
+    public void InitializeHand(List<int> cardIds)
+    {
+        if (isInitialized) return; // Evita inicialização múltipla
+
+        ClearHand();
+
+        foreach (int cardId in cardIds)
+        {
+            Card cardFromManager = CardManager.Instance.GetCardById(cardId);
+            if (cardFromManager != null)
+            {
+                AddCardToHand(cardFromManager);
+            }
+            else
+            {
+                Debug.LogWarning($"Card with ID {cardId} not found in CardManager!");
+            }
+        }
+
+        isInitialized = true;
+    }
 
     private void ClearHand()
     {
@@ -168,7 +151,9 @@ public void InitializeHand()
             UpdateCardPositions();
         }
     }
+    #endregion
 
+    #region Card Positioning and Layout
     private void UpdateCardPositions(bool isHighlighting = false, int highlightedIndex = -1, bool isPushing = false)
     {
         int cardCount = cardsInHand.Count;
@@ -250,8 +235,9 @@ public void InitializeHand()
             cardTransform.SetSiblingIndex(i);
         }
     }
+    #endregion
 
-
+    #region Card Interaction Effects
     private void AddHoverEffect(GameObject card)
     {
         EventTrigger trigger = card.GetComponent<EventTrigger>();
@@ -373,6 +359,29 @@ public void InitializeHand()
             isCardOverActivationArea = false;
         }
     }
+    #endregion
+
+    #region Activation Panel Management
+    private void InitializeActivationPanel()
+    {
+        if (activationPanel != null)
+        {
+            activationPanelCanvasGroup = activationPanel.GetComponent<CanvasGroup>();
+            if (activationPanelCanvasGroup == null)
+            {
+                activationPanelCanvasGroup = activationPanel.AddComponent<CanvasGroup>();
+            }
+
+            activationPanelRect = activationPanel.GetComponent<RectTransform>();
+
+            activationPanelCanvasGroup.alpha = 0f;
+            activationPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Activation Panel not assigned in inspector!");
+        }
+    }
 
     private void ShowActivationPanel()
     {
@@ -417,43 +426,29 @@ public void InitializeHand()
             ).SetEase(Ease.OutBack);
         }
     }
+    #endregion
 
+    #region Card Activation
     private void ActivateCard(GameObject card)
     {
+        if (playerController.isOurTurn == false)
+        {
+            Debug.LogWarning("Não é a vez do jogador!, Carta não pode ser ativada.");
+            return;
+        }
+
         Debug.Log($"Card activated: {card.name}");
 
         // Remove a carta da mão
         RemoveCardFromHand(card);
 
-        // Obtém o componente da carta
-        CardController cardController = card.GetComponent<CardController>();
-        if (cardController != null)
-        {
-            // Obtém o cardData
-            Card cardData = cardController.GetCardData();
+        int cardID = CardController.GetCardIDFromGameObject(card);
 
-            // Verifica se o cardData é um EffectCard
-            if (cardData is Card effectCard)
-            {
-                // Envia o efeito da carta ao PlayerObjectController
-                PlayerObjectController player = GetComponentInParent<PlayerObjectController>();
-                if (player != null && player.SelectedEssent != null)
-                {
-                    effectCard.Execute(player.SelectedEssent); // Aplica o efeito ao ídolo do jogador
-                }
-            }
-            else
-            {
-                Debug.LogWarning("A carta não é um EffectCard.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("CardController não encontrado na carta.");
-        }
+        GameController.Instance.CmdExecuteCardEffectByID(cardID);
     }
+    #endregion
 
-    // Calculate the new card index based on the X position
+    #region Utility Functions
     private int CalculateNewCardIndex(float xPos)
     {
         int cardCount = cardsInHand.Count;
@@ -471,4 +466,5 @@ public void InitializeHand()
 
         return cardCount - 1;
     }
+    #endregion
 }

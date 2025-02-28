@@ -2,7 +2,10 @@ using UnityEngine;
 using System.Collections;
 using DG.Tweening;
 using Mirror;
+using System.Collections.Generic;
+using System.Linq;
 
+[RequireComponent(typeof(NetworkIdentity))]
 public class Essent : NetworkBehaviour
 {
     public EssentData data;
@@ -16,12 +19,12 @@ public class Essent : NetworkBehaviour
 
     public bool isMoving = false;
 
-    private InGameInterfaceController interfaceController;
+    private GameHudManager interfaceController;
 
     private void Start()
     {
         // Busca o InGameInterfaceController na cena
-        interfaceController = FindFirstObjectByType<InGameInterfaceController>();
+        interfaceController = FindFirstObjectByType<GameHudManager>();
 
         if (interfaceController == null)
         {
@@ -50,6 +53,21 @@ public class Essent : NetworkBehaviour
         currentTile = startTile;
         transform.position = startTile.transform.position + Vector3.up * 2f;
         Debug.Log($"{data.essentName} começou no hexágono {currentTile.GetTileIndex()}.");
+    }
+
+    public List<int> GetInitialCardsIDs()
+    {
+        // Verifica se o EssentData e a lista de cartas iniciais existem
+        if (data != null && data.initialCards != null)
+        {
+            // Retorna uma lista de IDs das cartas iniciais
+            return data.initialCards.Select(card => card.id).ToList();
+        }
+        else
+        {
+            Debug.LogWarning("EssentData ou initialCards não encontrados!");
+            return new List<int>(); // Retorna uma lista vazia se não houver cartas
+        }
     }
 
     private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)

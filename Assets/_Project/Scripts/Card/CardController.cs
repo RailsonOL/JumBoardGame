@@ -60,6 +60,26 @@ public class CardController : MonoBehaviour
         return cardData;
     }
 
+    public int GetID()
+    {
+        return cardData.id;
+    }
+
+    public static int GetCardIDFromGameObject(GameObject cardGameObject)
+    {
+        // Verifica se o GameObject tem o componente CardController
+        if (cardGameObject.TryGetComponent<CardController>(out var cardController))
+        {
+            // Retorna o ID da carta
+            return cardController.GetID();
+        }
+        else
+        {
+            Debug.LogError("CardController não encontrado no GameObject da carta.");
+            return -1; // Retorna um valor inválido para indicar erro
+        }
+    }
+
     public void SetCardData(Card newCardData)
     {
         cardData = newCardData;

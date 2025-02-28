@@ -4,21 +4,21 @@ using UnityEngine;
 using Mirror;
 using Steamworks;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PlayerObjectController : NetworkBehaviour
 {
     [Header("Player Data")]
-
     [SyncVar] public int ConnectionID;
     [SyncVar] public int PlayerIdNumber;
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool PlayerReady;
+    [SyncVar(hook = nameof(OnReadyToPlayChanged))] public bool readyToPlay = false; // Nova SyncVar
 
     [Header("Player Game Data")]
     public Essent SelectedEssent;
-
-    public GameController gameController;
+    [SyncVar] public uint SelectedEssentNetId;
 
     [SyncVar] public bool isOurTurn = false;
 
@@ -34,6 +34,11 @@ public class PlayerObjectController : NetworkBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        if (isOwned)
+        {
+            StartCoroutine(CheckReadyToPlay());
+        }
     }
 
     void Update()
@@ -42,13 +47,59 @@ public class PlayerObjectController : NetworkBehaviour
         {
             if (isOwned)
             {
-                //Rolling dice and start movement
                 if (Input.GetKeyDown(KeyCode.R) && isOurTurn)
                 {
-                    gameController.CmdRollDice();
+                    GameController.Instance.CmdRollDice();
+                }
+
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    if (isLocalPlayer)
+                    {
+                        Debug.Log("Request Card");
+                        RequestInitialCards();
+                    }
                 }
             }
         }
+    }
+
+    private IEnumerator CheckReadyToPlay()
+    {
+        // Aguarda até que a cena esteja totalmente carregada e os objetos necessários estejam prontos
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "Game");
+
+        Debug.Log($"Cena game carregada para o cliente {ConnectionID}, verificando prontidão.");
+
+        while (!IsClientReady())
+        {
+            Debug.Log($"Cliente {ConnectionID} ainda não está pronto.");
+            yield return new WaitForSeconds(0.3f); // Re verifica a cada 0.3s
+        }
+
+        Debug.Log($"Cliente {ConnectionID} está pronto, atualizando readyToPlay.");
+        CmdSetReadyToPlay(true);
+    }
+
+    private bool IsClientReady()
+    {
+        bool essentReady = NetworkClient.spawned.ContainsKey(SelectedEssentNetId);
+        bool hudReady = GameHudManager.Inst != null;
+        bool cameraReady = CameraFollow.Instance != null;
+
+        // if essentials are ready, check if the player is ready
+        return essentReady && hudReady && cameraReady;
+    }
+
+    [Command]
+    private void CmdSetReadyToPlay(bool ready)
+    {
+        readyToPlay = ready;
+    }
+
+    private void OnReadyToPlayChanged(bool oldValue, bool newValue)
+    {
+        Debug.Log($"Cliente {ConnectionID} mudou readyToPlay para {newValue}");
     }
 
     private void PlayerReadyUpdate(bool oldReady, bool newReady)
@@ -57,11 +108,34 @@ public class PlayerObjectController : NetworkBehaviour
         {
             PlayerReady = newReady;
         }
-
         if (isClient)
         {
             LobbyController.Instance.UpdatePlayerList();
         }
+    }
+
+    public Essent GetSelectedEssentByNetId()
+    {
+        // Verifica se o NetworkIdentity com o netId existe na lista de objetos spawnados
+        if (NetworkClient.spawned.TryGetValue(SelectedEssentNetId, out NetworkIdentity networkIdentity))
+        {
+            // Tenta obter o componente Essent do objeto encontrado
+            Essent essent = networkIdentity.GetComponent<Essent>();
+            if (essent != null)
+            {
+                return essent;
+            }
+            else
+            {
+                Debug.LogWarning($"Objeto com NetworkIdentity {netId} encontrado, mas não possui componente Essent.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Objeto com NetworkIdentity {netId} não encontrado na lista de objetos spawnados.");
+        }
+
+        return null;
     }
 
     [Command]
@@ -91,7 +165,6 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.GamePlayers.Add(this);
         LobbyController.Instance.UpdateLobbyName();
         LobbyController.Instance.UpdatePlayerList();
-
     }
 
     public override void OnStopClient()
@@ -112,14 +185,12 @@ public class PlayerObjectController : NetworkBehaviour
         {
             PlayerName = newName;
         }
-
         if (isClient)
         {
             LobbyController.Instance.UpdatePlayerList();
         }
     }
 
-    //Start Game
     public void CanStartGame(string SceneName)
     {
         if (isOwned)
@@ -134,21 +205,66 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.StartGame(SceneName);
     }
 
+    public void RequestInitialCards()
+    {
+        Essent selectedEssent = GetSelectedEssentByNetId();
+        if (selectedEssent != null)
+        {
+            List<int> initialCardIds = selectedEssent.GetInitialCardsIDs();
+            SpawnInitialCards(initialCardIds);
+        }
+        else
+        {
+            Debug.LogWarning("SelectedEssent ou initialCards não encontrados!");
+        }
+    }
+
+    private void SpawnInitialCards(List<int> initialCardIds)
+    {
+        PlayerHand playerHand = GetComponentInChildren<PlayerHand>();
+        if (playerHand != null)
+        {
+            foreach (int cardId in initialCardIds)
+            {
+                Card cardFromManager = CardManager.Instance.GetCardById(cardId);
+                if (cardFromManager != null)
+                {
+                    playerHand.AddCardToHand(cardFromManager);
+                }
+                else
+                {
+                    Debug.LogWarning($"Card with ID {cardId} not found in CardManager!");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("PlayerHand não encontrado no jogador!");
+        }
+    }
+
+    [TargetRpc]
+    public void TargetInitializeHand(NetworkConnection target, List<int> cardIds)
+    {
+        PlayerHand playerHand = GetComponentInChildren<PlayerHand>();
+        if (playerHand != null)
+        {
+            playerHand.InitializeHand(cardIds);
+        }
+    }
+
     public void ReceiveCard(Card card)
     {
         if (card != null)
         {
-            // Busca a carta pelo ID usando o CardManager
             Card cardFromManager = CardManager.Instance.GetCardById(card.id);
             if (cardFromManager != null)
             {
-                // Atualiza a mão do jogador, se necessário
                 PlayerHand playerHand = GetComponent<PlayerHand>();
                 if (playerHand != null)
                 {
                     playerHand.AddCardToHand(cardFromManager);
                 }
-
                 Debug.Log($"Carta recebida: {cardFromManager.cardName}");
             }
             else
@@ -158,18 +274,7 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    private void GetTilePosition()
-    {
-
-    }
-
-    private void GetCurrentEssence()
-    {
-
-    }
-
-    private void GetEssentName()
-    {
-
-    }
+    private void GetTilePosition() { }
+    private void GetCurrentEssence() { }
+    private void GetEssentName() { }
 }

@@ -22,7 +22,7 @@ public class DiceController : MonoBehaviour
     public Camera mainCam;
 
     [Header("UI")]
-    public InGameInterfaceController interfaceC;
+    public GameHudManager interfaceC;
 
     void Start()
     {
