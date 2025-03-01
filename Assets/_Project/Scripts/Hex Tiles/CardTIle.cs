@@ -7,11 +7,20 @@ public class CardTile : HexTile
 
     public override void ExecuteTileEffect(Essent essent)
     {
+        Debug.Log("ExecuteTileEffect called");
+        Debug.Log($"Player Owner: {essent.playerOwner}");
+
         if (cards != null && cards.Count > 0 && essent.playerOwner != null)
         {
             Card randomCard = cards[Random.Range(0, cards.Count)]; // Escolhe uma carta aleatória
-            essent.playerOwner.ReceiveCard(randomCard); // Dá a carta ao jogador
-            Debug.Log($"Carta dada ao jogador: {randomCard.cardName}");
+
+            // Obtém o ID do jogador
+            int playerId = essent.playerOwner.PlayerIdNumber;
+
+            // Envia a carta para o jogador usando o GameController
+            GameController.Instance.SendCardToPlayer(playerId, randomCard.id);
+
+            Debug.Log($"Carta enviada ao jogador: {randomCard.cardName}");
         }
     }
 }

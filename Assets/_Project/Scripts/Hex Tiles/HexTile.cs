@@ -46,16 +46,6 @@ public class HexTile : MonoBehaviour
         }
     }
 
-    public HexTile GetNextHex() => nextHex;
-    public HexTile GetPreviousHex() => previousHex;
-    public int GetTileIndex() => tileIndex;
-    public bool IsStartTile() => isStartTile;
-    public void SetNextHex(HexTile next) => nextHex = next;
-    public void SetPreviousHex(HexTile prev) => previousHex = prev;
-    public void SetTileIndex(int index) => tileIndex = index;
-    public bool HasNextHex() => nextHex != null;
-    public bool HasPreviousHex() => previousHex != null;
-
     public virtual void ExecuteTileEffect(Essent essent)
     {
         Debug.Log($"Tile {tileIndex} ({region}): Nenhum efeito aplicado.");
@@ -81,4 +71,14 @@ public class HexTile : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, 0.5f);
         }
     }
+
+    public HexTile GetNextHex() => nextHex;
+    public HexTile GetPreviousHex() => previousHex;
+    public int GetTileIndex() => tileIndex;
+    public bool IsStartTile() => isStartTile;
+    public void SetNextHex(HexTile next) => nextHex = next;
+    public void SetPreviousHex(HexTile prev) => previousHex = prev;
+    public void SetTileIndex(int index) => tileIndex = index;
+    public bool HasNextHex() => nextHex != null;
+    public bool HasPreviousHex() => previousHex != null;
 }

@@ -224,6 +224,47 @@ public class GameController : NetworkBehaviour
         return readyCount == numberOfPlayers;
     }
 
+    [TargetRpc]
+    public void TargetReceiveCard(NetworkConnection target, int cardId)
+    {
+        // Obtém o PlayerObjectController do cliente que recebeu a mensagem
+        PlayerObjectController player = target.identity.GetComponent<PlayerObjectController>();
+        if (player != null)
+        {
+            // Chama a função para receber a carta no cliente
+            player.ReciveCardByID(cardId);
+        }
+        else
+        {
+            Debug.LogWarning("PlayerObjectController não encontrado no cliente.");
+        }
+    }
+
+    public void SendCardToPlayer(int playerId, int cardId)
+    {
+        // Ajusta o playerId para começar em 0
+        int adjustedPlayerId = playerId - 1;
+
+        // Verifica se o jogador existe
+        if (adjustedPlayerId >= 0 && adjustedPlayerId < players.Length)
+        {
+            PlayerObjectController player = players[adjustedPlayerId];
+            if (player != null)
+            {
+                // Envia a carta para o cliente correspondente
+                TargetReceiveCard(player.connectionToClient, cardId);
+            }
+            else
+            {
+                Debug.LogWarning($"Jogador com ID {playerId} não encontrado.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"ID de jogador inválido: {playerId}");
+        }
+    }
+
     // check info about standing way point and recording stat
     public void TurnResult()
     {

@@ -52,14 +52,14 @@ public class PlayerObjectController : NetworkBehaviour
                     GameController.Instance.CmdRollDice();
                 }
 
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    if (isLocalPlayer)
-                    {
-                        Debug.Log("Request Card");
-                        RequestInitialCards();
-                    }
-                }
+                // if (Input.GetKeyDown(KeyCode.C))
+                // {
+                //     if (isLocalPlayer)
+                //     {
+                //         Debug.Log("Request Card");
+                //         RequestInitialCards();
+                //     }
+                // }
             }
         }
     }
@@ -205,44 +205,6 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.StartGame(SceneName);
     }
 
-    public void RequestInitialCards()
-    {
-        Essent selectedEssent = GetSelectedEssentByNetId();
-        if (selectedEssent != null)
-        {
-            List<int> initialCardIds = selectedEssent.GetInitialCardsIDs();
-            SpawnInitialCards(initialCardIds);
-        }
-        else
-        {
-            Debug.LogWarning("SelectedEssent ou initialCards não encontrados!");
-        }
-    }
-
-    private void SpawnInitialCards(List<int> initialCardIds)
-    {
-        PlayerHand playerHand = GetComponentInChildren<PlayerHand>();
-        if (playerHand != null)
-        {
-            foreach (int cardId in initialCardIds)
-            {
-                Card cardFromManager = CardManager.Instance.GetCardById(cardId);
-                if (cardFromManager != null)
-                {
-                    playerHand.AddCardToHand(cardFromManager);
-                }
-                else
-                {
-                    Debug.LogWarning($"Card with ID {cardId} not found in CardManager!");
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning("PlayerHand não encontrado no jogador!");
-        }
-    }
-
     [TargetRpc]
     public void TargetInitializeHand(NetworkConnection target, List<int> cardIds)
     {
@@ -271,6 +233,24 @@ public class PlayerObjectController : NetworkBehaviour
             {
                 Debug.LogWarning($"Carta com ID {card.id} não encontrada no CardManager!");
             }
+        }
+    }
+    
+    public void ReciveCardByID(int cardID)
+    {
+        Card cardFromManager = CardManager.Instance.GetCardById(cardID);
+        if (cardFromManager != null)
+        {
+            PlayerHand playerHand = GetComponent<PlayerHand>();
+            if (playerHand != null)
+            {
+                playerHand.AddCardToHand(cardFromManager);
+            }
+            Debug.Log($"Carta recebida: {cardFromManager.cardName}");
+        }
+        else
+        {
+            Debug.LogWarning($"Carta com ID {cardID} não encontrada no CardManager!");
         }
     }
 
