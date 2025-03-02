@@ -19,6 +19,8 @@ public class PlayerObjectController : NetworkBehaviour
     [Header("Player Game Data")]
     public Essent SelectedEssent;
     [SyncVar] public uint SelectedEssentNetId;
+    [SyncVar(hook = nameof(OnSelectedEssentIdChanged))]
+    public int SelectedEssentId = -1; // Store the selected essent ID (default -1 means none selected)
 
     [SyncVar] public bool isOurTurn = false;
 
@@ -152,6 +154,18 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdSetSelectedEssentId(int essentId)
+    {
+        SelectedEssentId = essentId;
+        Debug.Log($"Player {PlayerName} selected Essent ID: {essentId}");
+    }
+
+    private void OnSelectedEssentIdChanged(int oldId, int newId)
+    {
+        Debug.Log($"Selected Essent ID changed from {oldId} to {newId} for Player {PlayerName}");
+    }
+
     public override void OnStartAuthority()
     {
         CmdSetPlayerName(SteamFriends.GetPersonaName());
@@ -235,7 +249,7 @@ public class PlayerObjectController : NetworkBehaviour
             }
         }
     }
-    
+
     public void ReciveCardByID(int cardID)
     {
         Card cardFromManager = CardManager.Instance.GetCardById(cardID);

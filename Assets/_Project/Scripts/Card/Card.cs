@@ -78,12 +78,12 @@ public class Card : ScriptableObject
     {
         if (effect != null && targetEssent != null)
         {
-            effect.ApplyEffect(targetEssent); // Aplica o efeito ao ídolo
-            Debug.Log($"Efeito {effect.effectName} aplicado ao ídolo {targetEssent.data.essentName}.");
+            effect.ApplyEffect(targetEssent); // Aplica o efeito ao Essente
+            Debug.Log($"Efeito {effect.effectName} aplicado ao Essent {targetEssent.data.essentName}.");
         }
         else
         {
-            Debug.LogWarning("Efeito ou ídolo não encontrado.");
+            Debug.LogWarning("Efeito ou Essente não encontrado.");
         }
     }
 }

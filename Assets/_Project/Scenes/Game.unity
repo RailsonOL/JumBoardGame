@@ -4805,7 +4805,11 @@ MonoBehaviour:
   currentPlayer: 0
   players: []
   dice: {fileID: 491469301}
-  essentPrefab: {fileID: 8816444356503057198, guid: 1240291339f210340bc94f719091b2d1, type: 3}
+  essentPrefabs:
+  - {fileID: 4384138148024616655, guid: d81dddaab7c502f478e4571604532ff6, type: 3}
+  - {fileID: 8816444356503057198, guid: 1240291339f210340bc94f719091b2d1, type: 3}
+  - {fileID: 8260069727505045415, guid: 4a2582f193e4db24aa926f37f2ba0820, type: 3}
+  - {fileID: 4537643275736989507, guid: beaf1d4f53bb3c24798db7b8a4b0998b, type: 3}
   startingTile: {fileID: 856687810}
 --- !u!4 &699832794
 Transform:
@@ -13026,6 +13030,7 @@ MonoBehaviour:
   yPosition: 12
   distance: 5
   xOffset: 2
+  smoothSpeed: 0.5
 --- !u!81 &1941332192
 AudioListener:
   m_ObjectHideFlags: 0

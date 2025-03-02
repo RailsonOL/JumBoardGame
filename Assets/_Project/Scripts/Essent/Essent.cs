@@ -13,6 +13,8 @@ public class Essent : NetworkBehaviour
     public HexTile currentTile;
     public PlayerObjectController playerOwner;
 
+    public int totalEssence;
+
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float arcHeight = 0.5f;
@@ -51,7 +53,7 @@ public class Essent : NetworkBehaviour
     public void Initialize(HexTile startTile)
     {
         currentTile = startTile;
-        transform.position = startTile.transform.position + Vector3.up * 2f;
+        transform.position = startTile.transform.position + Vector3.up;
         Debug.Log($"{data.essentName} começou no hexágono {currentTile.GetTileIndex()}.");
     }
 
@@ -74,7 +76,7 @@ public class Essent : NetworkBehaviour
     {
         isMoving = true;
         Vector3 startPosition = transform.position;
-        Vector3 targetPosition = targetTile.transform.position + Vector3.up * 2f;
+        Vector3 targetPosition = targetTile.transform.position + Vector3.up;
         float elapsedTime = 0f;
 
         while (elapsedTime < 1f)

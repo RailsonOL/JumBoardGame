@@ -1,17 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Mirror;
-using Steamworks;
 using UnityEngine.UI;
 
 public class CharactersCosmestics : MonoBehaviour
 {
-    public int currentColorIndex = 0;
-    public Material[] colors;
-    public Image colorImage;
-    public TextMeshProUGUI colorText;
+    public int currentEssentIndex = 0;
+    public EssentData[] essentOptions; // Array of EssentData ScriptableObjects
+    public Image essentIconImage;      // UI Image to display the essent's icon
+    public TextMeshProUGUI essentNameText; // UI Text to display the essent's name
+
+    private PlayerObjectController localPlayer; // Reference to the local PlayerObjectController
 
     private void Start()
     {
@@ -20,37 +19,54 @@ public class CharactersCosmestics : MonoBehaviour
 
     IEnumerator StartSlow()
     {
-        yield return new WaitWhile(() => LobbyController.Instance.LocalPlayerController != null); // Wait until the local player controller is set
-        currentColorIndex = PlayerPrefs.GetInt("currentColorIndex", 0);
-        colorImage.color = colors[currentColorIndex].color;
-        colorText.text = colors[currentColorIndex].name;
+        // Wait until the LobbyController has set the LocalPlayerController
+        yield return new WaitUntil(() => LobbyController.Instance != null && LobbyController.Instance.LocalPlayerController != null);
+
+        localPlayer = LobbyController.Instance.LocalPlayerController;
+        currentEssentIndex = PlayerPrefs.GetInt("currentEssentIndex", 0);
+        UpdateUI();
     }
 
-    private void SetColor(int index)
+    private void UpdateUI()
     {
-        PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
-        colorImage.color = colors[currentColorIndex].color;
-        colorText.text = colors[currentColorIndex].name;
-        //LobbyController.Instance.LocalPlayerController.CmdUpdatePawnColor(index);
+        if (essentOptions.Length == 0 || currentEssentIndex >= essentOptions.Length)
+        {
+            Debug.LogWarning("Essent options not set or index out of range!");
+            return;
+        }
+
+        // Update the UI with the selected essent's data
+        EssentData selectedEssent = essentOptions[currentEssentIndex];
+        essentIconImage.sprite = selectedEssent.icon;
+        essentNameText.text = selectedEssent.essentName;
+
+        // Save the selected index
+        PlayerPrefs.SetInt("currentEssentIndex", currentEssentIndex);
+
+        // Send the selected essent ID to the PlayerObjectController
+        if (localPlayer != null && localPlayer.isOwned)
+        {
+            localPlayer.CmdSetSelectedEssentId(selectedEssent.id);
+        }
     }
 
-    public void NextColor()
+    public void NextEssent()
     {
-        if (currentColorIndex < colors.Length - 1) // Increment
-            currentColorIndex++;
-        else if (currentColorIndex == colors.Length - 1) // Wrap
-            currentColorIndex = 0;
+        if (currentEssentIndex < essentOptions.Length - 1) // Increment
+            currentEssentIndex++;
+        else if (currentEssentIndex == essentOptions.Length - 1) // Wrap to start
+            currentEssentIndex = 0;
 
-        SetColor(currentColorIndex);
+        UpdateUI();
     }
 
-    public void PreviousColor()
+    public void PreviousEssent()
     {
-        if (currentColorIndex > 0) // Decrement
-            currentColorIndex--;
-        else if (currentColorIndex == 0) // Wrap
-            currentColorIndex = colors.Length - 1;
+        if (currentEssentIndex > 0) // Decrement
+            currentEssentIndex--;
+        else if (currentEssentIndex == 0) // Wrap to end
+            currentEssentIndex = essentOptions.Length - 1;
 
-        SetColor(currentColorIndex);
+        UpdateUI();
     }
 }

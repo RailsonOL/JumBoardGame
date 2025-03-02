@@ -614,8 +614,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -2.1303, y: -131}
-  m_SizeDelta: {x: 423.7561, y: 50}
+  m_AnchoredPosition: {x: 304.37, y: -52.994003}
+  m_SizeDelta: {x: 282.0284, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &506410461
 MonoBehaviour:
@@ -1174,7 +1174,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1632779198}
         m_TargetAssemblyTypeName: CharactersCosmestics, Assembly-CSharp
-        m_MethodName: PreviousColor
+        m_MethodName: PreviousEssent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1234,7 +1234,7 @@ GameObject:
   - component: {fileID: 1132115619}
   - component: {fileID: 1132115618}
   m_Layer: 5
-  m_Name: PawnColor
+  m_Name: Essent Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1439,7 +1439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -2.1303, y: -52.994003}
+  m_AnchoredPosition: {x: -143.99998, y: -52.994003}
   m_SizeDelta: {x: 423.7561, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1192440884
@@ -1935,7 +1935,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pawn color:'
+  m_text: 'Choose your Essent:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1962,7 +1962,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.1
+  m_fontSize: 22.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2099,7 +2099,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1632779198}
         m_TargetAssemblyTypeName: CharactersCosmestics, Assembly-CSharp
-        m_MethodName: NextColor
+        m_MethodName: NextEssent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2340,16 +2340,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84413a301d52094c97938f1cb167e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentColorIndex: 0
-  colors:
-  - {fileID: 2100000, guid: d891857fbd6846a4da77fcabc0fdfb02, type: 2}
-  - {fileID: 2100000, guid: 9472b4e69c2413d45ac6ef6762e008d8, type: 2}
-  - {fileID: 2100000, guid: b2ab43b2316d3f048a4f3d3693d272e8, type: 2}
-  - {fileID: 2100000, guid: 27355da7d92abb54193a9dcbae88e9fc, type: 2}
-  - {fileID: 2100000, guid: afba714d0b374be40a52fc72b523dce4, type: 2}
-  - {fileID: 2100000, guid: 80cc44ea8ffd5cd4b97ce6b59aa359c4, type: 2}
-  colorImage: {fileID: 1132115618}
-  colorText: {fileID: 2009085407}
+  currentEssentIndex: 0
+  essentOptions:
+  - {fileID: 11400000, guid: f0deef6aa9444884582dd5e725a5b237, type: 2}
+  - {fileID: 11400000, guid: 9f82e243e1072634ca5e5c956dc30ad7, type: 2}
+  - {fileID: 11400000, guid: ca8807316eb19dc49be1074dbbcc34be, type: 2}
+  - {fileID: 11400000, guid: e112813ecc267af439362082fd2945eb, type: 2}
+  essentIconImage: {fileID: 1132115618}
+  essentNameText: {fileID: 2009085407}
 --- !u!1 &1650826243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,7 +2358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650826244}
   m_Layer: 5
-  m_Name: CharacterCosmetics
+  m_Name: Essent Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

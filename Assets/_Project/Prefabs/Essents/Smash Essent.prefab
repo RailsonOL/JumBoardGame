@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4066060273075744624}
   - component: {fileID: -6511425442526626339}
   m_Layer: 0
-  m_Name: Hammer Essent
+  m_Name: Smash Essent
   m_TagString: Essent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   data: {fileID: 11400000, guid: 9f82e243e1072634ca5e5c956dc30ad7, type: 2}
-  position: 0
+  tileIndexPosition: 0
   currentTile: {fileID: 0}
   playerOwner: {fileID: 0}
   moveSpeed: 2
@@ -114,15 +114,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.016459465
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0027239
+      value: 0.537
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00000014901161
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eef2705d9d0820a498cdc89729f24431, type: 3}
       propertyPath: m_LocalRotation.w

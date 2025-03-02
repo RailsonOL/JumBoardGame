@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class GameController : NetworkBehaviour
 {
@@ -21,7 +20,7 @@ public class GameController : NetworkBehaviour
     [Header("Game Objects")]
     [SerializeField] PlayerObjectController[] players;
     [SerializeField] DiceController dice;
-    public GameObject essentPrefab;
+    [SerializeField] List<GameObject> essentPrefabs; // Lista de prefabs Essent
 
     [Header("Player Hand Panel")]
     [SerializeField] private HexTile startingTile;
@@ -172,16 +171,36 @@ public class GameController : NetworkBehaviour
         for (int i = 0; i < numberOfPlayers; i++)
         {
             PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
-            Essent essentSpawned = Instantiate(essentPrefab, player.transform.position, essentPrefab.transform.rotation).GetComponent<Essent>();
+
+            // Obtém o ID do essent selecionado pelo jogador
+            int selectedEssentId = player.SelectedEssentId;
+
+            // Procura o prefab correspondente ao ID selecionado
+            GameObject selectedPrefab = essentPrefabs.FirstOrDefault(prefab =>
+            {
+                Essent essentComponent = prefab.GetComponent<Essent>();
+                return essentComponent != null && essentComponent.data != null && essentComponent.data.id == selectedEssentId;
+            });
+
+            if (selectedPrefab == null)
+            {
+                Debug.LogError($"Nenhum prefab Essent encontrado com ID {selectedEssentId} para o jogador {player.PlayerName}. Usando o primeiro prefab como fallback.");
+                selectedPrefab = essentPrefabs[0]; // Fallback para o primeiro prefab se não encontrar
+            }
+
+            // Instancia o prefab selecionado
+            Essent essentSpawned = Instantiate(selectedPrefab, player.transform.position, selectedPrefab.transform.rotation).GetComponent<Essent>();
             essentSpawned.playerOwner = player;
             player.SelectedEssent = essentSpawned;
 
+            // Inicializa o essent no tile inicial
             essentSpawned.Initialize(startingTile);
             NetworkServer.Spawn(essentSpawned.gameObject);
 
+            // Atualiza o netId do essent no PlayerObjectController
             player.SelectedEssentNetId = essentSpawned.netId;
 
-            // Obtenha a lista de IDs de cartas do Essent
+            // Obtém a lista de IDs de cartas do Essent
             List<int> initialCardIds = essentSpawned.GetInitialCardsIDs();
 
             Debug.Log($"Enviando cartas iniciais para o jogador {player.PlayerName}...");
@@ -191,7 +210,6 @@ public class GameController : NetworkBehaviour
             if (player.TryGetComponent<PlayerHand>(out var playerHand))
             {
                 Debug.Log("PlayerHand encontrado");
-
             }
             else
             {
@@ -362,9 +380,9 @@ public class GameController : NetworkBehaviour
         }
     }
 
-    //Statistics table update 
+    // Statistics table update 
     public void RefreshStat()
     {
-        // Implementação existente...
+        // Implementação existente (se houver) ou deixe vazio por enquanto
     }
 }
