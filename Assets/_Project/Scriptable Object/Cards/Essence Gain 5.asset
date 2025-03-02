@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
-  m_Name: Move 10
+  m_Name: Essence Gain 5
   m_EditorClassIdentifier: 
-  id: 7
-  icon: {fileID: 21300000, guid: a8aa26bcad1c64d4d8a78fcd0b65bf61, type: 3}
-  cardName: "Salto Estrat\xE9gico 10"
-  description: "Mova-se 10 casas. Em momentos cr\xEDticos, a capacidade de se reposicionar
-    rapidamente pode ser o diferencial entre estrelas e lendas."
-  essenceCost: 5
-  cardRarity: 4
+  id: 3
+  icon: {fileID: 21300000, guid: 6f1d43bd5bd6a9e4cb666feafd2ef890, type: 3}
+  cardName: "Ganho de Ess\xEAncia 5"
+  description: "Ess\xEAncia \xE9 como caf\xE9: um pouco mais e voc\xEA se sente pronto
+    para conquistar o mundo. Ou pelo menos o tabuleiro."
+  essenceCost: 0
+  cardRarity: 3
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: f219af20dace43c4d99e121cebf404c9, type: 2}
+  effect: {fileID: 11400000, guid: b3613f77b8d438d4f87f121e3f6ef04c, type: 2}

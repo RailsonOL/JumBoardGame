@@ -76,14 +76,31 @@ public class Card : ScriptableObject
     // Método para executar a carta
     public void Execute(Essent targetEssent)
     {
-        if (effect != null && targetEssent != null)
-        {
-            effect.ApplyEffect(targetEssent); // Aplica o efeito ao Essente
-            Debug.Log($"Efeito {effect.effectName} aplicado ao Essent {targetEssent.data.essentName}.");
-        }
-        else
+        // Verifica se o efeito e o Essent são válidos
+        if (effect == null || targetEssent == null)
         {
             Debug.LogWarning("Efeito ou Essente não encontrado.");
+            return;
         }
+
+        // Verifica se o Essent tem essência suficiente para usar a carta
+        if (targetEssent.totalEssence < essenceCost)
+        {
+            Debug.LogWarning($"{targetEssent.essentName} não tem essência suficiente para usar a carta {cardName}.");
+            return;
+        }
+
+        // Aplica o efeito ao Essent
+        effect.ApplyEffect(targetEssent);
+        Debug.Log($"Card {cardName} aplicado ao Essent {targetEssent.essentName}.");
+
+        // Remove o custo de essência
+        Debug.Log($"Custo da carta: {essenceCost}");
+        Debug.Log($"Essência antes: {targetEssent.totalEssence}");
+        targetEssent.ModifyEssence(-essenceCost);
+        Debug.Log($"Essência depois: {targetEssent.totalEssence}");
+
+        // Notifica que a essência foi modificada (opcional, se houver um evento)
+        //OnEssenceModified?.Invoke(targetEssent.totalEssence);
     }
 }

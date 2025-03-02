@@ -50,7 +50,7 @@ public class CardTile : HexTile
             int playerId = essent.playerOwner.PlayerIdNumber;
 
             // Envia a carta para o jogador usando o GameController
-            GameController.Instance.SendCardToPlayer(playerId, randomCard.id);
+            GameManager.Instance.SendCardToPlayer(playerId, randomCard.id);
 
             Debug.Log($"Carta enviada ao jogador: {randomCard.cardName}");
         }

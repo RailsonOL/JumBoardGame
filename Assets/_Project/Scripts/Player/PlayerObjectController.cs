@@ -16,7 +16,9 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool PlayerReady;
     [SyncVar(hook = nameof(OnReadyToPlayChanged))] public bool readyToPlay = false; // Nova SyncVar
 
+
     [Header("Player Game Data")]
+
     public Essent SelectedEssent;
     [SyncVar] public uint SelectedEssentNetId;
     [SyncVar(hook = nameof(OnSelectedEssentIdChanged))]
@@ -29,6 +31,8 @@ public class PlayerObjectController : NetworkBehaviour
     public int numberOfFails = 0;
     public int place = 0;
     public bool isEnd = false;
+
+    [SerializeField] private PlayerHand playerHand;
 
     private CustomNetworkManager manager;
     private CustomNetworkManager Manager => manager ??= NetworkManager.singleton as CustomNetworkManager;
@@ -51,7 +55,7 @@ public class PlayerObjectController : NetworkBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.R) && isOurTurn)
                 {
-                    GameController.Instance.CmdRollDice();
+                    GameManager.Instance.CmdRollDice();
                 }
 
                 // if (Input.GetKeyDown(KeyCode.C))
@@ -122,8 +126,7 @@ public class PlayerObjectController : NetworkBehaviour
         if (NetworkClient.spawned.TryGetValue(SelectedEssentNetId, out NetworkIdentity networkIdentity))
         {
             // Tenta obter o componente Essent do objeto encontrado
-            Essent essent = networkIdentity.GetComponent<Essent>();
-            if (essent != null)
+            if (networkIdentity.TryGetComponent<Essent>(out var essent))
             {
                 return essent;
             }
@@ -143,7 +146,7 @@ public class PlayerObjectController : NetworkBehaviour
     [Command]
     private void CmdChangeReadyState()
     {
-        this.PlayerReadyUpdate(this.PlayerReady, !this.PlayerReady);
+        PlayerReadyUpdate(PlayerReady, !PlayerReady);
     }
 
     public void ChangeReadyState()
@@ -222,10 +225,23 @@ public class PlayerObjectController : NetworkBehaviour
     [TargetRpc]
     public void TargetInitializeHand(NetworkConnection target, List<int> cardIds)
     {
-        PlayerHand playerHand = GetComponentInChildren<PlayerHand>();
         if (playerHand != null)
         {
             playerHand.InitializeHand(cardIds);
+        }
+    }
+
+    [TargetRpc]
+    public void TargetRemoveCardFromHand(int cardID)
+    {
+        // Chama a função no PlayerHand para processar o resultado
+        if (playerHand != null)
+        {
+            playerHand.RemoveCardFromHandByID(cardID);
+        }
+        else
+        {
+            Debug.LogWarning("PlayerHand não encontrado no jogador.");
         }
     }
 
@@ -236,7 +252,6 @@ public class PlayerObjectController : NetworkBehaviour
             Card cardFromManager = CardManager.Instance.GetCardById(card.id);
             if (cardFromManager != null)
             {
-                PlayerHand playerHand = GetComponent<PlayerHand>();
                 if (playerHand != null)
                 {
                     playerHand.AddCardToHand(cardFromManager);
@@ -255,7 +270,6 @@ public class PlayerObjectController : NetworkBehaviour
         Card cardFromManager = CardManager.Instance.GetCardById(cardID);
         if (cardFromManager != null)
         {
-            PlayerHand playerHand = GetComponent<PlayerHand>();
             if (playerHand != null)
             {
                 playerHand.AddCardToHand(cardFromManager);

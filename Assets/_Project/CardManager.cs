@@ -7,6 +7,9 @@ public class CardManager : MonoBehaviour
 
     [SerializeField] private List<Card> allCards; // Lista de todas as cartas disponíveis no jogo
 
+    // Propriedade pública para acessar a lista de cartas
+    public List<Card> AllCards => allCards;
+
     private void Awake()
     {
         if (Instance == null)

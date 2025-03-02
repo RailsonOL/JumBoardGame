@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
   m_Name: Back 3
   m_EditorClassIdentifier: 
-  id: 4
+  id: 1
   icon: {fileID: 21300000, guid: a8aa26bcad1c64d4d8a78fcd0b65bf61, type: 3}
   cardName: Retirada Calculada 3
   description: "Um, dois ou tr\xEAs passos atr\xE1s pode ser o caminho para uma jogada

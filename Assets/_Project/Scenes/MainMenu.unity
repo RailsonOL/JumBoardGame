@@ -1666,10 +1666,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allCards:
+  - {fileID: 11400000, guid: 022c9480eee033042a54fe18d3168b6e, type: 2}
+  - {fileID: 11400000, guid: 3c3a368d5efb622418f37a1d0ec4c5e7, type: 2}
+  - {fileID: 11400000, guid: 0b49ad10804b58240a66b88968aa3787, type: 2}
+  - {fileID: 11400000, guid: 6cb4cf1a446605b40a24978d3b74a549, type: 2}
   - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
   - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
   - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}
-  - {fileID: 11400000, guid: 022c9480eee033042a54fe18d3168b6e, type: 2}
 --- !u!4 &1969882878
 Transform:
   m_ObjectHideFlags: 0

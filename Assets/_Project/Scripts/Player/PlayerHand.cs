@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using Mirror;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PlayerHand : NetworkBehaviour
 {
@@ -149,6 +150,21 @@ public class PlayerHand : NetworkBehaviour
             cardsInHand.Remove(card);
             Destroy(card);
             UpdateCardPositions();
+        }
+    }
+
+    public void RemoveCardFromHandByID(int cardID)
+    {
+        Debug.Log($"Carta com ID {cardID} foi executada com sucesso.");
+        // Remove a carta da mão
+        GameObject cardToRemove = cardsInHand.FirstOrDefault(card => CardController.GetCardIDFromGameObject(card) == cardID);
+        if (cardToRemove != null)
+        {
+            RemoveCardFromHand(cardToRemove);
+        }
+        else
+        {
+            Debug.LogWarning($"Carta com ID {cardID} não encontrada na mão do jogador.");
         }
     }
     #endregion
@@ -437,14 +453,9 @@ public class PlayerHand : NetworkBehaviour
             return;
         }
 
-        Debug.Log($"Card activated: {card.name}");
-
-        // Remove a carta da mão
-        RemoveCardFromHand(card);
-
         int cardID = CardController.GetCardIDFromGameObject(card);
 
-        GameController.Instance.CmdExecuteCardEffectByID(cardID);
+        GameManager.Instance.CmdExecuteCardEffectByID(cardID);
     }
     #endregion
 

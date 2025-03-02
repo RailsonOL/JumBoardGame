@@ -31,7 +31,7 @@ public class PlayerMovimentNetwork : NetworkBehaviour
 
     //Components
     CharacterController characterController;
-    [SyncVar] public GameController gameController;
+    [SyncVar] public GameManager gameController;
 
     public override void OnStartAuthority()
     {

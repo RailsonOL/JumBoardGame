@@ -75,14 +75,17 @@ MonoBehaviour:
   PlayerSteamID: 0
   PlayerName: 
   PlayerReady: 0
+  readyToPlay: 0
   SelectedEssent: {fileID: 0}
-  gameController: {fileID: 0}
+  SelectedEssentNetId: 0
+  SelectedEssentId: -1
   isOurTurn: 0
   numberOfTurns: 0
   numberOfBuffs: 0
   numberOfFails: 0
   place: 0
   isEnd: 0
+  playerHand: {fileID: -5831279516990390762}
 --- !u!136 &2824388357052214224
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -196,6 +199,7 @@ MonoBehaviour:
   panelFadeInDuration: 0.3
   panelFadeOutDuration: 0.2
   handPanel: {fileID: 3218804371741455344}
+  cardsInHand: []
 --- !u!1 &6653516461878897189
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +404,7 @@ RectTransform:
   m_GameObject: {fileID: 8744854069547156342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1359405654852233114}
@@ -408,8 +412,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -1.9989929}
-  m_SizeDelta: {x: 706.4283, y: 97.7954}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 557.5652, y: 88.6102}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &995630442427954467
 CanvasRenderer:

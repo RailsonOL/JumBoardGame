@@ -14,6 +14,7 @@ public class Essent : NetworkBehaviour
     public PlayerObjectController playerOwner;
 
     public int totalEssence;
+    public string essentName;
 
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float jumpHeight = 1f;
@@ -25,36 +26,38 @@ public class Essent : NetworkBehaviour
 
     private void Start()
     {
-        // Busca o InGameInterfaceController na cena
         interfaceController = FindFirstObjectByType<GameHudManager>();
 
         if (interfaceController == null)
         {
             Debug.LogError("InGameInterfaceController não encontrado na cena!");
         }
+
+        totalEssence = data.essence;
+        essentName = data.essentName;
     }
 
     public bool IsAlive()
     {
-        return data.essence > 0;
+        return totalEssence > 0;
     }
 
     public void ModifyEssence(int amount)
     {
-        data.essence += amount;
-        Debug.Log($"{data.essentName} agora tem {data.essence} de essência.");
+        totalEssence += amount;
+        Debug.Log($"{data.essentName} agora tem {totalEssence} de essência.");
     }
 
     public void UseSpecialAbility()
     {
-        Debug.Log($"{data.essentName} usou sua habilidade especial!");
+        Debug.Log($"{essentName} usou sua habilidade especial!");
     }
 
     public void Initialize(HexTile startTile)
     {
         currentTile = startTile;
         transform.position = startTile.transform.position + Vector3.up;
-        Debug.Log($"{data.essentName} começou no hexágono {currentTile.GetTileIndex()}.");
+        Debug.Log($"{essentName} começou no hexágono {currentTile.GetTileIndex()}.");
     }
 
     public List<int> GetInitialCardsIDs()
@@ -72,40 +75,9 @@ public class Essent : NetworkBehaviour
         }
     }
 
-    private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)
-    {
-        isMoving = true;
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = targetTile.transform.position + Vector3.up;
-        float elapsedTime = 0f;
 
-        while (elapsedTime < 1f)
-        {
-            elapsedTime += Time.deltaTime * moveSpeed;
-            float percentageComplete = elapsedTime;
 
-            // Movimento horizontal com curva de suavização
-            Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, Mathf.SmoothStep(0f, 1f, percentageComplete));
-
-            // Efeito de pulo
-            float yOffset = Mathf.Sin(percentageComplete * Mathf.PI) * jumpHeight;
-
-            // Arco entre hexágonos
-            float arcOffset = (1f - Mathf.Abs(percentageComplete - 0.5f) * 2f) * arcHeight;
-
-            currentPosition.y += yOffset + arcOffset;
-
-            transform.position = currentPosition;
-
-            yield return null;
-        }
-
-        transform.position = targetPosition;
-        currentTile = targetTile;
-        isMoving = false;
-    }
-
-    #region Move Next
+    #region Board Moviment
 
     public void MoveNext(int numMoves)
     {
@@ -113,41 +85,6 @@ public class Essent : NetworkBehaviour
 
         StartCoroutine(MoveAlongRoute(numMoves));
     }
-
-    private IEnumerator MoveAlongRoute(int numMoves)
-    {
-        isMoving = true;
-        int movesDone = 0;
-
-        while (movesDone < numMoves)
-        {
-            HexTile nextTile = currentTile.GetNextHex();
-            if (nextTile == null)
-            {
-                Debug.Log($"{data.essentName} atingiu o final da rota, ignorando {numMoves - movesDone} movimentos restantes.");
-                break;
-            }
-
-            // Move o ídolo para o próximo tile
-            yield return StartCoroutine(MoveSmoothly(nextTile, true));
-
-            // Atualiza o tile atual
-            currentTile = nextTile;
-            movesDone++;
-        }
-
-        // Aplica o efeito do tile final após o movimento ser concluído
-        if (currentTile != null)
-        {
-            currentTile.ExecuteTileEffect(this);
-        }
-
-        isMoving = false;
-    }
-
-    #endregion
-
-    #region Move Back
 
     public void MoveBack(int numMoves)
     {
@@ -184,6 +121,70 @@ public class Essent : NetworkBehaviour
             currentTile.ExecuteTileEffect(this);
         }
 
+        isMoving = false;
+    }
+
+    private IEnumerator MoveAlongRoute(int numMoves)
+    {
+        isMoving = true;
+        int movesDone = 0;
+
+        while (movesDone < numMoves)
+        {
+            HexTile nextTile = currentTile.GetNextHex();
+            if (nextTile == null)
+            {
+                Debug.Log($"{data.essentName} atingiu o final da rota, ignorando {numMoves - movesDone} movimentos restantes.");
+                break;
+            }
+
+            // Move o ídolo para o próximo tile
+            yield return StartCoroutine(MoveSmoothly(nextTile, true));
+
+            // Atualiza o tile atual
+            currentTile = nextTile;
+            movesDone++;
+        }
+
+        // Aplica o efeito do tile final após o movimento ser concluído
+        if (currentTile != null)
+        {
+            currentTile.ExecuteTileEffect(this);
+        }
+
+        isMoving = false;
+    }
+
+    private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)
+    {
+        isMoving = true;
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = targetTile.transform.position + Vector3.up;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 1f)
+        {
+            elapsedTime += Time.deltaTime * moveSpeed;
+            float percentageComplete = elapsedTime;
+
+            // Movimento horizontal com curva de suavização
+            Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, Mathf.SmoothStep(0f, 1f, percentageComplete));
+
+            // Efeito de pulo
+            float yOffset = Mathf.Sin(percentageComplete * Mathf.PI) * jumpHeight;
+
+            // Arco entre hexágonos
+            float arcOffset = (1f - Mathf.Abs(percentageComplete - 0.5f) * 2f) * arcHeight;
+
+            currentPosition.y += yOffset + arcOffset;
+
+            transform.position = currentPosition;
+
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+        currentTile = targetTile;
         isMoving = false;
     }
 

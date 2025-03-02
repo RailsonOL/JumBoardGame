@@ -6,21 +6,16 @@ using UnityEngine;
 public class SpecialEffect : ScriptableObject
 {
     [Header("Settings")]
-    [Tooltip("This data is not displayed in game, it is for identification purposes only.")]
-    // Nome do efeito (opcional, para identificação)
-    public string effectName;
 
-    // Descrição do efeito (opcional, para UI ou debug)
+    // Descrição do efeito (opcional, para identificação ou debug)
     [Tooltip("This data is not displayed in game, it is for identification purposes only.")]
+    [TextArea(3, 10)]
     public string description;
 
     // Método virtual que aplica o efeito a um ídolo
     public virtual void ApplyEffect(Essent essent)
     {
-        // Implementação base do efeito
-        Debug.Log($"Efeito especial '{effectName}' aplicado em {essent.data.essentName}.");
-
         // Exemplo: Aumenta a essência do ídolo em 10
-        essent.ModifyEssence(10);
+        // essent.ModifyEssence(10);
     }
 }
