@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public enum TileRegion
@@ -49,6 +50,23 @@ public class HexTile : MonoBehaviour
     public virtual void ExecuteTileEffect(Essent essent)
     {
         Debug.Log($"Tile {tileIndex} ({region}): Nenhum efeito aplicado.");
+
+        // Verifica se há outros Essents no mesmo tile
+        Essent[] essentsOnTile = FindObjectsByType<Essent>(FindObjectsSortMode.None)
+            .Where(e => e.currentTile == this && e != essent) // Exclui o próprio Essent
+            .ToArray();
+
+        if (essentsOnTile.Length > 0)
+        {
+            Debug.Log($"Há {essentsOnTile.Length} Essents no mesmo tile. Aplicando dano...");
+
+            foreach (Essent otherEssent in essentsOnTile)
+            {
+                // Causa dano ao outro Essent
+                otherEssent.ModifyEssence(-essent.damageToOthers);
+                Debug.Log($"{essent.essentName} causou {essent.damageToOthers} de dano a {otherEssent.essentName}.");
+            }
+        }
     }
 
     private void OnDrawGizmos()

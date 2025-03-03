@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5612338809623001368
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 11400000, guid: e48ffb18d6797644b94be807180230bf, type: 2}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: nextHex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: tileType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: tileIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: previousHex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: tileMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.908329
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.099999905
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579843767359487234, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446629956741385967, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c54d9f0a0c242f9489f0ba5619aae750, type: 2}
+    - target: {fileID: 4961007456583951071, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+    - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_Name
+      value: Card Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      propertyPath: m_TagString
+      value: HexTile
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 87440446346251439, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5673754143410494096}
+  m_SourcePrefab: {fileID: 100100000, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+--- !u!1 &2680211861769149388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7552833535938028244, guid: 7b8ff3431cf31f94e9253e8dac77571d, type: 3}
+  m_PrefabInstance: {fileID: 5612338809623001368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5673754143410494096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2680211861769149388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd855a294b1d314aba5b6195e72a140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextHex: {fileID: 0}
+  previousHex: {fileID: 0}
+  tileIndex: 7
+  isStartTile: 0
+  tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
+  region: 0
+  cards:
+  - {fileID: 11400000, guid: 022c9480eee033042a54fe18d3168b6e, type: 2}
+  - {fileID: 11400000, guid: 3c3a368d5efb622418f37a1d0ec4c5e7, type: 2}
+  - {fileID: 11400000, guid: 0b49ad10804b58240a66b88968aa3787, type: 2}
+  - {fileID: 11400000, guid: 6cb4cf1a446605b40a24978d3b74a549, type: 2}
+  - {fileID: 11400000, guid: 45e03bab2bfdac04fb4d3d15cf1c43a7, type: 2}
+  - {fileID: 11400000, guid: d84b9679a2b3b3549a7e2c39f35253ec, type: 2}
+  - {fileID: 11400000, guid: 237039828c50739449df65234c177776, type: 2}

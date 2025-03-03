@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2579843767359487234}
   - component: {fileID: 87440446346251439}
   m_Layer: 0
-  m_Name: HexTile Prefab
+  m_Name: Normal Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

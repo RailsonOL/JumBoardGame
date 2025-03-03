@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
     [Header("Game State")]
     [SyncVar(hook = nameof(OnCurrentPlayerChanged_Hook))]
     public int currentPlayer;
-    [SyncVar] private int numberOfPlayers;
+    [SyncVar] public int numberOfPlayers;
     [SyncVar] private bool gameEnd = false;
 
     [Header("Player Management")]
@@ -162,7 +162,8 @@ public class GameManager : NetworkBehaviour
             // Add the spawned Essent to the essents array
             essents[i] = essentSpawned;
 
-            essentSpawned.Initialize(startingTile);
+            // Pass the player index to the Initialize method
+            essentSpawned.Initialize(startingTile, i);
             essentSpawned.OnEssenceChanged += OnEssentEssenceChanged;
             NetworkServer.Spawn(essentSpawned.gameObject);
 
@@ -225,12 +226,11 @@ public class GameManager : NetworkBehaviour
         Debug.Log("EndTurn called");
         cardsUsedThisTurn = 0;
         hasRolledDiceThisTurn = false;
-        NextTurn(false);
+        TurnResult();
     }
 
     public void NextTurn(bool repeat)
     {
-        RefreshStat();
         players[currentPlayer].isOurTurn = false;
 
         if (!repeat)
@@ -281,6 +281,12 @@ public class GameManager : NetworkBehaviour
     #endregion
 
     #region Player Actions
+
+    public void OnRollDiceButtonPressed()
+    {
+        CmdRollDice();
+    }
+
     [Command(requiresAuthority = false)]
     public void CmdRollDice(NetworkConnectionToClient sender = null)
     {
@@ -314,8 +320,6 @@ public class GameManager : NetworkBehaviour
 
         GameHudManager.Inst.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is stopped");
         yield return new WaitForSeconds(1f);
-
-        TurnResult();
     }
 
     [Command(requiresAuthority = false)]

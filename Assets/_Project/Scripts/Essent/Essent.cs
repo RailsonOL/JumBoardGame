@@ -19,6 +19,7 @@ public class Essent : NetworkBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float arcHeight = 0.5f;
+    public int damageToOthers = 2; // Valor do dano causado a outros Essents no mesmo tile
     public event System.Action<int> OnEssenceChanged;
 
     public bool isMoving = false;
@@ -72,16 +73,26 @@ public class Essent : NetworkBehaviour
         return -1;
     }
 
-    public void UseSpecialAbility()
-    {
-        Debug.Log($"{essentName} usou sua habilidade especial!");
-    }
-
-    public void Initialize(HexTile startTile)
+    public void Initialize(HexTile startTile, int playerIndex)
     {
         currentTile = startTile;
-        transform.position = startTile.transform.position + Vector3.up;
-        Debug.Log($"{essentName} começou no hexágono {currentTile.GetTileIndex()}.");
+
+        // Define o ângulo de deslocamento com base no índice do jogador
+        float angleOffset = (360f / GameManager.Instance.numberOfPlayers) * playerIndex;
+
+        // Converte o ângulo para radianos
+        float angleInRadians = angleOffset * Mathf.Deg2Rad;
+
+        // Define o raio do deslocamento (ajuste conforme necessário)
+        float radius = 0.5f; // Distância do centro do HexTile
+
+        // Calcula a posição deslocada
+        Vector3 offset = new Vector3(Mathf.Cos(angleInRadians), 0, Mathf.Sin(angleInRadians)) * radius;
+
+        // Define a posição final do Essent
+        transform.position = startTile.transform.position + Vector3.up + offset;
+
+        Debug.Log($"{essentName} começou no hexágono {currentTile.GetTileIndex()} com deslocamento {offset}.");
     }
 
     public List<int> GetInitialCardsIDs()
@@ -127,7 +138,7 @@ public class Essent : NetworkBehaviour
             HexTile previousTile = currentTile.GetPreviousHex();
             if (previousTile == null)
             {
-                Debug.Log($"{data.essentName} atingiu o início da rota, ignorando {numMoves - movesDone} movimentos restantes.");
+                Debug.Log($"{essentName} atingiu o início da rota, ignorando {numMoves - movesDone} movimentos restantes.");
                 break;
             }
 

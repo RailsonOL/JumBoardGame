@@ -25,7 +25,7 @@ public class CardTile : HexTile
         tileLabel.text = "Card Tile"; // Define o texto
         tileLabel.fontSize = 2f; // Tamanho da fonte no mundo 3D
         tileLabel.alignment = TextAlignmentOptions.Center; // Centraliza o texto
-        tileLabel.color = Color.black; // Define a cor como verde
+        tileLabel.color = Color.white; // Define a cor como verde
 
         // Posiciona o texto acima do tile no espaço 3D
         textObject.transform.localPosition = Vector3.up * 0.2f; // 2 unidades acima do tile
