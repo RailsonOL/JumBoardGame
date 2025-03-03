@@ -9,16 +9,13 @@ public class GameHudManager : NetworkBehaviour
     public static GameHudManager Inst { get; private set; }
 
     [Header("UI Infos")]
-    [SerializeField] TextMeshProUGUI currentTurnText;
-    [SerializeField] TextMeshProUGUI gameStatusText;
-    [SerializeField] TextMeshProUGUI diceResultText;
-    [SerializeField] TextMeshProUGUI genericMessage;
+    [SerializeField] private TextMeshProUGUI currentTurnText;
+    [SerializeField] private TextMeshProUGUI gameStatusText;
+    [SerializeField] private TextMeshProUGUI diceResultText;
+    [SerializeField] private TextMeshProUGUI genericMessage;
 
     [Header("Players Essent Status")]
-    [SerializeField] TextMeshProUGUI player1EssentStatus;
-    [SerializeField] TextMeshProUGUI player2EssentStatus;
-    [SerializeField] TextMeshProUGUI player3EssentStatus;
-    [SerializeField] TextMeshProUGUI player4EssentStatus;
+    [SerializeField] private TextMeshProUGUI[] playerEssentStatus; // Array para os status dos jogadores
 
     private void Awake()
     {
@@ -60,15 +57,21 @@ public class GameHudManager : NetworkBehaviour
     [ClientRpc]
     public void RpcActivatePlayerEssentStatus(int quantity)
     {
-        player1EssentStatus.gameObject.SetActive(quantity >= 1);
-        player2EssentStatus.gameObject.SetActive(quantity >= 2);
-        player3EssentStatus.gameObject.SetActive(quantity >= 3);
-        player4EssentStatus.gameObject.SetActive(quantity >= 4);
+        for (int i = 0; i < playerEssentStatus.Length; i++)
+        {
+            playerEssentStatus[i].gameObject.SetActive(i < quantity);
+        }
     }
 
     [ClientRpc]
     public void RpcUpdatePlayerEssentStatus(int playerIndex, string essentName, string currentEssence)
     {
+        if (playerIndex < 1 || playerIndex > playerEssentStatus.Length)
+        {
+            Debug.LogWarning("Índice de jogador inválido: " + playerIndex);
+            return;
+        }
+
         // Template padrão no Inspector
         string template = "{essentName}: {currentEssence}";
 
@@ -76,26 +79,7 @@ public class GameHudManager : NetworkBehaviour
         string formattedText = template.Replace("{essentName}", essentName)
                                        .Replace("{currentEssence}", currentEssence);
 
-        // Atualizar o texto correto com base no playerIndex
-        switch (playerIndex)
-        {
-            case 1:
-                player1EssentStatus.SetText(formattedText);
-                break;
-            case 2:
-                player2EssentStatus.SetText(formattedText);
-                break;
-            case 3:
-                player3EssentStatus.SetText(formattedText);
-                break;
-            case 4:
-                player4EssentStatus.SetText(formattedText);
-                break;
-            default:
-                Debug.LogWarning("Índice de jogador inválido: " + playerIndex);
-                break;
-        }
+        // Atualizar o texto do jogador correspondente
+        playerEssentStatus[playerIndex - 1].SetText(formattedText);
     }
-
-
 }

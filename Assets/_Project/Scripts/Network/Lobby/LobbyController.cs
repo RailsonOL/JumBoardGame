@@ -41,7 +41,6 @@ public class LobbyController : MonoBehaviour
             {
                 manager = NetworkManager.singleton as CustomNetworkManager;
             }
-
             return manager;
         }
     }
@@ -116,13 +115,15 @@ public class LobbyController : MonoBehaviour
         LobbyIDText.text = lobbyShortCode;
     }
 
-
     public void UpdatePlayerList()
     {
         if (!PlayerItemCreated) { CreateHostPlayerItem(); }
-        if (PlayerListItems.Count < Manager.GamePlayers.Count) { CreateClientPlayerItem(); }
-        if (PlayerListItems.Count > Manager.GamePlayers.Count) { RemovePlayerItem(); }
-        if (PlayerListItems.Count == Manager.GamePlayers.Count) { UpdatePlayerItem(); }
+        if (Manager.GamePlayers != null) // Verificação para evitar acesso após desconexão
+        {
+            if (PlayerListItems.Count < Manager.GamePlayers.Count) { CreateClientPlayerItem(); }
+            if (PlayerListItems.Count > Manager.GamePlayers.Count) { RemovePlayerItem(); }
+            if (PlayerListItems.Count == Manager.GamePlayers.Count) { UpdatePlayerItem(); }
+        }
     }
 
     public void FindLocalPlayer()
@@ -182,7 +183,7 @@ public class LobbyController : MonoBehaviour
         {
             foreach (PlayerListItem item in PlayerListItems)
             {
-                if (item.ConnectionID == player.ConnectionID)
+                if (item != null && item.gameObject != null && item.ConnectionID == player.ConnectionID) // Verificação de nulidade
                 {
                     item.PlayerName = player.PlayerName;
                     item.PlayerSteamID = player.PlayerSteamID;
@@ -211,14 +212,13 @@ public class LobbyController : MonoBehaviour
             }
         }
 
-        if (ItemsToRemove.Count > 0)
+        foreach (PlayerListItem item in ItemsToRemove)
         {
-            foreach (PlayerListItem item in ItemsToRemove)
+            if (item != null && item.gameObject != null) // Verificação de nulidade
             {
                 GameObject ItemToRemove = item.gameObject;
                 PlayerListItems.Remove(item);
                 Destroy(ItemToRemove);
-                ItemToRemove = null;
             }
         }
     }

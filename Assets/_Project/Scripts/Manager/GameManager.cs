@@ -7,6 +7,31 @@ using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
+    #region Variables
+    [Header("Game State")]
+    [SyncVar(hook = nameof(OnCurrentPlayerChanged_Hook))]
+    public int currentPlayer;
+    [SyncVar] private int numberOfPlayers;
+    [SyncVar] private bool gameEnd = false;
+
+    [Header("Player Management")]
+    [SerializeField] private PlayerObjectController[] players;
+    [SerializeField] public Essent[] essents;
+    [SerializeField] private DiceController dice;
+    [SerializeField] private List<GameObject> essentPrefabs; // List of Essent prefabs
+    [SerializeField] private HexTile startingTile;
+
+    [SyncVar] private int cardsUsedThisTurn = 0;
+    [SyncVar] private bool hasRolledDiceThisTurn = false;
+    public int maxCardsPerTurn = 1; // Maximum number of cards that can be used per turn
+
+    private CustomNetworkManager manager;
+    private CustomNetworkManager Manager => manager ??= NetworkManager.singleton as CustomNetworkManager;
+
+    // Event to notify changes in the current player
+    public event Action OnCurrentPlayerChanged;
+    #endregion
+
     #region Singleton and Initialization
     public static GameManager Instance { get; private set; }
 
@@ -34,29 +59,7 @@ public class GameManager : NetworkBehaviour
     }
     #endregion
 
-    #region Game State and Player Management
-    [Header("Game State")]
-    [SyncVar(hook = nameof(OnCurrentPlayerChanged_Hook))]
-    public int currentPlayer;
-    [SyncVar] private int numberOfPlayers;
-    [SyncVar] private bool gameEnd = false;
-
-    [Header("Player Management")]
-    [SerializeField] private PlayerObjectController[] players;
-    [SerializeField] private DiceController dice;
-    [SerializeField] private List<GameObject> essentPrefabs; // List of Essent prefabs
-    [SerializeField] private HexTile startingTile;
-
-    [SyncVar] private int cardsUsedThisTurn = 0;
-    [SyncVar] private bool hasRolledDiceThisTurn = false;
-    public int maxCardsPerTurn = 1; // Maximum number of cards that can be used per turn
-
-    private CustomNetworkManager manager;
-    private CustomNetworkManager Manager => manager ??= NetworkManager.singleton as CustomNetworkManager;
-
-    // Event to notify changes in the current player
-    public event Action OnCurrentPlayerChanged;
-
+    #region Player Management
     private void OnCurrentPlayerChanged_Hook(int oldValue, int newValue)
     {
         Debug.Log($"Current player changed from {oldValue} to {newValue}");
@@ -132,6 +135,9 @@ public class GameManager : NetworkBehaviour
     #region Essent Spawning
     public void SpawnEssents()
     {
+        // Initialize the essents array with the correct size
+        essents = new Essent[numberOfPlayers];
+
         for (int i = 0; i < numberOfPlayers; i++)
         {
             PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
@@ -153,7 +159,11 @@ public class GameManager : NetworkBehaviour
             essentSpawned.playerOwner = player;
             player.SelectedEssent = essentSpawned;
 
+            // Add the spawned Essent to the essents array
+            essents[i] = essentSpawned;
+
             essentSpawned.Initialize(startingTile);
+            essentSpawned.OnEssenceChanged += OnEssentEssenceChanged;
             NetworkServer.Spawn(essentSpawned.gameObject);
 
             player.SelectedEssentNetId = essentSpawned.netId;
@@ -178,6 +188,20 @@ public class GameManager : NetworkBehaviour
         players[currentPlayer].isOurTurn = true;
 
         StartCoroutine(WaitForAllPlayersReady());
+    }
+
+    private void OnEssentEssenceChanged(int essentIndex)
+    {
+        if (GameHudManager.Inst != null && essentIndex > 0 && essentIndex <= numberOfPlayers)
+        {
+            Essent essent = essents[essentIndex - 1];
+            if (essent != null)
+            {
+                string essentName = essent.essentName;
+                string currentEssence = essent.totalEssence.ToString();
+                GameHudManager.Inst.RpcUpdatePlayerEssentStatus(essentIndex, essentName, currentEssence);
+            }
+        }
     }
     #endregion
 

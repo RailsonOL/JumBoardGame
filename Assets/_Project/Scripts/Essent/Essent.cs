@@ -19,6 +19,7 @@ public class Essent : NetworkBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float arcHeight = 0.5f;
+    public event System.Action<int> OnEssenceChanged;
 
     public bool isMoving = false;
 
@@ -41,11 +42,34 @@ public class Essent : NetworkBehaviour
     {
         return totalEssence > 0;
     }
-
     public void ModifyEssence(int amount)
     {
         totalEssence += amount;
-        Debug.Log($"{data.essentName} agora tem {totalEssence} de essência.");
+        Debug.Log($"{essentName} agora tem {totalEssence} de essência.");
+
+        // Trigger the event if it's registered
+        if (OnEssenceChanged != null)
+        {
+            int playerIndex = FindEssentIndex();
+            if (playerIndex >= 0)
+            {
+                OnEssenceChanged.Invoke(playerIndex + 1); // +1 because the UI uses 1-based indices
+            }
+        }
+    }
+
+    private int FindEssentIndex()
+    {
+        if (GameManager.Instance == null || GameManager.Instance.essents == null) return -1;
+
+        // Find this Essent's index in the essents array
+        for (int i = 0; i < GameManager.Instance.essents.Length; i++)
+        {
+            if (GameManager.Instance.essents[i] == this)
+                return i;
+        }
+
+        return -1;
     }
 
     public void UseSpecialAbility()

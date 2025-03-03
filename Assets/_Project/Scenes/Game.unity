@@ -12009,10 +12009,11 @@ MonoBehaviour:
   gameStatusText: {fileID: 1288299779}
   diceResultText: {fileID: 858761775}
   genericMessage: {fileID: 595116745}
-  player1EssentStatus: {fileID: 278890990}
-  player2EssentStatus: {fileID: 1020255523}
-  player3EssentStatus: {fileID: 807756571}
-  player4EssentStatus: {fileID: 1770855347}
+  playerEssentStatus:
+  - {fileID: 278890990}
+  - {fileID: 1020255523}
+  - {fileID: 807756571}
+  - {fileID: 1770855347}
 --- !u!4 &1659191331
 Transform:
   m_ObjectHideFlags: 0
