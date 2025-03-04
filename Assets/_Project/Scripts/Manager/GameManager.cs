@@ -15,8 +15,7 @@ public class GameManager : NetworkBehaviour
     [SyncVar] private bool gameEnd = false;
 
     [Header("Player Management")]
-    [SerializeField] public PlayerObjectController[] players;
-    public Essent[] essents;
+    [SerializeField] public PlayerObjectController[] players; // clients have access to this array
     [SerializeField] private DiceController dice;
     [SerializeField] private List<GameObject> essentPrefabs; // List of Essent prefabs
     [SerializeField] private HexTile startingTile;
@@ -86,16 +85,6 @@ public class GameManager : NetworkBehaviour
         return null;
     }
 
-    public uint GetEssentNetIdByIndex(int index)
-    {
-        if (essents != null && index >= 0 && index < essents.Length)
-        {
-            return essents[index].netId;
-        }
-
-        return 0;
-    }
-
     #endregion
 
     #region Game Initialization
@@ -146,9 +135,6 @@ public class GameManager : NetworkBehaviour
     #region Essent Spawning
     public void SpawnEssents()
     {
-        // Initialize the essents array with the correct size
-        essents = new Essent[numberOfPlayers];
-
         for (int i = 0; i < numberOfPlayers; i++)
         {
             PlayerObjectController player = players[i].GetComponent<PlayerObjectController>();
@@ -169,9 +155,6 @@ public class GameManager : NetworkBehaviour
             Essent essentSpawned = Instantiate(selectedPrefab, player.transform.position, selectedPrefab.transform.rotation).GetComponent<Essent>();
             essentSpawned.playerOwner = player;
             player.SelectedEssent = essentSpawned;
-
-            // Add the spawned Essent to the essents array
-            essents[i] = essentSpawned;
 
             // Pass the player index to the Initialize method
             essentSpawned.Initialize(startingTile, i);
@@ -202,16 +185,16 @@ public class GameManager : NetworkBehaviour
         StartCoroutine(WaitForAllPlayersReady());
     }
 
-    private void OnEssentEssenceChanged(int essentIndex)
+    private void OnEssentEssenceChanged(int playerIndex)
     {
-        if (GameHudManager.Instance != null && essentIndex > 0 && essentIndex <= numberOfPlayers)
+        if (GameHudManager.Instance != null && playerIndex > 0 && playerIndex <= numberOfPlayers)
         {
-            Essent essent = essents[essentIndex - 1];
+            Essent essent = players[playerIndex - 1].SelectedEssent;
             if (essent != null)
             {
                 string essentName = essent.essentName;
                 string currentEssence = essent.totalEssence.ToString();
-                GameHudManager.Instance.RpcUpdatePlayerEssentStatus(essentIndex, essentName, currentEssence);
+                GameHudManager.Instance.RpcUpdatePlayerEssentStatus(playerIndex, essentName, currentEssence);
             }
         }
     }

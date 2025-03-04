@@ -43,6 +43,7 @@ public class Essent : NetworkBehaviour
     {
         return totalEssence > 0;
     }
+
     public void ModifyEssence(int amount)
     {
         totalEssence += amount;
@@ -61,12 +62,12 @@ public class Essent : NetworkBehaviour
 
     private int FindEssentIndex()
     {
-        if (GameManager.Instance == null || GameManager.Instance.essents == null) return -1;
+        if (GameManager.Instance == null) return -1;
 
         // Find this Essent's index in the essents array
-        for (int i = 0; i < GameManager.Instance.essents.Length; i++)
+        for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
-            if (GameManager.Instance.essents[i] == this)
+            if (GameManager.Instance.players[i].SelectedEssent == this)
                 return i;
         }
 
@@ -109,8 +110,6 @@ public class Essent : NetworkBehaviour
             return new List<int>(); // Retorna uma lista vazia se não houver cartas
         }
     }
-
-
 
     #region Board Moviment
 

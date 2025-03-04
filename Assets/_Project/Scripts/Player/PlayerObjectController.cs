@@ -19,6 +19,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     [Header("Player Game Data")]
 
+    /// Only server can access, to client use GetSelectedEssentLocal()
     public Essent SelectedEssent;
     [SyncVar] public uint SelectedEssentNetId;
     [SyncVar(hook = nameof(OnSelectedEssentIdChanged))]

@@ -9,6 +9,16 @@ public class CameraFollow : MonoBehaviour
     public float distance = 10f; // Distância da câmera ao objeto
     public float xOffset = 0f; // Deslocamento lateral da câmera
 
+    [Header("Zoom Settings")]
+    [Tooltip("Velocidade do zoom ao girar o scroll do mouse.")]
+    public float zoomSpeed = 5f; // Velocidade do zoom
+    [Tooltip("Distância mínima da câmera ao target (zoom in máximo).")]
+    public float minDistance = 5f; // Distância mínima
+    [Tooltip("Distância máxima da câmera ao target (zoom out máximo).")]
+    public float maxDistance = 20f; // Distância máxima
+    [Tooltip("Velocidade de suavização do zoom.")]
+    public float zoomSmoothSpeed = 0.2f; // Suavização do zoom
+
     [Header("Smooth Transition Settings")]
     [Tooltip("Velocidade da suavização ao mudar de target. Quanto menor, mais lento e suave.")]
     public float smoothSpeed = 0.5f; // Velocidade da suavização
@@ -16,6 +26,8 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 targetPosition; // Posição do target no plano X e Z
     private bool isSmoothing = false; // Indica se a câmera está em transição suave
+    private float targetDistance; // Distância suavizada da câmera ao target
+    private float zoomVelocity; // Usado para suavizar o zoom
 
     private void Awake()
     {
@@ -28,6 +40,9 @@ public class CameraFollow : MonoBehaviour
         {
             Destroy(gameObject); // Garante que só haja uma instância do CameraFollow
         }
+
+        // Inicializa a distância suavizada
+        targetDistance = distance;
     }
 
     // Método para atualizar o target da câmera
@@ -60,6 +75,9 @@ public class CameraFollow : MonoBehaviour
                 target.transform.position.z // Posição Z do target
             );
 
+            // Suaviza a distância da câmera ao target
+            distance = Mathf.SmoothDamp(distance, targetDistance, ref zoomVelocity, zoomSmoothSpeed);
+
             // Se a câmera está em transição suave
             if (isSmoothing)
             {
@@ -80,6 +98,32 @@ public class CameraFollow : MonoBehaviour
 
             // Mantém a câmera olhando para o objeto (apenas no plano X e Z)
             transform.LookAt(new Vector3(newTargetPosition.x, 0, newTargetPosition.z));
+        }
+    }
+
+    void Update()
+    {
+        // Verifica se há um target e se o scroll do mouse foi usado
+        if (target != null)
+        {
+            HandleZoom();
+        }
+    }
+
+    private void HandleZoom()
+    {
+        // Obtém o movimento do scroll do mouse
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll != 0)
+        {
+            // Ajusta a distância alvo da câmera com base no scroll
+            targetDistance -= scroll * zoomSpeed;
+
+            // Limita a distância alvo entre os valores mínimo e máximo
+            targetDistance = Mathf.Clamp(targetDistance, minDistance, maxDistance);
+
+            Debug.Log($"CameraFollow: Zoom target adjusted. Current target distance: {targetDistance}");
         }
     }
 }
