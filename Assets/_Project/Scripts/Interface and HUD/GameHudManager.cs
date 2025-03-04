@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Mirror;
+using UnityEngine.UI;
 
 public class GameHudManager : NetworkBehaviour
 {
-    public static GameHudManager Inst { get; private set; }
+    public static GameHudManager Instance { get; private set; }
 
     [Header("UI Infos")]
     [SerializeField] private TextMeshProUGUI currentTurnText;
@@ -15,14 +16,14 @@ public class GameHudManager : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI genericMessage;
 
     [Header("Players Essent Status")]
-    [SerializeField] private TextMeshProUGUI[] playerEssentStatus; // Array para os status dos jogadores
+    [SerializeField] private TextMeshProUGUI[] essentStatus;
+    [SerializeField] private Button[] essentStatusButton;
 
     private void Awake()
     {
-        // Configura o Singleton
-        if (Inst == null)
+        if (Instance == null)
         {
-            Inst = this;
+            Instance = this;
         }
         else
         {
@@ -57,29 +58,49 @@ public class GameHudManager : NetworkBehaviour
     [ClientRpc]
     public void RpcActivatePlayerEssentStatus(int quantity)
     {
-        for (int i = 0; i < playerEssentStatus.Length; i++)
+        for (int i = 0; i < essentStatusButton.Length; i++)
         {
-            playerEssentStatus[i].gameObject.SetActive(i < quantity);
+            essentStatusButton[i].gameObject.SetActive(i < quantity);
         }
     }
 
     [ClientRpc]
-    public void RpcUpdatePlayerEssentStatus(int playerIndex, string essentName, string currentEssence)
+    public void RpcUpdatePlayerEssentStatus(int essentIndex, string essentName, string currentEssence)
     {
-        if (playerIndex < 1 || playerIndex > playerEssentStatus.Length)
+        if (essentIndex < 1 || essentIndex > essentStatus.Length)
         {
-            Debug.LogWarning("Índice de jogador inválido: " + playerIndex);
+            Debug.LogWarning("Índice de Essente inválido: " + essentIndex);
             return;
         }
 
-        // Template padrão no Inspector
         string template = "{essentName}: {currentEssence}";
 
-        // Substituir placeholders pelos valores reais
         string formattedText = template.Replace("{essentName}", essentName)
                                        .Replace("{currentEssence}", currentEssence);
 
-        // Atualizar o texto do jogador correspondente
-        playerEssentStatus[playerIndex - 1].SetText(formattedText);
+        essentStatus[essentIndex - 1].SetText(formattedText);
+
+        // Configurar o evento de clique no botão correspondente
+        if (essentIndex - 1 < essentStatusButton.Length)
+        {
+            Button button = essentStatusButton[essentIndex - 1];
+            button.onClick.RemoveAllListeners(); // Remove listeners anteriores para evitar duplicação
+            button.onClick.AddListener(() => OnEssentButtonClicked(essentIndex - 1));
+        }
+    }
+
+    private void OnEssentButtonClicked(int essentIndex)
+    {
+        Debug.Log($"Botão do Essent do jogador {essentIndex + 1} clicado");
+
+        // Obtenha o netId do Essent com base no índice
+        Essent essentLocal = GameManager.Instance.players[essentIndex].GetSelectedEssentLocal();
+
+        // Verifique se o netId é válido
+        if (essentLocal != null)
+        {
+
+            CameraManager.Instance?.ActivateEssentFollowCamera(essentLocal.gameObject);
+        }
     }
 }

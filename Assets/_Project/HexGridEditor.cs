@@ -9,19 +9,18 @@ public class HexGridEditor : MonoBehaviour
     [Header("Grid Configuration")]
     public float hexSize = 1f;
     public float spacing = 0.05f;
-    public int radius = 0; // Raio de exibição ao redor do mouse
+    public int radius = 0;
 
     [Header("Orientation")]
-    [Tooltip("Orientação do grid hexagonal. Define como os hexágonos estão alinhados.")]
     public HexOrientation orientation = HexOrientation.PointyTop;
 
     [Header("Prefabs")]
     public List<GameObject> hexPrefabs = new List<GameObject>();
+    public List<GameObject> decorations = new List<GameObject>(); // Decorações (casas, pontes, etc.)
+    public List<GameObject> natureDecorations = new List<GameObject>(); // Decorações naturais (árvores, pedras, etc.)
 
     [Header("Prefab Settings")]
-    [Tooltip("Rotação adicional aplicada aos prefabs (além da rotação base de alinhamento)")]
     public Vector3 prefabRotationOffset = Vector3.zero;
-    [Tooltip("Exibe um hexágono de teste para ajudar a alinhar o grid com seus prefabs")]
     public bool showTestHex = false;
 
     [Header("Editor Settings")]
@@ -32,12 +31,13 @@ public class HexGridEditor : MonoBehaviour
 
     // Internal variables
     private int currentPrefabIndex = 0;
+    private int currentDecorationIndex = 0;
+    private int currentNatureDecorationIndex = 0;
     private Dictionary<Vector3Int, GameObject> placedHexagons = new Dictionary<Vector3Int, GameObject>();
+    private Dictionary<Vector3Int, List<GameObject>> placedDecorations = new Dictionary<Vector3Int, List<GameObject>>();
     private Vector3Int? hoveredCell = null;
-    private GameObject testHexInstance = null;
 
-    // Constants
-    private const float ROOT_3 = 1.73205f; // Square root of 3
+    private const float ROOT_3 = 1.73205f;
 
     public enum HexOrientation
     {
@@ -48,41 +48,35 @@ public class HexGridEditor : MonoBehaviour
     void OnEnable()
     {
         SceneView.duringSceneGui += OnSceneGUI;
-        UpdateTestHex();
+
+        // Reconstruir o dicionário placedHexagons ao iniciar
+        RebuildPlacedHexagons();
     }
 
     void OnDisable()
     {
         SceneView.duringSceneGui -= OnSceneGUI;
-        DestroyTestHex();
     }
 
-    void UpdateTestHex()
+    void RebuildPlacedHexagons()
     {
-        DestroyTestHex();
+        placedHexagons.Clear();
 
-        if (showTestHex && hexPrefabs.Count > 0 && hexPrefabs[currentPrefabIndex] != null)
+        // Percorre todos os objetos filhos do HexGridEditor
+        foreach (Transform child in transform)
         {
-            testHexInstance = PrefabUtility.InstantiatePrefab(hexPrefabs[currentPrefabIndex]) as GameObject;
-            if (hoveredCell.HasValue)
+            HexCoordinates hexCoord = child.GetComponent<HexCoordinates>();
+            if (hexCoord != null)
             {
-                testHexInstance.transform.position = CubeToWorld(hoveredCell.Value);
-            }
-            else
-            {
-                testHexInstance.transform.position = transform.position;
-            }
-            testHexInstance.transform.rotation = GetPrefabRotation(Vector3Int.zero);
-            testHexInstance.name = "TEST_HEX";
-        }
-    }
+                // Converte as coordenadas do hexágono para Vector3Int
+                Vector3Int cubeCoord = new Vector3Int(hexCoord.q, hexCoord.r, hexCoord.s);
 
-    void DestroyTestHex()
-    {
-        if (testHexInstance != null)
-        {
-            DestroyImmediate(testHexInstance);
-            testHexInstance = null;
+                // Adiciona ao dicionário placedHexagons
+                if (!placedHexagons.ContainsKey(cubeCoord))
+                {
+                    placedHexagons.Add(cubeCoord, child.gameObject);
+                }
+            }
         }
     }
 
@@ -90,53 +84,54 @@ public class HexGridEditor : MonoBehaviour
     {
         Event e = Event.current;
 
+        // Verifica se um prefab foi selecionado na aba Project
+        GameObject selectedPrefab = null;
+        if (Selection.activeObject != null && Selection.activeObject is GameObject)
+        {
+            selectedPrefab = Selection.activeObject as GameObject;
+
+            // Atualiza o índice do prefab selecionado
+            if (hexPrefabs.Contains(selectedPrefab))
+            {
+                currentPrefabIndex = hexPrefabs.IndexOf(selectedPrefab);
+                currentDecorationIndex = -1; // Nenhuma decoração selecionada
+                currentNatureDecorationIndex = -1; // Nenhuma decoração natural selecionada
+            }
+            else if (decorations.Contains(selectedPrefab))
+            {
+                currentDecorationIndex = decorations.IndexOf(selectedPrefab);
+                currentNatureDecorationIndex = -1; // Nenhuma decoração natural selecionada
+                currentPrefabIndex = -1; // Nenhum hexágono selecionado
+            }
+            else if (natureDecorations.Contains(selectedPrefab))
+            {
+                currentNatureDecorationIndex = natureDecorations.IndexOf(selectedPrefab);
+                currentDecorationIndex = -1; // Nenhuma decoração selecionada
+                currentPrefabIndex = -1; // Nenhum hexágono selecionado
+            }
+        }
+
         // Handle keyboard input
         if (e.type == EventType.KeyDown)
         {
-            // Switch prefab selection with 1 and 2 keys
-            if (e.keyCode == KeyCode.Alpha1 && hexPrefabs.Count > 0)
-            {
-                currentPrefabIndex = (currentPrefabIndex - 1 + hexPrefabs.Count) % hexPrefabs.Count;
-                UpdateTestHex();
-                e.Use();
-                SceneView.RepaintAll();
-            }
-            else if (e.keyCode == KeyCode.Alpha2 && hexPrefabs.Count > 0)
-            {
-                currentPrefabIndex = (currentPrefabIndex + 1) % hexPrefabs.Count;
-                UpdateTestHex();
-                e.Use();
-                SceneView.RepaintAll();
-            }
             // Place or remove hex with space key
-            else if (e.keyCode == KeyCode.Space && hoveredCell.HasValue)
+            if (e.keyCode == KeyCode.Space && !e.control && hoveredCell.HasValue)
             {
-                if (placedHexagons.ContainsKey(hoveredCell.Value))
-                {
-                    // Remove existing hex
-                    DestroyImmediate(placedHexagons[hoveredCell.Value]);
-                    placedHexagons.Remove(hoveredCell.Value);
-                }
-                else if (hexPrefabs.Count > 0 && hexPrefabs[currentPrefabIndex] != null)
-                {
-                    // Place new hex
-                    Vector3 worldPos = CubeToWorld(hoveredCell.Value);
-                    GameObject newHex = PrefabUtility.InstantiatePrefab(hexPrefabs[currentPrefabIndex]) as GameObject;
-                    newHex.transform.position = worldPos;
-                    newHex.transform.rotation = GetPrefabRotation(hoveredCell.Value);
-                    newHex.transform.parent = this.transform;
-
-                    // Store cube coordinates in a component for reference
-                    HexCoordinates hexCoord = newHex.AddComponent<HexCoordinates>();
-                    hexCoord.q = hoveredCell.Value.x;
-                    hexCoord.r = hoveredCell.Value.y;
-                    hexCoord.s = hoveredCell.Value.z;
-
-                    placedHexagons.Add(hoveredCell.Value, newHex);
-
-                    // Register undo
-                    Undo.RegisterCreatedObjectUndo(newHex, "Place Hex");
-                }
+                HandleHexPlacement(hoveredCell.Value);
+                e.Use();
+                SceneView.RepaintAll();
+            }
+            // Place or remove decorations with Ctrl + Space
+            else if (e.keyCode == KeyCode.Space && e.control && hoveredCell.HasValue)
+            {
+                HandleDecorationPlacement(hoveredCell.Value);
+                e.Use();
+                SceneView.RepaintAll();
+            }
+            // Rotate hex with Ctrl + R
+            else if (e.keyCode == KeyCode.R && e.control && hoveredCell.HasValue)
+            {
+                RotateHex(hoveredCell.Value);
                 e.Use();
                 SceneView.RepaintAll();
             }
@@ -159,7 +154,6 @@ public class HexGridEditor : MonoBehaviour
             }
             else
             {
-                // Raycast against an infinite plane at Y=0 if no collider was hit
                 Plane plane = new Plane(Vector3.up, 0);
                 float distance;
                 if (plane.Raycast(ray, out distance))
@@ -173,13 +167,6 @@ public class HexGridEditor : MonoBehaviour
                     }
                 }
             }
-
-            // Atualiza a posição do hexágono de teste para seguir o mouse
-            if (showTestHex && testHexInstance != null && hoveredCell.HasValue)
-            {
-                Vector3 worldPos = CubeToWorld(hoveredCell.Value);
-                testHexInstance.transform.position = worldPos;
-            }
         }
 
         // Draw the hex grid
@@ -189,25 +176,225 @@ public class HexGridEditor : MonoBehaviour
         Handles.BeginGUI();
         GUILayout.BeginArea(new Rect(10, 10, 300, 150));
 
-        // Mostra o nome do prefab selecionado
-        GUILayout.Label($"Selected Prefab: {(hexPrefabs.Count > 0 ? hexPrefabs[currentPrefabIndex].name + " (" + (currentPrefabIndex + 1) + " / " + hexPrefabs.Count + ")" : "None")}");
+        GUILayout.Label($"Selected Hex: {(hexPrefabs.Count > 0 && currentPrefabIndex >= 0 ? hexPrefabs[currentPrefabIndex].name : "None")}");
+        GUILayout.Label($"Selected Decoration: {(decorations.Count > 0 && currentDecorationIndex >= 0 ? decorations[currentDecorationIndex].name : "None")}");
+        GUILayout.Label($"Selected Nature Decoration: {(natureDecorations.Count > 0 && currentNatureDecorationIndex >= 0 ? natureDecorations[currentNatureDecorationIndex].name : "None")}");
 
         if (hoveredCell.HasValue)
         {
             GUILayout.Label($"Hover Cell (q,r,s): ({hoveredCell.Value.x}, {hoveredCell.Value.y}, {hoveredCell.Value.z})");
-
-            // Show rotation info for debugging
-            Quaternion rot = GetPrefabRotation(hoveredCell.Value);
-            Vector3 eulerRot = rot.eulerAngles;
-            GUILayout.Label($"Rotation: ({eulerRot.x:F1}, {eulerRot.y:F1}, {eulerRot.z:F1})");
         }
         else
         {
             GUILayout.Label("Hover Cell: None");
         }
-        GUILayout.Label("Controls: 1/2 = Cycle Prefabs, Space = Place/Remove Hex");
+        GUILayout.Label("Controls: Space = Place/Remove Hex, Ctrl+Space = Place/Remove Decoration, Ctrl+R = Rotate Hex");
         GUILayout.EndArea();
         Handles.EndGUI();
+    }
+
+    void RotateHex(Vector3Int cell)
+    {
+        if (placedHexagons.ContainsKey(cell))
+        {
+            GameObject hexToRotate = placedHexagons[cell];
+            Quaternion currentRotation = hexToRotate.transform.rotation;
+
+            // Rotaciona o hexágono em 60 graus (ou outro ângulo desejado)
+            float rotationAngle = 60f; // Você pode alterar esse valor se necessário
+            Quaternion newRotation = currentRotation * Quaternion.Euler(0, rotationAngle, 0);
+
+            // Aplica a nova rotação
+            hexToRotate.transform.rotation = newRotation;
+
+            // Registra a operação no Undo
+            Undo.RecordObject(hexToRotate.transform, "Rotate Hex");
+
+            // Marca a cena como suja
+            EditorUtility.SetDirty(hexToRotate);
+            SceneView.RepaintAll();
+
+            Debug.Log("Hex rotated.");
+        }
+        else
+        {
+            Debug.Log("No hex at this cell.");
+        }
+    }
+
+    void HandleHexPlacement(Vector3Int cell)
+    {
+        if (placedHexagons.ContainsKey(cell))
+        {
+            // Remove hex and all its decorations
+            GameObject hexToRemove = placedHexagons[cell];
+            if (placedDecorations.ContainsKey(cell))
+            {
+                foreach (GameObject decoration in placedDecorations[cell])
+                {
+                    Undo.DestroyObjectImmediate(decoration);
+                }
+                placedDecorations.Remove(cell);
+            }
+            Undo.DestroyObjectImmediate(hexToRemove);
+            placedHexagons.Remove(cell);
+        }
+        else if (hexPrefabs.Count > 0 && currentPrefabIndex >= 0 && hexPrefabs[currentPrefabIndex] != null)
+        {
+            // Place new hex
+            Vector3 worldPos = CubeToWorld(cell);
+            GameObject newHex = PrefabUtility.InstantiatePrefab(hexPrefabs[currentPrefabIndex]) as GameObject;
+            newHex.transform.position = worldPos;
+            newHex.transform.rotation = GetPrefabRotation(cell);
+            newHex.transform.parent = this.transform;
+
+            // Store cube coordinates in a component for reference
+            HexCoordinates hexCoord = newHex.AddComponent<HexCoordinates>();
+            hexCoord.q = cell.x;
+            hexCoord.r = cell.y;
+            hexCoord.s = cell.z;
+
+            placedHexagons.Add(cell, newHex);
+            placedDecorations[cell] = new List<GameObject>();
+
+            // Register undo
+            Undo.RegisterCreatedObjectUndo(newHex, "Place Hex");
+        }
+    }
+
+    void HandleDecorationPlacement(Vector3Int cell)
+    {
+        if (placedHexagons.ContainsKey(cell))
+        {
+            if (placedDecorations.ContainsKey(cell) && placedDecorations[cell].Count > 0)
+            {
+                // Remove a primeira decoração, se ela ainda existir
+                GameObject decorationToRemove = placedDecorations[cell][0];
+
+                // Verifica se o objeto ainda existe antes de tentar destruí-lo
+                if (decorationToRemove != null)
+                {
+                    Undo.DestroyObjectImmediate(decorationToRemove);
+                }
+
+                // Remove a decoração da lista
+                placedDecorations[cell].RemoveAt(0);
+
+                // Se não houver mais decorações, remove a célula do dicionário
+                if (placedDecorations[cell].Count == 0)
+                {
+                    placedDecorations.Remove(cell);
+                }
+
+                Debug.Log("Decoration removed.");
+            }
+            else
+            {
+                // Adiciona uma nova decoração
+                if (currentDecorationIndex >= 0 && decorations.Count > 0 && decorations[currentDecorationIndex] != null)
+                {
+                    PlaceDecoration(cell, decorations[currentDecorationIndex]);
+                    Debug.Log("Decoration placed.");
+                }
+                else if (currentNatureDecorationIndex >= 0 && natureDecorations.Count > 0 && natureDecorations[currentNatureDecorationIndex] != null)
+                {
+                    PlaceDecoration(cell, natureDecorations[currentNatureDecorationIndex], true);
+                    Debug.Log("Nature decoration placed.");
+                }
+                else
+                {
+                    Debug.Log("No decoration selected.");
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("No hex at this cell.");
+        }
+    }
+
+    void PlaceDecoration(Vector3Int cell, GameObject decorationPrefab, bool isNatureDecoration = false)
+    {
+        // Obtém a posição do hexágono
+        Vector3 worldPos = CubeToWorld(cell);
+
+        // Instancia a decoração
+        GameObject newDecoration = PrefabUtility.InstantiatePrefab(decorationPrefab) as GameObject;
+
+        // Define o pai da decoração como o hexágono correspondente
+        newDecoration.transform.parent = placedHexagons[cell].transform;
+
+        // Posiciona a decoração em cima do hexágono
+        newDecoration.transform.localPosition = Vector3.zero; // Posição relativa ao hexágono (centro)
+        newDecoration.transform.localPosition += Vector3.up * 1f; // Ajuste a altura conforme necessário
+
+        // Aplica rotação aleatória para decorações naturais
+        if (isNatureDecoration)
+        {
+            float randomRotation = Random.Range(0, 360);
+            newDecoration.transform.localRotation = Quaternion.Euler(0, randomRotation, 0);
+        }
+        else
+        {
+            newDecoration.transform.localRotation = Quaternion.identity;
+        }
+
+        // Adiciona à lista de decorações
+        if (!placedDecorations.ContainsKey(cell))
+        {
+            placedDecorations[cell] = new List<GameObject>();
+        }
+        placedDecorations[cell].Add(newDecoration);
+
+        // Registra a operação no Undo
+        Undo.RegisterCreatedObjectUndo(newDecoration, "Place Decoration");
+    }
+
+    void HandleSpaceKey(Vector3Int cell)
+    {
+        if (placedHexagons.ContainsKey(cell))
+        {
+            // Remove decorations first
+            if (placedDecorations.ContainsKey(cell) && placedDecorations[cell].Count > 0)
+            {
+                GameObject decorationToRemove = placedDecorations[cell][0];
+                Undo.DestroyObjectImmediate(decorationToRemove);
+                placedDecorations[cell].RemoveAt(0);
+
+                if (placedDecorations[cell].Count == 0)
+                {
+                    placedDecorations.Remove(cell);
+                }
+            }
+            else
+            {
+                // Remove hex if no decorations left
+                GameObject hexToRemove = placedHexagons[cell];
+                Undo.DestroyObjectImmediate(hexToRemove);
+                placedHexagons.Remove(cell);
+            }
+        }
+        else if (hexPrefabs.Count > 0 && hexPrefabs[currentPrefabIndex] != null)
+        {
+            // Place new hex
+            Vector3 worldPos = CubeToWorld(cell);
+            GameObject newHex = PrefabUtility.InstantiatePrefab(hexPrefabs[currentPrefabIndex]) as GameObject;
+            newHex.transform.position = worldPos;
+            newHex.transform.rotation = GetPrefabRotation(cell);
+            newHex.transform.parent = this.transform;
+
+            // Store cube coordinates in a component for reference
+            HexCoordinates hexCoord = newHex.AddComponent<HexCoordinates>();
+            hexCoord.q = cell.x;
+            hexCoord.r = cell.y;
+            hexCoord.s = cell.z;
+
+            placedHexagons.Add(cell, newHex);
+            placedDecorations[cell] = new List<GameObject>();
+
+            // Register undo
+            Undo.RegisterCreatedObjectUndo(newHex, "Place Hex");
+        }
     }
 
     // Get rotation for prefab based on grid orientation and offset
@@ -412,9 +599,6 @@ public class HexGridEditor : MonoBehaviour
         hexSize = Mathf.Max(0.1f, hexSize);
         spacing = Mathf.Max(0f, spacing);
         //radius = Mathf.Max(1, radius); // Garante que o raio seja pelo menos 1
-
-        // Update test hex when settings change
-        UpdateTestHex();
     }
 }
 
@@ -458,17 +642,15 @@ public class HexGridEditorInspector : Editor
         EditorGUILayout.HelpBox("Add hex tile prefabs to the list below. You can cycle through them using 1 and 2 keys.", MessageType.Info);
 
         SerializedProperty prefabsProperty = serializedObject.FindProperty("hexPrefabs");
+        SerializedProperty decorationsProperty = serializedObject.FindProperty("decorations");
+        SerializedProperty natureDecorationsProperty = serializedObject.FindProperty("natureDecorations");
         EditorGUILayout.PropertyField(prefabsProperty, true);
+        EditorGUILayout.PropertyField(decorationsProperty, true);
+        EditorGUILayout.PropertyField(natureDecorationsProperty, true);
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Prefab Settings", EditorStyles.boldLabel);
         gridEditor.prefabRotationOffset = EditorGUILayout.Vector3Field("Rotação Adicional", gridEditor.prefabRotationOffset);
-        gridEditor.showTestHex = EditorGUILayout.Toggle("Mostrar Hex de Teste", gridEditor.showTestHex);
-
-        if (gridEditor.showTestHex)
-        {
-            EditorGUILayout.HelpBox("Um hexágono de teste está sendo exibido na origem do grid. Use isso para ajustar a rotação até que o seu prefab se alinhe corretamente.", MessageType.Info);
-        }
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Editor Settings", EditorStyles.boldLabel);

@@ -17,10 +17,6 @@ public class DiceController : MonoBehaviour
     private List<Rigidbody> diceRbs;
     private List<Vector3> dicePositions;
 
-    [Header("Cameras")]
-    public Camera diceCam;
-    public Camera mainCam;
-
     [Header("UI")]
     public GameHudManager interfaceC;
 
@@ -88,12 +84,6 @@ public class DiceController : MonoBehaviour
         Debug.Log("Resultado total: " + allDiceResult);
         diceThrown = false;
         interfaceC.RpcUpdateDiceResult(allDiceResult.ToString());
-    }
-
-    public void ViewDice()
-    {
-        diceCam.gameObject.SetActive(!diceCam.gameObject.activeSelf);
-        mainCam.gameObject.SetActive(!mainCam.gameObject.activeSelf);
     }
 
     IEnumerator WaitAndCalculateResult(int index)

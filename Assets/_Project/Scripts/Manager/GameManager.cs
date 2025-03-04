@@ -15,8 +15,8 @@ public class GameManager : NetworkBehaviour
     [SyncVar] private bool gameEnd = false;
 
     [Header("Player Management")]
-    [SerializeField] private PlayerObjectController[] players;
-    [SerializeField] public Essent[] essents;
+    [SerializeField] public PlayerObjectController[] players;
+    public Essent[] essents;
     [SerializeField] private DiceController dice;
     [SerializeField] private List<GameObject> essentPrefabs; // List of Essent prefabs
     [SerializeField] private HexTile startingTile;
@@ -85,6 +85,17 @@ public class GameManager : NetworkBehaviour
         }
         return null;
     }
+
+    public uint GetEssentNetIdByIndex(int index)
+    {
+        if (essents != null && index >= 0 && index < essents.Length)
+        {
+            return essents[index].netId;
+        }
+
+        return 0;
+    }
+
     #endregion
 
     #region Game Initialization
@@ -117,10 +128,10 @@ public class GameManager : NetworkBehaviour
         yield return new WaitUntil(() => AreAllPlayersReady());
 
         Debug.Log("All players are ready, updating UI and camera...");
-        GameHudManager.Inst.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
+        GameHudManager.Instance.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
         UpdateCameraTargetForClients();
 
-        GameHudManager.Inst.RpcActivatePlayerEssentStatus(numberOfPlayers);
+        GameHudManager.Instance.RpcActivatePlayerEssentStatus(numberOfPlayers);
         RefreshStat();
     }
 
@@ -193,14 +204,14 @@ public class GameManager : NetworkBehaviour
 
     private void OnEssentEssenceChanged(int essentIndex)
     {
-        if (GameHudManager.Inst != null && essentIndex > 0 && essentIndex <= numberOfPlayers)
+        if (GameHudManager.Instance != null && essentIndex > 0 && essentIndex <= numberOfPlayers)
         {
             Essent essent = essents[essentIndex - 1];
             if (essent != null)
             {
                 string essentName = essent.essentName;
                 string currentEssence = essent.totalEssence.ToString();
-                GameHudManager.Inst.RpcUpdatePlayerEssentStatus(essentIndex, essentName, currentEssence);
+                GameHudManager.Instance.RpcUpdatePlayerEssentStatus(essentIndex, essentName, currentEssence);
             }
         }
     }
@@ -262,7 +273,7 @@ public class GameManager : NetworkBehaviour
 
         players[currentPlayer].isOurTurn = true;
         Debug.Log($"Player {players[currentPlayer].PlayerName} turn");
-        GameHudManager.Inst.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
+        GameHudManager.Instance.RpcUpdateCurrentTurn($"Player {players[currentPlayer].PlayerName}'s turn");
         UpdateCameraTargetForClients();
     }
 
@@ -303,12 +314,12 @@ public class GameManager : NetworkBehaviour
     private IEnumerator RollAndMove()
     {
         dice.RollDice();
-        GameHudManager.Inst.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} throw the dice...");
+        GameHudManager.Instance.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} throw the dice...");
 
         yield return new WaitUntil(() => dice.allDiceResult != 0);
         int moveAmount = dice.allDiceResult;
 
-        GameHudManager.Inst.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is moving {moveAmount} tiles");
+        GameHudManager.Instance.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is moving {moveAmount} tiles");
 
         var currentEssent = players[currentPlayer].SelectedEssent;
         if (currentEssent != null)
@@ -318,7 +329,7 @@ public class GameManager : NetworkBehaviour
 
         yield return new WaitUntil(() => !players[currentPlayer].SelectedEssent.isMoving);
 
-        GameHudManager.Inst.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is stopped");
+        GameHudManager.Instance.RpcUpdateGameStatus($"{players[currentPlayer].PlayerName} is stopped");
         yield return new WaitForSeconds(1f);
     }
 
@@ -399,7 +410,7 @@ public class GameManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void RpcUpdateCameraTarget(uint essentNetId)
+    private void RpcUpdateCameraTarget(uint essentNetId) // Run on all clients
     {
         if (NetworkClient.spawned.TryGetValue(essentNetId, out NetworkIdentity identity))
         {
@@ -424,7 +435,7 @@ public class GameManager : NetworkBehaviour
     #region Statistics and UI
     public void RefreshStat()
     {
-        if (players == null || GameHudManager.Inst == null)
+        if (players == null || GameHudManager.Instance == null)
         {
             Debug.LogWarning("Players or GameHudManager not available.");
             return;
@@ -437,7 +448,7 @@ public class GameManager : NetworkBehaviour
             {
                 string essentName = player.SelectedEssent.essentName;
                 string currentEssence = player.SelectedEssent.totalEssence.ToString();
-                GameHudManager.Inst.RpcUpdatePlayerEssentStatus(i + 1, essentName, currentEssence);
+                GameHudManager.Instance.RpcUpdatePlayerEssentStatus(i + 1, essentName, currentEssence);
             }
             else
             {

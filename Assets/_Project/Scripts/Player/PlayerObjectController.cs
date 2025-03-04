@@ -57,15 +57,6 @@ public class PlayerObjectController : NetworkBehaviour
                 {
                     GameManager.Instance.CmdRollDice();
                 }
-
-                // if (Input.GetKeyDown(KeyCode.C))
-                // {
-                //     if (isLocalPlayer)
-                //     {
-                //         Debug.Log("Request Card");
-                //         RequestInitialCards();
-                //     }
-                // }
             }
         }
     }
@@ -90,7 +81,7 @@ public class PlayerObjectController : NetworkBehaviour
     private bool IsClientReady()
     {
         bool essentReady = NetworkClient.spawned.ContainsKey(SelectedEssentNetId);
-        bool hudReady = GameHudManager.Inst != null;
+        bool hudReady = GameHudManager.Instance != null;
         bool cameraReady = CameraFollow.Instance != null;
 
         // if essentials are ready, check if the player is ready
@@ -120,7 +111,7 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    public Essent GetSelectedEssentByNetId()
+    public Essent GetSelectedEssentLocal()
     {
         // Verifica se o NetworkIdentity com o netId existe na lista de objetos spawnados
         if (NetworkClient.spawned.TryGetValue(SelectedEssentNetId, out NetworkIdentity networkIdentity))
@@ -281,8 +272,4 @@ public class PlayerObjectController : NetworkBehaviour
             Debug.LogWarning($"Carta com ID {cardID} não encontrada no CardManager!");
         }
     }
-
-    private void GetTilePosition() { }
-    private void GetCurrentEssence() { }
-    private void GetEssentName() { }
 }

@@ -26,16 +26,34 @@ public class HexTile : MonoBehaviour
 
     private void Awake()
     {
-        hexModelRenderer = transform.Find("HexModel").GetComponent<MeshRenderer>();
-        UpdateMaterial();
+        Transform hexModelTransform = transform.Find("HexModel");
+
+        if (hexModelTransform != null)
+        {
+            hexModelRenderer = hexModelTransform.GetComponent<MeshRenderer>();
+
+            if (hexModelRenderer != null)
+            {
+                UpdateMaterial();
+            }
+        }
     }
 
     private void OnValidate()
     {
         if (!Application.isPlaying)
         {
-            hexModelRenderer = transform.Find("HexModel").GetComponent<MeshRenderer>();
-            UpdateMaterial();
+            Transform hexModelTransform = transform.Find("HexModel");
+
+            if (hexModelTransform != null)
+            {
+                hexModelRenderer = hexModelTransform.GetComponent<MeshRenderer>();
+
+                if (hexModelRenderer != null)
+                {
+                    UpdateMaterial();
+                }
+            }
         }
     }
 

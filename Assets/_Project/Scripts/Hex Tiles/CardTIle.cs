@@ -28,7 +28,7 @@ public class CardTile : HexTile
         tileLabel.color = Color.white; // Define a cor como verde
 
         // Posiciona o texto acima do tile no espaço 3D
-        textObject.transform.localPosition = Vector3.up * 0.2f; // 2 unidades acima do tile
+        textObject.transform.localPosition = Vector3.up * 1.2f; // 2 unidades acima do tile
 
         // Define a rotação como (90, 0, 0) em graus
         textObject.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
