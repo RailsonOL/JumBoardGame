@@ -42,6 +42,12 @@ public class PlayerObjectController : NetworkBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
+        if (isLocalPlayer)
+        {
+            // Configura o chat para o jogador local
+            ChatManager.Instance.SetPlayer(this);
+        }
+
         if (isOwned)
         {
             StartCoroutine(CheckReadyToPlay());
@@ -60,6 +66,13 @@ public class PlayerObjectController : NetworkBehaviour
                 }
             }
         }
+    }
+
+    [Command]
+    public void CmdSendMessage(string message)
+    {
+        // Envia o nome do jogador e a mensagem para todos os jogadores
+        ChatManager.Instance.RpcReceiveMessage(PlayerName, message);
     }
 
     private IEnumerator CheckReadyToPlay()
