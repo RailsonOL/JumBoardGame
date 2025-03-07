@@ -42,16 +42,12 @@ public class PlayerObjectController : NetworkBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        if (isLocalPlayer)
-        {
-            // Configura o chat para o jogador local
-            ChatManager.Instance.SetPlayer(this);
-        }
-
         if (isOwned)
         {
             StartCoroutine(CheckReadyToPlay());
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Update()
@@ -65,6 +61,19 @@ public class PlayerObjectController : NetworkBehaviour
                     GameManager.Instance.CmdRollDice();
                 }
             }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Game" && isLocalPlayer) // When the "Game" scene is loaded
+        {
+            ChatManager.Instance.SetPlayer(this);
         }
     }
 

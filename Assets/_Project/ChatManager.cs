@@ -11,10 +11,12 @@ public class ChatManager : NetworkBehaviour
     public static ChatManager Instance { get; private set; }
 
     [Header("UI Elements")]
-    public TMP_Text chatText; // Chat text (using TextMeshPro)
-    public TMP_InputField inputField; // Text input field (using TextMeshPro)
-    public ScrollRect scrollRect; // For scrolling the chat (chatText is inside)
-    public GameObject chatPanel; // Panel containing the Scroll View and InputField
+    public TMP_Text chatText;
+    public TMP_InputField inputField;
+    public ScrollRect scrollRect;
+    public GameObject chatPanel;
+    public GameObject chatPreviewPanel;
+    public TMP_Text chatPreviewText;
 
     // Formatted text settings
     public float lineSpacing = 2f; // Line spacing for the chat text
@@ -24,11 +26,13 @@ public class ChatManager : NetworkBehaviour
     private const string DefaultSystemMessageColor = "yellow"; // Default color for system messages
 
     private List<string> chatLog = new(); // List of chat messages
+    private List<string> chatPreviewLog = new(); // List of messages in the preview panel
     private const int maxMessages = 50; // Maximum number of messages in the chat
+    private const int maxPreviewMessages = 5; // Maximum number of messages in the preview panel
 
     private PlayerObjectController localPlayer;
     private Coroutine hideChatCoroutine;
-    private float hideChatDelay = 2f; // Default time to hide the chat after inactivity
+    private float hideChatDelay = 3f; // Default time to hide the chat after inactivity
 
     #region Initialization
     private void Awake()
@@ -46,10 +50,10 @@ public class ChatManager : NetworkBehaviour
 
     private void Start()
     {
-        // Initialize the chat
         chatText.text = "";
         SetLineSpacing(lineSpacing);
         chatPanel.SetActive(false); // Start with the chat hidden
+        chatPreviewPanel.SetActive(false); // Start with the preview hidden
 
         // Set up the InputField events
         if (inputField != null)
@@ -85,8 +89,20 @@ public class ChatManager : NetworkBehaviour
     private void ShowChat()
     {
         chatPanel.SetActive(true);
+        chatPreviewPanel.SetActive(false);
 
-        // Restart the timer to hide the chat
+        if (hideChatCoroutine != null)
+        {
+            StopCoroutine(hideChatCoroutine);
+        }
+        hideChatCoroutine = StartCoroutine(HideChatAfterDelay());
+    }
+
+    private void ShowChatPreview()
+    {
+        chatPreviewPanel.SetActive(true);
+        chatPanel.SetActive(false);
+
         if (hideChatCoroutine != null)
         {
             StopCoroutine(hideChatCoroutine);
@@ -101,10 +117,10 @@ public class ChatManager : NetworkBehaviour
             StopCoroutine(hideChatCoroutine);
         }
 
-        // Only hide the chat if the InputField is not focused AND the mouse is not over the chat
         if (!inputField.isFocused && !IsPointerOverUIElement())
         {
             chatPanel.SetActive(false);
+            chatPreviewPanel.SetActive(false);
         }
     }
 
@@ -112,10 +128,11 @@ public class ChatManager : NetworkBehaviour
     {
         yield return new WaitForSeconds(hideChatDelay);
 
-        // Only hide the chat if the InputField is not focused AND the mouse is not over the chat
         if (!inputField.isFocused && !IsPointerOverUIElement())
         {
             chatPanel.SetActive(false);
+            chatPreviewPanel.SetActive(false);
+            chatPreviewLog.Clear();
         }
     }
     #endregion
@@ -124,10 +141,8 @@ public class ChatManager : NetworkBehaviour
     public void SetPlayer(PlayerObjectController player)
     {
         localPlayer = player;
-        Debug.Log("Local player set in ChatManager.");
     }
 
-    // Method to send a message (called by the player)
     public new void SendMessage(string message)
     {
         if (localPlayer != null && localPlayer.isLocalPlayer)
@@ -136,16 +151,12 @@ public class ChatManager : NetworkBehaviour
         }
     }
 
-    // Method to send a system notification
-    // Method to send a system notification
     public void SendSystemMessage(string message, string color = DefaultSystemMessageColor)
     {
         if (isServer)
         {
-            // Format the system message with the specified color
             string formattedMessage = string.Format(SystemMessageFormat, color, message);
 
-            // Send the formatted message to all clients
             RpcReceiveMessage(systemName, formattedMessage);
         }
     }
@@ -165,25 +176,35 @@ public class ChatManager : NetworkBehaviour
             formattedMessage = string.Format(PlayerNameFormat, playerName, message); // Format the player message
         }
 
-        // Add the formatted message to the end of the list
         chatLog.Add(formattedMessage);
 
-        // Limit the number of messages in the log
         if (chatLog.Count > maxMessages)
         {
             chatLog.RemoveAt(0); // Remove the oldest message
         }
 
-        // Update the chat text
         UpdateChatText();
 
-        // Scroll the chat to the most recent message (bottom)
         StartCoroutine(ScrollToBottom());
 
-        // Show the chat when a message is received
-        ShowChat();
+        chatPreviewLog.Add(formattedMessage);
 
-        // Restart the timer to hide the chat
+        if (chatPreviewLog.Count > maxPreviewMessages)
+        {
+            chatPreviewLog.RemoveAt(0);
+        }
+
+        UpdateChatPreviewText();
+
+        if (!chatPanel.activeSelf)
+        {
+            ShowChatPreview();
+        }
+        else
+        {
+            ShowChat();
+        }
+
         if (hideChatCoroutine != null)
         {
             StopCoroutine(hideChatCoroutine);
@@ -194,6 +215,11 @@ public class ChatManager : NetworkBehaviour
     private void UpdateChatText()
     {
         chatText.text = string.Join("\n", chatLog);
+    }
+
+    private void UpdateChatPreviewText()
+    {
+        chatPreviewText.text = string.Join("\n", chatPreviewLog);
     }
     #endregion
 
@@ -241,19 +267,15 @@ public class ChatManager : NetworkBehaviour
         }
     }
 
-    // Check if the pointer is over a UI element
     private bool IsPointerOverUIElement()
     {
-        // Create a pointer event for the current mouse position
         PointerEventData eventData = new PointerEventData(EventSystem.current)
         {
             position = Input.mousePosition
         };
 
-        // List to store raycast results
         List<RaycastResult> results = new List<RaycastResult>();
 
-        // Perform the raycast to check if the pointer is over a UI element
         EventSystem.current.RaycastAll(eventData, results);
 
         // Return true if the pointer is over the InputField or the Scroll Rect
@@ -268,22 +290,18 @@ public class ChatManager : NetworkBehaviour
         return false;
     }
 
-    // Set the chat hide delay
     public void SetHideChatDelay(float delay)
     {
         hideChatDelay = delay;
     }
 
-    // Scroll the chat to the bottom
     private IEnumerator ScrollToBottom()
     {
-        // Force layout update
         Canvas.ForceUpdateCanvases();
 
         // Adjust the scroll to the bottom
         scrollRect.verticalNormalizedPosition = 0f;
 
-        // Wait for a frame to ensure the layout is updated
         yield return null;
 
         // Adjust the scroll again to ensure it's at the bottom

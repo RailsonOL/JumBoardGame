@@ -127,7 +127,7 @@ public class GameManager : NetworkBehaviour
     private bool AreAllPlayersReady()
     {
         int readyCount = players.Count(p => p.readyToPlay);
-        //Debug.Log($"Ready players: {readyCount}/{numberOfPlayers}");
+        Debug.Log($"Ready players: {readyCount}/{numberOfPlayers}");
         return readyCount == numberOfPlayers;
     }
     #endregion
@@ -217,7 +217,7 @@ public class GameManager : NetworkBehaviour
 
     private void EndTurn()
     {
-        Debug.Log("EndTurn called");
+        ChatManager.Instance.SendSystemMessage($"<b><color=red>{players[currentPlayer].PlayerName}</color></b> has finished his turn");
         cardsUsedThisTurn = 0;
         hasRolledDiceThisTurn = false;
         TurnResult();
