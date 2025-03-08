@@ -12,6 +12,9 @@ public class Essent : NetworkBehaviour
     public int tileIndexPosition;
     public HexTile currentTile;
     public PlayerObjectController playerOwner;
+    public GameObject essentModel;
+
+    Animator essentAnimator;
 
     public int totalEssence;
     public string essentName;
@@ -30,6 +33,8 @@ public class Essent : NetworkBehaviour
     {
         interfaceController = FindFirstObjectByType<GameHudManager>();
 
+        essentAnimator = essentModel.GetComponent<Animator>();
+
         if (interfaceController == null)
         {
             Debug.LogError("InGameInterfaceController não encontrado na cena!");
@@ -47,7 +52,6 @@ public class Essent : NetworkBehaviour
     public void ModifyEssence(int amount)
     {
         totalEssence += amount;
-        Debug.Log($"{essentName} agora tem {totalEssence} de essência.");
 
         // Trigger the event if it's registered
         if (OnEssenceChanged != null)
@@ -137,7 +141,6 @@ public class Essent : NetworkBehaviour
             HexTile previousTile = currentTile.GetPreviousHex();
             if (previousTile == null)
             {
-                Debug.Log($"{essentName} atingiu o início da rota, ignorando {numMoves - movesDone} movimentos restantes.");
                 break;
             }
 
@@ -163,21 +166,33 @@ public class Essent : NetworkBehaviour
         isMoving = true;
         int movesDone = 0;
 
+        // Move o ídolo para o próximo tile
+        if (essentAnimator != null)
+        {
+            // Inicia a animação de início do pulo
+            essentAnimator.SetTrigger("startJump");
+            essentAnimator.SetBool("idleJump", true);
+        }
+
         while (movesDone < numMoves)
         {
             HexTile nextTile = currentTile.GetNextHex();
             if (nextTile == null)
             {
-                Debug.Log($"{data.essentName} atingiu o final da rota, ignorando {numMoves - movesDone} movimentos restantes.");
                 break;
             }
 
-            // Move o ídolo para o próximo tile
             yield return StartCoroutine(MoveSmoothly(nextTile, true));
 
             // Atualiza o tile atual
             currentTile = nextTile;
             movesDone++;
+        }
+
+        if (essentAnimator != null)
+        {
+            essentAnimator.SetBool("idleJump", false);
+            essentAnimator.SetTrigger("endJump");
         }
 
         // Aplica o efeito do tile final após o movimento ser concluído
@@ -191,7 +206,6 @@ public class Essent : NetworkBehaviour
 
     private IEnumerator MoveSmoothly(HexTile targetTile, bool isForward)
     {
-        isMoving = true;
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = targetTile.transform.position + Vector3.up;
         float elapsedTime = 0f;
@@ -219,7 +233,6 @@ public class Essent : NetworkBehaviour
 
         transform.position = targetPosition;
         currentTile = targetTile;
-        isMoving = false;
     }
 
     #endregion

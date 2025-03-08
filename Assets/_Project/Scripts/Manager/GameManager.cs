@@ -127,7 +127,7 @@ public class GameManager : NetworkBehaviour
     private bool AreAllPlayersReady()
     {
         int readyCount = players.Count(p => p.readyToPlay);
-        Debug.Log($"Ready players: {readyCount}/{numberOfPlayers}");
+        //Debug.Log($"Ready players: {readyCount}/{numberOfPlayers}");
         return readyCount == numberOfPlayers;
     }
     #endregion

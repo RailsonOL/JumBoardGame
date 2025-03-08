@@ -29086,14 +29086,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b789bd66a1fa942951794039f055a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yPosition: 12
-  distance: 5
-  xOffset: 2
+  target: {fileID: 0}
+  rotationSpeed: 5
+  minVerticalAngle: -20
+  maxVerticalAngle: 80
   zoomSpeed: 15
-  minDistance: 3
-  maxDistance: 15
-  zoomSmoothSpeed: 0.3
-  smoothSpeed: 0.5
+  minZoomDistance: 2
+  maxZoomDistance: 10
+  zoomSmoothTime: 0.2
+  yPosition: 3.04
+  currentZoomDistance: 5.499998
+  desiredZoomDistance: 5.5
+  currentRotationX: 704.75
+  currentRotationY: 27.75
 --- !u!81 &1941332192
 AudioListener:
   m_ObjectHideFlags: 0
@@ -33627,7 +33632,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 797321513392062233}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999225
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -34873,7 +34878,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 211.9197}
+  m_AnchoredPosition: {x: 0, y: 211.91972}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7977901671359923029

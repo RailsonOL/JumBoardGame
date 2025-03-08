@@ -52,7 +52,7 @@ public class PlayerHand : NetworkBehaviour
     private GameObject draggedCard;
     private int draggedCardIndex;
     private bool isDragging = false;
-    private bool isInitialized = false;
+    [HideInInspector] public bool isInitialized = false;
 
     private PlayerObjectController playerController;
     #endregion

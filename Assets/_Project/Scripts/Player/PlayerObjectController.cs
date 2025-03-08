@@ -71,9 +71,16 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Game" && isLocalPlayer) // When the "Game" scene is loaded
+        if (scene.name == "Game" && isLocalPlayer)
         {
-            ChatManager.Instance.SetPlayer(this);
+            if (playerHand != null && playerHand.isInitialized)
+            {
+                ChatManager.Instance.SetPlayer(this);
+            }
+            else
+            {
+                Debug.LogWarning("PlayerHand ainda não está pronto.");
+            }
         }
     }
 
