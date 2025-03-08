@@ -18,6 +18,7 @@ MonoBehaviour:
   description: "Quando a ess\xEAncia vem em dobro, as estrat\xE9gias ficam mais ousadas.
     Hora de brilhar e deixar todo mundo para tr\xE1s!"
   essenceCost: 0
+  requiresTargetSelection: 0
   cardRarity: 4
   customMaterial: {fileID: 0}
   effect: {fileID: 11400000, guid: c280e8424754591438d4cf59918e4646, type: 2}

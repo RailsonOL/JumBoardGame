@@ -39,18 +39,6 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (target == null)
-        {
-            Debug.LogError("Target not set for CameraFollow!");
-            return;
-        }
-
-        currentZoomDistance = Vector3.Distance(transform.position, target.transform.position);
-        desiredZoomDistance = currentZoomDistance;
-    }
-
     private void LateUpdate()
     {
         if (target == null) return;

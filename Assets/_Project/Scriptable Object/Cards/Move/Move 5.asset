@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
+  m_Name: Move 5
+  m_EditorClassIdentifier: 
+  id: 6
+  icon: {fileID: 21300000, guid: a8aa26bcad1c64d4d8a78fcd0b65bf61, type: 3}
+  cardName: "Salto Estrat\xE9gico 5"
+  description: "Acelere seu caminho avan\xE7ando 5 casas. Alguns chamam de sorte,
+    mas voc\xEA sabe que \xE9 estrat\xE9gia."
+  essenceCost: 3
+  requiresTargetSelection: 0
+  cardRarity: 2
+  customMaterial: {fileID: 0}
+  effect: {fileID: 11400000, guid: 44c1d9b708e42484d91d0b95b6c719f9, type: 2}

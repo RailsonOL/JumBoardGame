@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
+  m_Name: Essence Gain 2
+  m_EditorClassIdentifier: 
+  id: 2
+  icon: {fileID: 21300000, guid: 6f1d43bd5bd6a9e4cb666feafd2ef890, type: 3}
+  cardName: "Ganho de Ess\xEAncia 2"
+  description: "Um pouquinho de Ess\xEAncia a mais nunca \xE9 demais. Quem sabe \xE9
+    exatamente o que faltava para virar o jogo?"
+  essenceCost: 0
+  requiresTargetSelection: 0
+  cardRarity: 0
+  customMaterial: {fileID: 0}
+  effect: {fileID: 11400000, guid: 7558b34a0f862184fa6daf309d0d59b0, type: 2}

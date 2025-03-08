@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class CardManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CardManager : MonoBehaviour
 
     // Propriedade pública para acessar a lista de cartas
     public List<Card> AllCards => allCards;
+    public int previousListCount = 0;
 
     private void Awake()
     {
@@ -21,6 +23,44 @@ public class CardManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnValidate()
+    {
+        // Verifica se o tamanho da lista mudou
+        if (AllCards != null && AllCards.Count != previousListCount)
+        {
+            GenerateCardIds();
+            previousListCount = AllCards.Count; // Atualiza o tamanho anterior
+        }
+    }
+
+    public void GenerateCardIds()
+    {
+        if (AllCards == null || AllCards.Count == 0)
+        {
+            Debug.LogWarning("A lista de cartas está vazia. Adicione cartas ao CardManager.");
+            return;
+        }
+
+        // Gera IDs apenas para as novas cartas
+        for (int i = previousListCount; i < AllCards.Count; i++)
+        {
+            if (AllCards[i].id == 0) // Verifica se o ID ainda não foi atribuído
+            {
+                AllCards[i].id = i + 1; // IDs começam em 1
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(AllCards[i]); // Marca o ScriptableObject como modificado
+#endif
+            }
+        }
+
+#if UNITY_EDITOR
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+#endif
+
+        Debug.Log("IDs das cartas gerados com sucesso!");
     }
 
     public Card GetCardById(int cardId)

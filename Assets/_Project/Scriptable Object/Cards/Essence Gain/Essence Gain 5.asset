@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
-  m_Name: Essence Gain 2
+  m_Name: Essence Gain 5
   m_EditorClassIdentifier: 
-  id: 2
+  id: 3
   icon: {fileID: 21300000, guid: 6f1d43bd5bd6a9e4cb666feafd2ef890, type: 3}
-  cardName: "Ganho de Ess\xEAncia 2"
-  description: "Um pouquinho de Ess\xEAncia a mais nunca \xE9 demais. Quem sabe \xE9
-    exatamente o que faltava para virar o jogo?"
+  cardName: "Ganho de Ess\xEAncia 5"
+  description: "Ess\xEAncia \xE9 como caf\xE9: um pouco mais e voc\xEA se sente pronto
+    para conquistar o mundo. Ou pelo menos o tabuleiro."
   essenceCost: 0
-  cardRarity: 0
+  requiresTargetSelection: 0
+  cardRarity: 3
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: 7558b34a0f862184fa6daf309d0d59b0, type: 2}
+  effect: {fileID: 11400000, guid: b3613f77b8d438d4f87f121e3f6ef04c, type: 2}

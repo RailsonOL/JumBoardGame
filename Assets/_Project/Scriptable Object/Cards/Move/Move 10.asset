@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
+  m_Name: Move 10
+  m_EditorClassIdentifier: 
+  id: 7
+  icon: {fileID: 21300000, guid: a8aa26bcad1c64d4d8a78fcd0b65bf61, type: 3}
+  cardName: "Salto Estrat\xE9gico 10"
+  description: "Mova-se 10 casas. Em momentos cr\xEDticos, a capacidade de se reposicionar
+    rapidamente pode ser o diferencial entre estrelas e lendas."
+  essenceCost: 5
+  requiresTargetSelection: 0
+  cardRarity: 4
+  customMaterial: {fileID: 0}
+  effect: {fileID: 11400000, guid: f219af20dace43c4d99e121cebf404c9, type: 2}

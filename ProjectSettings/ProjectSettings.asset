@@ -755,7 +755,13 @@ PlayerSettings:
   windowsGamepadBackendHint: 0
   cloudProjectId: b97710b8-fabd-4084-96ab-645c8fd19c52
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: JumBoardGame
   organizationId: rayplaym
   cloudEnabled: 0

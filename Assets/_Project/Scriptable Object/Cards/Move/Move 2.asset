@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
-  m_Name: Back 3
+  m_Name: Move 2
   m_EditorClassIdentifier: 
-  id: 1
+  id: 5
   icon: {fileID: 21300000, guid: a8aa26bcad1c64d4d8a78fcd0b65bf61, type: 3}
-  cardName: Retirada Calculada 3
-  description: "Um, dois ou tr\xEAs passos atr\xE1s pode ser o caminho para uma jogada
-    mais inteligente."
+  cardName: "Salto Estrat\xE9gico 2"
+  description: "Avance 2 casas no tabuleiro. \xC0s vezes, a dist\xE2ncia entre a
+    derrota e a vit\xF3ria \xE9 menor do que parece."
   essenceCost: 2
-  cardRarity: 1
+  requiresTargetSelection: 0
+  cardRarity: 0
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: 72bcd3ed3034f6c4b8c331f4a7f53d21, type: 2}
+  effect: {fileID: 11400000, guid: df38d05a6f8dc574f9e544fd05b85992, type: 2}

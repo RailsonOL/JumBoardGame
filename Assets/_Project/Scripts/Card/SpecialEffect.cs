@@ -13,9 +13,11 @@ public class SpecialEffect : ScriptableObject
     public string description;
 
     // Método virtual que aplica o efeito a um ídolo
-    public virtual void ApplyEffect(Essent essent)
+    public virtual bool ApplyEffect(Essent essent)
     {
         // Exemplo: Aumenta a essência do ídolo em 10
         // essent.ModifyEssence(10);
+        Debug.Log($"Efeito aplicado ao Essent {essent.essentName}.");
+        return true; // Efeito aplicado com sucesso
     }
 }

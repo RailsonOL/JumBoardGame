@@ -14,6 +14,8 @@ public class Essent : NetworkBehaviour
     public PlayerObjectController playerOwner;
     public GameObject essentModel;
 
+    private Essent selectedTarget;
+
     Animator essentAnimator;
 
     public int totalEssence;
@@ -33,7 +35,15 @@ public class Essent : NetworkBehaviour
     {
         interfaceController = FindFirstObjectByType<GameHudManager>();
 
-        essentAnimator = essentModel.GetComponent<Animator>();
+        // Verifica se essentModel não é nulo antes de acessar o componente Animator
+        if (essentModel != null)
+        {
+            essentAnimator = essentModel.GetComponent<Animator>();
+        }
+        else
+        {
+            Debug.LogWarning("essentModel não está atribuído. O personagem não tem um modelo.");
+        }
 
         if (interfaceController == null)
         {
@@ -76,6 +86,16 @@ public class Essent : NetworkBehaviour
         }
 
         return -1;
+    }
+
+    public void SetSelectedTarget(Essent target)
+    {
+        selectedTarget = target;
+    }
+
+    public Essent GetSelectedTarget()
+    {
+        return selectedTarget;
     }
 
     public void Initialize(HexTile startTile, int playerIndex)

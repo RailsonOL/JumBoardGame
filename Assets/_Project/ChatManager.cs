@@ -19,7 +19,7 @@ public class ChatManager : NetworkBehaviour
     public TMP_Text chatPreviewText;
 
     // Formatted text settings
-    public float lineSpacing = 2f; // Line spacing for the chat text
+    public float lineSpacing = 6f; // Line spacing for the chat text
     private readonly string systemName = "[Game]";
     private const string PlayerNameFormat = "<b><color=red>[{0}]</color></b>: {1}"; // {0} is the player name, {1} is the message
     private const string SystemMessageFormat = "<b><color=purple>[Game]</color></b> <color={0}>{1}</color>"; // {0} is the color code, {1} is the message
@@ -230,13 +230,23 @@ public class ChatManager : NetworkBehaviour
         {
             if (!string.IsNullOrEmpty(text))
             {
-                SendMessage(text);
-                inputField.text = ""; // Clear the input field
+                if (text.StartsWith("/"))
+                {
+                    // Se for um comando, processe-o
+                    CommandHandler.Instance.ProcessCommand(text);
+                }
+                else
+                {
+                    // Se não for um comando, envie como mensagem de chat normal
+                    SendMessage(text);
+                }
 
-                // Refocus the InputField after sending the message
+                inputField.text = ""; // Limpa o campo de entrada
+
+                // Refoca o InputField após enviar a mensagem
                 inputField.ActivateInputField();
 
-                // Restart the timer to hide the chat
+                // Reinicia o timer para esconder o chat
                 if (hideChatCoroutine != null)
                 {
                     StopCoroutine(hideChatCoroutine);

@@ -5,6 +5,7 @@ using DG.Tweening;
 using Mirror;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System.Collections;
 
 public class PlayerHand : NetworkBehaviour
 {
@@ -49,6 +50,8 @@ public class PlayerHand : NetworkBehaviour
     [Header("Panel Reference")]
     public RectTransform handPanel; // Referência ao painel onde as cartas serão renderizadas
     [SerializeField] private List<GameObject> cardsInHand = new List<GameObject>();
+    private AttackTargetSelection attackTargetSelection;
+
     private GameObject draggedCard;
     private int draggedCardIndex;
     private bool isDragging = false;
@@ -83,6 +86,12 @@ public class PlayerHand : NetworkBehaviour
         {
             handPanel.gameObject.SetActive(true);
             InitializeActivationPanel();
+
+            attackTargetSelection = FindFirstObjectByType<AttackTargetSelection>();
+            if (attackTargetSelection == null)
+            {
+                Debug.LogError("AttackTargetSelection não encontrado na cena!");
+            }
         }
     }
     #endregion
@@ -449,13 +458,79 @@ public class PlayerHand : NetworkBehaviour
     {
         if (playerController.isOurTurn == false)
         {
-            Debug.LogWarning("Não é a vez do jogador!, Carta não pode ser ativada.");
+            Debug.LogWarning("Not the player's turn! Card cannot be activated.");
             return;
         }
 
         int cardID = CardController.GetCardIDFromGameObject(card);
+        Card cardData = CardManager.Instance.GetCardById(cardID);
 
+        if (cardData == null)
+        {
+            Debug.LogWarning($"Card with ID {cardID} not found in CardManager!");
+            return;
+        }
+
+        // Verificar se a carta requer seleção de alvo
+        if (cardData.requiresTargetSelection)
+        {
+            // Obter a lista de alvos disponíveis
+            List<Essent> targets = GetTargetsForCard(cardData);
+            if (targets.Count > 0)
+            {
+                // Iniciar a corrotina para esperar pela seleção do alvo
+                StartCoroutine(WaitForTargetSelection(cardID, targets));
+            }
+            else
+            {
+                Debug.LogWarning("No valid targets found for this card.");
+            }
+        }
+        else
+        {
+            // Aplicar o efeito da carta diretamente (sem seleção de alvo)
+            GameManager.Instance.CmdExecuteCardEffectByID(cardID);
+        }
+    }
+
+    private IEnumerator WaitForTargetSelection(int cardID, List<Essent> targets)
+    {
+        // Mostrar os alvos para o jogador
+        attackTargetSelection.ShowTargets(targets);
+
+        // Esperar até que um alvo seja selecionado
+        bool isTargetSelected = false;
+        attackTargetSelection.OnTargetSelectedEvent += target =>
+        {
+            playerController.SelectedEssent.SetSelectedTarget(target);
+            isTargetSelected = true;
+        };
+
+        yield return new WaitUntil(() => isTargetSelected);
+
+        // Agora que o alvo foi selecionado, aplicar o efeito da carta
         GameManager.Instance.CmdExecuteCardEffectByID(cardID);
+    }
+    private List<Essent> GetTargetsForCard(Card card)
+    {
+        List<Essent> targets = new();
+
+        // Check if the card requires target selection
+        if (card.requiresTargetSelection)
+        {
+            // Get the current player's Essent
+            Essent currentEssent = playerController.SelectedEssent;
+
+            // Example: For a direct attack card, target all Essents except the player's
+            targets = FindObjectsByType<Essent>(FindObjectsSortMode.None)
+                .Where(e => e != currentEssent) // Exclude the player's Essent
+                .ToList();
+
+            // You can add more conditions here based on the card's logic
+            // For example, if the card has a range limit, you can filter targets by distance
+        }
+
+        return targets;
     }
     #endregion
 

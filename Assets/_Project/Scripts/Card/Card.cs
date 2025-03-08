@@ -14,6 +14,9 @@ public class Card : ScriptableObject
     [Header("Card Properties")]
     public int essenceCost;
 
+    [Header("Target Selection")]
+    public bool requiresTargetSelection = false;
+
     public enum Rarity
     {
         Common,     // Branco - #ffffff (255,255,255)
@@ -74,33 +77,32 @@ public class Card : ScriptableObject
     }
 
     // Método para executar a carta
-    public void Execute(Essent targetEssent)
+    public bool Execute(Essent targetEssent)
     {
         // Verifica se o efeito e o Essent são válidos
         if (effect == null || targetEssent == null)
         {
             Debug.LogWarning("Efeito ou Essente não encontrado.");
-            return;
+            return false;
         }
 
         // Verifica se o Essent tem essência suficiente para usar a carta
         if (targetEssent.totalEssence < essenceCost)
         {
             Debug.LogWarning($"{targetEssent.essentName} não tem essência suficiente para usar a carta {cardName}.");
-            return;
+            return false;
         }
 
         // Aplica o efeito ao Essent
-        effect.ApplyEffect(targetEssent);
-        Debug.Log($"Card {cardName} aplicado ao Essent {targetEssent.essentName}.");
+        bool effectApplied = effect.ApplyEffect(targetEssent);
+        if (!effectApplied)
+        {
+            Debug.LogWarning($"Efeito da carta {cardName} não foi aplicado ao Essent {targetEssent.essentName}.");
+            return false;
+        }
 
-        // Remove o custo de essência
-        Debug.Log($"Custo da carta: {essenceCost}");
-        Debug.Log($"Essência antes: {targetEssent.totalEssence}");
         targetEssent.ModifyEssence(-essenceCost);
-        Debug.Log($"Essência depois: {targetEssent.totalEssence}");
 
-        // Notifica que a essência foi modificada (opcional, se houver um evento)
-        //OnEssenceModified?.Invoke(targetEssent.totalEssence);
+        return true; // Efeito aplicado com sucesso
     }
 }

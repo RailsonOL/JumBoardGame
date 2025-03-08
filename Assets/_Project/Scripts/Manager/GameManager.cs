@@ -84,7 +84,6 @@ public class GameManager : NetworkBehaviour
         }
         return null;
     }
-
     #endregion
 
     #region Game Initialization
@@ -326,9 +325,18 @@ public class GameManager : NetworkBehaviour
                 Card cardFromManager = CardManager.Instance.GetCardById(cardID);
                 if (cardFromManager != null)
                 {
-                    players[currentPlayer].TargetRemoveCardFromHand(cardID);
-                    cardFromManager.Execute(players[currentPlayer].SelectedEssent);
-                    cardsUsedThisTurn++;
+                    // Tenta aplicar o efeito
+                    bool effectApplied = cardFromManager.Execute(players[currentPlayer].SelectedEssent);
+                    if (effectApplied)
+                    {
+                        // Remove a carta da mão apenas se o efeito for aplicado com sucesso
+                        players[currentPlayer].TargetRemoveCardFromHand(cardID);
+                        cardsUsedThisTurn++;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Efeito da {cardFromManager.cardName} não foi aplicado.");
+                    }
                 }
                 else
                 {

@@ -12,10 +12,15 @@ public class MoveEffect : SpecialEffect
     public int moveAmount = 3;
     public MoveDirection direction = MoveDirection.Forward;
 
-    public override void ApplyEffect(Essent essent)
+    public override bool ApplyEffect(Essent essent)
     {
-        base.ApplyEffect(essent);
+        if (essent == null)
+        {
+            Debug.LogWarning("Essent não encontrado para aplicar o efeito de movimento.");
+            return false; // Retorna false se o Essent for nulo
+        }
 
+        // Aplica o movimento com base na direção
         if (direction == MoveDirection.Forward)
         {
             essent.MoveNext(moveAmount);
@@ -26,5 +31,7 @@ public class MoveEffect : SpecialEffect
             essent.MoveBack(moveAmount);
             Debug.Log($"{essent.data.essentName} voltou {moveAmount} casas!");
         }
+
+        return true; // Retorna true para indicar que o efeito foi aplicado com sucesso
     }
 }

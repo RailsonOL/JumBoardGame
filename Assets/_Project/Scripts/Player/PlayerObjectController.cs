@@ -56,6 +56,11 @@ public class PlayerObjectController : NetworkBehaviour
         {
             if (isOwned)
             {
+                if (ChatManager.Instance != null && ChatManager.Instance.inputField != null && ChatManager.Instance.inputField.isFocused)
+                {
+                    return; // Ignora a entrada se o campo de entrada do chat estiver focado
+                }
+
                 if (Input.GetKeyDown(KeyCode.R) && isOurTurn)
                 {
                     GameManager.Instance.CmdRollDice();
@@ -73,15 +78,18 @@ public class PlayerObjectController : NetworkBehaviour
     {
         if (scene.name == "Game" && isLocalPlayer)
         {
-            if (playerHand != null && playerHand.isInitialized)
-            {
-                ChatManager.Instance.SetPlayer(this);
-            }
-            else
-            {
-                Debug.LogWarning("PlayerHand ainda não está pronto.");
-            }
+            StartCoroutine(WaitForPlayerHandInitialization());
         }
+    }
+
+    private IEnumerator WaitForPlayerHandInitialization()
+    {
+        while (playerHand == null || !playerHand.isInitialized)
+        {
+            yield return null;
+        }
+
+        ChatManager.Instance.SetPlayer(this);
     }
 
     [Command]
@@ -295,6 +303,7 @@ public class PlayerObjectController : NetworkBehaviour
             {
                 playerHand.AddCardToHand(cardFromManager);
             }
+
             Debug.Log($"Carta recebida: {cardFromManager.cardName}");
         }
         else
