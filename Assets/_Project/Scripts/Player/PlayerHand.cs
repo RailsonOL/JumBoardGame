@@ -502,7 +502,7 @@ public class PlayerHand : NetworkBehaviour
         bool isTargetSelected = false;
         attackTargetSelection.OnTargetSelectedEvent += target =>
         {
-            playerController.SelectedEssent.SetSelectedTarget(target);
+            playerController.GetSelectedEssentLocal().CmdSetSelectedTarget(target.essentID);
             isTargetSelected = true;
         };
 
@@ -519,7 +519,7 @@ public class PlayerHand : NetworkBehaviour
         if (card.requiresTargetSelection)
         {
             // Get the current player's Essent
-            Essent currentEssent = playerController.SelectedEssent;
+            Essent currentEssent = playerController.GetSelectedEssentLocal();
 
             // Example: For a direct attack card, target all Essents except the player's
             targets = FindObjectsByType<Essent>(FindObjectsSortMode.None)

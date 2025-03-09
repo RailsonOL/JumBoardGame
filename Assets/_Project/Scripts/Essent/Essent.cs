@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 [RequireComponent(typeof(NetworkIdentity))]
+[RequireComponent(typeof(NetworkTransformReliable))]
 public class Essent : NetworkBehaviour
 {
     public EssentData data;
@@ -14,7 +15,8 @@ public class Essent : NetworkBehaviour
     public PlayerObjectController playerOwner;
     public GameObject essentModel;
 
-    private Essent selectedTarget;
+    [SyncVar] public int selectedTargetID;
+    [SyncVar] public int essentID;
 
     Animator essentAnimator;
 
@@ -40,10 +42,6 @@ public class Essent : NetworkBehaviour
         {
             essentAnimator = essentModel.GetComponent<Animator>();
         }
-        else
-        {
-            Debug.LogWarning("essentModel não está atribuído. O personagem não tem um modelo.");
-        }
 
         if (interfaceController == null)
         {
@@ -52,6 +50,7 @@ public class Essent : NetworkBehaviour
 
         totalEssence = data.essence;
         essentName = data.essentName;
+        essentID = data.id;
     }
 
     public bool IsAlive()
@@ -88,14 +87,24 @@ public class Essent : NetworkBehaviour
         return -1;
     }
 
-    public void SetSelectedTarget(Essent target)
+    public void SetSelectedTarget(int essentTargetID)
     {
-        selectedTarget = target;
+        selectedTargetID = essentTargetID;
     }
 
-    public Essent GetSelectedTarget()
+    // Nessa logica toda estou usando o ID do essent para selecionar o alvo,
+    // nao tem como passar o Essent pela rede e por isso ficou assim
+    // Se tiver Essents iguais em cena, dará problema, mas o jogo nao terá isso.
+    // Se for alterado, essa logica deve ser revista
+    [Command(requiresAuthority = false)]
+    public void CmdSetSelectedTarget(int essentTargetID)
     {
-        return selectedTarget;
+        SetSelectedTarget(essentTargetID);
+    }
+
+    public int GetSelectedTargetID()
+    {
+        return selectedTargetID;
     }
 
     public void Initialize(HexTile startTile, int playerIndex)

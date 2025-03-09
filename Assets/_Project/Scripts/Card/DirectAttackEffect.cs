@@ -14,9 +14,20 @@ public class DirectAttackEffect : SpecialEffect
         }
 
         // Aplica o dano ao alvo selecionado
-        essent.GetSelectedTarget().ModifyEssence(-damageAmount);
-        Debug.Log($"Ataque direto aplicado a {essent.GetSelectedTarget().essentName}, causando {damageAmount} de dano.");
+        Essent targetEssent = GameManager.Instance.GetEssentByID(essent.selectedTargetID);
+        if (targetEssent != null)
+        {
+            targetEssent.ModifyEssence(-damageAmount);
+        }
+        else
+        {
+            Debug.LogWarning("Alvo não encontrado para o ataque direto.");
+            return false; // Retorna false se o alvo não for encontrado
+        }
 
+        ChatManager.Instance.SendSystemMessage($"Direct attack applied to {targetEssent.essentName}, with {damageAmount} damage");
+
+        essent.SetSelectedTarget(0); // reset target
         return true; // Retorna true para indicar que o efeito foi aplicado com sucesso
     }
 }

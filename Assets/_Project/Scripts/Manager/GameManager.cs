@@ -325,17 +325,24 @@ public class GameManager : NetworkBehaviour
                 Card cardFromManager = CardManager.Instance.GetCardById(cardID);
                 if (cardFromManager != null)
                 {
-                    // Tenta aplicar o efeito
-                    bool effectApplied = cardFromManager.Execute(players[currentPlayer].SelectedEssent);
-                    if (effectApplied)
+                    if (cardFromManager.requiresTargetSelection)
                     {
-                        // Remove a carta da mão apenas se o efeito for aplicado com sucesso
-                        players[currentPlayer].TargetRemoveCardFromHand(cardID);
-                        cardsUsedThisTurn++;
+                        // Inicia uma coroutine no servidor para esperar o target estar disponível
+                        StartCoroutine(ExecuteCardEffectWithTargetSelection(cardFromManager, players[currentPlayer], cardID));
                     }
                     else
                     {
-                        Debug.LogWarning($"Efeito da {cardFromManager.cardName} não foi aplicado.");
+                        // Aplica o efeito imediatamente para cartas que não requerem seleção de alvo
+                        bool effectApplied = cardFromManager.Execute(players[currentPlayer].SelectedEssent);
+                        if (effectApplied)
+                        {
+                            players[currentPlayer].TargetRemoveCardFromHand(cardID);
+                            cardsUsedThisTurn++;
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Efeito da {cardFromManager.cardName} não foi aplicado.");
+                        }
                     }
                 }
                 else
@@ -348,6 +355,36 @@ public class GameManager : NetworkBehaviour
                 Debug.LogWarning("Cannot execute card effect because SelectedEssent is not available.");
             }
         }
+    }
+
+    private IEnumerator ExecuteCardEffectWithTargetSelection(Card card, PlayerObjectController player, int cardID)
+    {
+        // Espera até que o SelectedTarget esteja disponível
+        yield return new WaitUntil(() => player.SelectedEssent.selectedTargetID != 0);
+
+        // Aplica o efeito da carta
+        bool effectApplied = card.Execute(player.SelectedEssent);
+        if (effectApplied)
+        {
+            player.TargetRemoveCardFromHand(cardID);
+            cardsUsedThisTurn++;
+        }
+        else
+        {
+            Debug.LogWarning($"Efeito da {card.cardName} não foi aplicado.");
+        }
+    }
+
+    public Essent GetEssentByID(int essentID)
+    {
+        foreach (PlayerObjectController player in players)
+        {
+            if (player.SelectedEssent.essentID == essentID)
+            {
+                return player.SelectedEssent;
+            }
+        }
+        return null;
     }
 
     public bool CanPerformAction(bool isCardAction)
