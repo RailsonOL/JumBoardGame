@@ -120,6 +120,7 @@ public class GameManager : NetworkBehaviour
         UpdateCameraTargetForClients();
 
         GameHudManager.Instance.RpcActivatePlayerEssentStatus(numberOfPlayers);
+        GameHudManager.Instance.RpcSetLoadingPanelVisibility(false); // Desativa o loadingPanel
         RefreshStat();
     }
 

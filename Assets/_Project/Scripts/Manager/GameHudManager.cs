@@ -19,6 +19,9 @@ public class GameHudManager : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI[] essentStatus;
     [SerializeField] private Button[] essentStatusButton;
 
+    [Header("Loading Panel")]
+    [SerializeField] private GameObject loadingPanel; // Adicione esta linha
+
     private void Awake()
     {
         if (Instance == null)
@@ -89,6 +92,19 @@ public class GameHudManager : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    public void RpcSetLoadingPanelVisibility(bool isVisible)
+    {
+        if (loadingPanel != null)
+        {
+            loadingPanel.SetActive(isVisible);
+        }
+        else
+        {
+            Debug.LogWarning("LoadingPanel não está atribuído no GameHudManager.");
+        }
+    }
+
     private void OnEssentButtonClicked(int essentIndex)
     {
         Debug.Log($"Botão do Essent do jogador {essentIndex + 1} clicado");
@@ -99,7 +115,6 @@ public class GameHudManager : NetworkBehaviour
         // Verifique se o netId é válido
         if (essentLocal != null)
         {
-
             CameraManager.Instance?.ActivateEssentFollowCamera(essentLocal.gameObject);
         }
     }
