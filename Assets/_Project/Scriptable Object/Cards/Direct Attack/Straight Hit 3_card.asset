@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
-  m_Name: Essence Gain 5
+  m_Name: Straight Hit 3_card
   m_EditorClassIdentifier: 
-  id: 3
-  icon: {fileID: 21300000, guid: 6f1d43bd5bd6a9e4cb666feafd2ef890, type: 3}
-  cardName: "Ganho de Ess\xEAncia 5"
-  description: "Ess\xEAncia \xE9 como caf\xE9: um pouco mais e voc\xEA se sente pronto
-    para conquistar o mundo. Ou pelo menos o tabuleiro."
-  essenceCost: 0
-  requiresTargetSelection: 0
+  id: 11
+  icon: {fileID: 21300000, guid: d349a69889020184491632b278641c6f, type: 3}
+  cardName: Golpe Certeiro 3
+  description: "Um ataque r\xE1pido e eficaz. Dano 3 direto no alvo."
+  essenceCost: 2
+  requiresTargetSelection: 1
   cardRarity: 3
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: b3613f77b8d438d4f87f121e3f6ef04c, type: 2}
+  effect: {fileID: 11400000, guid: becd091d772b6454dbe61f510f4a09b5, type: 2}

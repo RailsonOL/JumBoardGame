@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58070f9b3e58cae41a6583bf2c131a8f, type: 3}
-  m_Name: New Attack Effect 5
+  m_Script: {fileID: 11500000, guid: 4584db86940aa2b439756186973f31f4, type: 3}
+  m_Name: Straight Hit 3
   m_EditorClassIdentifier: 
-  description: 
-  attackType: 0
-  damageAmount: 5
+  description: Direct Attack
+  damageAmount: 3
+  currentTarget: {fileID: 0}

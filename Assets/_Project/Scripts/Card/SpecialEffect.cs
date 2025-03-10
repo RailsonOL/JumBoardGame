@@ -2,7 +2,7 @@ using UnityEngine;
 
 // Cria um menu no Unity para criar novos efeitos especiais
 [Icon("Assets/Editor/SO Icons/Effect SO Icon.png")]
-[CreateAssetMenu(fileName = "New Special Effect", menuName = "Game/Special Effect Base")]
+[CreateAssetMenu(fileName = "New Special Effect_effect", menuName = "Game/Special Effect Base")]
 public class SpecialEffect : ScriptableObject
 {
     [Header("Settings")]

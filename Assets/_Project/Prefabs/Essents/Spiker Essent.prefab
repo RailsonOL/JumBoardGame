@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8260069727505045415}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.2, z: -3.03}
+  m_LocalPosition: {x: 0, y: 0.121, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71,10 +71,19 @@ MonoBehaviour:
   tileIndexPosition: 0
   currentTile: {fileID: 0}
   playerOwner: {fileID: 0}
+  essentModel: {fileID: 0}
+  selectedTargetID: 0
+  essentID: 0
+  totalEssence: 0
+  essentName: 
   moveSpeed: 2
   jumpHeight: 1
   arcHeight: 0.5
+  damageToOthers: 2
   isMoving: 0
+  showBasePointGizmo: 1
+  basePointHeight: 0.08
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &6684572797998026584
 MonoBehaviour:
   m_ObjectHideFlags: 0

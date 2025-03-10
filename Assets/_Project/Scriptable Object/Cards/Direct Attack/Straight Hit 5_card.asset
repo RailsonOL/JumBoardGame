@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
-  m_Name: Straight Hit 2
+  m_Name: Straight Hit 5_card
   m_EditorClassIdentifier: 
   id: 11
-  icon: {fileID: 21300000, guid: 173ad0a6cef80ac4f9551f86ba5d16b0, type: 3}
-  cardName: Golpe Certeiro 2
-  description: "Precis\xE3o \xE9 tudo. Dano 2 direto no alvo."
-  essenceCost: 2
+  icon: {fileID: 21300000, guid: d349a69889020184491632b278641c6f, type: 3}
+  cardName: Golpe Certeiro 5
+  description: "Quando o golpe \xE9 certeiro, o impacto \xE9 devastador. Dano 5 direto
+    no alvo."
+  essenceCost: 3
   requiresTargetSelection: 1
-  cardRarity: 2
+  cardRarity: 4
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: a560da649012bee49a46d6d46b88bb89, type: 2}
+  effect: {fileID: 11400000, guid: 1648db7b500cf6045b91bff1dbef2bce, type: 2}

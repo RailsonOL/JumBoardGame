@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
-  m_Name: Move 10
+  m_Name: Convergence 3_card
   m_EditorClassIdentifier: 
-  id: 7
-  icon: {fileID: 21300000, guid: a8aa26bcad1c64d4d8a78fcd0b65bf61, type: 3}
-  cardName: "Salto Estrat\xE9gico 10"
-  description: "Mova-se 10 casas. Em momentos cr\xEDticos, a capacidade de se reposicionar
-    rapidamente pode ser o diferencial entre estrelas e lendas."
-  essenceCost: 5
+  id: 9
+  icon: {fileID: 21300000, guid: 2239cd30c28698942bcfedbd280d9bca, type: 3}
+  cardName: "Ataque de Converg\xEAncia 3"
+  description: "O encontro de for\xE7as gera um impacto. Dano 3 para quem estiver
+    no mesmo espa\xE7o."
+  essenceCost: 3
   requiresTargetSelection: 0
-  cardRarity: 4
+  cardRarity: 3
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: f219af20dace43c4d99e121cebf404c9, type: 2}
+  effect: {fileID: 11400000, guid: 5d9007948e9077b4dbbc354b05ec6394, type: 2}

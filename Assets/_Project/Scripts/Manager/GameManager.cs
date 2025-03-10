@@ -156,7 +156,7 @@ public class GameManager : NetworkBehaviour
             player.SelectedEssent = essentSpawned;
 
             // Pass the player index to the Initialize method
-            essentSpawned.Initialize(startingTile, i);
+            essentSpawned.Initialize(startingTile);
             essentSpawned.OnEssenceChanged += OnEssentEssenceChanged;
             NetworkServer.Spawn(essentSpawned.gameObject);
 

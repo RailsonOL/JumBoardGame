@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
-  m_Name: Convergence 3 Card
+  m_Name: Essence Gain 2_card
   m_EditorClassIdentifier: 
-  id: 9
-  icon: {fileID: 21300000, guid: 2239cd30c28698942bcfedbd280d9bca, type: 3}
-  cardName: "Ataque de Converg\xEAncia 3"
-  description: "O encontro de for\xE7as gera um impacto. Dano 3 para quem estiver
-    no mesmo espa\xE7o."
-  essenceCost: 3
+  id: 2
+  icon: {fileID: 21300000, guid: 6f1d43bd5bd6a9e4cb666feafd2ef890, type: 3}
+  cardName: "Ganho de Ess\xEAncia 2"
+  description: "Um pouquinho de Ess\xEAncia a mais nunca \xE9 demais. Quem sabe \xE9
+    exatamente o que faltava para virar o jogo?"
+  essenceCost: 0
   requiresTargetSelection: 0
-  cardRarity: 3
+  cardRarity: 0
   customMaterial: {fileID: 0}
-  effect: {fileID: 11400000, guid: 5d9007948e9077b4dbbc354b05ec6394, type: 2}
+  effect: {fileID: 11400000, guid: 7558b34a0f862184fa6daf309d0d59b0, type: 2}

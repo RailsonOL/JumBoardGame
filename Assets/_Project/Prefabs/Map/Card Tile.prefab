@@ -120,6 +120,18 @@ MonoBehaviour:
   isStartTile: 0
   tileMaterial: {fileID: 2100000, guid: 8d021232111e42b47ad30b8f5502d0e2, type: 2}
   region: 0
+  positionPoints:
+  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 0.49999997, y: 1, z: 0.86602545}
+  - {x: -0.50000006, y: 1, z: 0.8660254}
+  - {x: -1, y: 1, z: -0.00000008742278}
+  - {x: -0.4999999, y: 1, z: -0.86602545}
+  - {x: 0.4999999, y: 1, z: -0.86602545}
+  showGizmos: 1
+  circleRadius: 1
+  numberOfPoints: 6
+  heightOffset: 1
   cards:
   - {fileID: 11400000, guid: 022c9480eee033042a54fe18d3168b6e, type: 2}
   - {fileID: 11400000, guid: 3c3a368d5efb622418f37a1d0ec4c5e7, type: 2}

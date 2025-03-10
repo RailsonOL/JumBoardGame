@@ -107,26 +107,18 @@ public class Essent : NetworkBehaviour
         return selectedTargetID;
     }
 
-    public void Initialize(HexTile startTile, int playerIndex)
+    public void Initialize(HexTile startTile)
     {
+        // Define o tile atual como o tile inicial
         currentTile = startTile;
 
-        // Define o ângulo de deslocamento com base no índice do jogador
-        float angleOffset = (360f / GameManager.Instance.numberOfPlayers) * playerIndex;
+        if (!currentTile.TryAddEssent(this))
+        {
+            Debug.LogError($"Não há espaço suficiente no tile {currentTile.GetTileIndex()} para adicionar o Essent {essentName}.");
+            return;
+        }
 
-        // Converte o ângulo para radianos
-        float angleInRadians = angleOffset * Mathf.Deg2Rad;
-
-        // Define o raio do deslocamento (ajuste conforme necessário)
-        float radius = 0.5f; // Distância do centro do HexTile
-
-        // Calcula a posição deslocada
-        Vector3 offset = new Vector3(Mathf.Cos(angleInRadians), 0, Mathf.Sin(angleInRadians)) * radius;
-
-        // Define a posição final do Essent
-        transform.position = startTile.transform.position + Vector3.up + offset;
-
-        Debug.Log($"{essentName} começou no hexágono {currentTile.GetTileIndex()} com deslocamento {offset}.");
+        Debug.Log($"{essentName} começou no hexágono {currentTile.GetTileIndex()}.");
     }
 
     public List<int> GetInitialCardsIDs()

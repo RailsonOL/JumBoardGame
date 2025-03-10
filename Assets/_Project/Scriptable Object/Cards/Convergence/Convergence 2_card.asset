@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa9d816258d895419d3699513343c9d, type: 3}
+  m_Name: Convergence 2_card
+  m_EditorClassIdentifier: 
+  id: 8
+  icon: {fileID: 21300000, guid: 2239cd30c28698942bcfedbd280d9bca, type: 3}
+  cardName: "Ataque de Converg\xEAncia 2"
+  description: Convergir no mesmo ponto pode ser perigoso. Dano 2 para quem estiver
+    na mesma casa.
+  essenceCost: 2
+  requiresTargetSelection: 0
+  cardRarity: 2
+  customMaterial: {fileID: 0}
+  effect: {fileID: 11400000, guid: babdaac4fa9ac77479fc9cd171b9c00a, type: 2}

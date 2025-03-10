@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [Icon("Assets/Editor/SO Icons/Card SO Icon.png")]
-[CreateAssetMenu(fileName = "New Card", menuName = "Game/Card")]
+[CreateAssetMenu(fileName = "New Card_card", menuName = "Game/Card")]
 public class Card : ScriptableObject
 {
     [Header("Card Visual Data")]

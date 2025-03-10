@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58070f9b3e58cae41a6583bf2c131a8f, type: 3}
-  m_Name: New Attack Effect 4
+  m_Name: Frontal Strike 5 Effect
   m_EditorClassIdentifier: 
   description: 
-  attackType: 0
+  attackType: 1
   damageAmount: 5
